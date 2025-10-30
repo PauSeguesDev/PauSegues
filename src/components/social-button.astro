@@ -1,0 +1,21 @@
+---
+import type { Social } from "@/types/socialType";
+
+interface Props {
+    social: Social;
+}
+
+const { social } = Astro.props;
+
+---
+<div class="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center rounded-3xl border-3
+    hover:scale-110 hover:bg-web-dark-blue transition duration-500">
+    <a 
+        href={social.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={social.label ?? social.name}
+    >
+        <social.image.logo />
+    </a>
+</div>
