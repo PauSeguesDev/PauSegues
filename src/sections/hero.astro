@@ -1,0 +1,30 @@
+---
+import { SOCIAL } from "@/consts/social";
+
+import SocialButton from "@/components/social-button.astro";
+---
+<section class="w-auto h-full px-4 sm:px-10 md:px-24 lg:px-36 py-4
+    flex flex-col md:flex-row justify-center md:justify-between bg-grid-container">
+    <div class="flex flex-col justify-center items-center md:items-start">
+        <div>
+            <h1 class="text-5xl lg:text-7xl font-bold">
+                Pau Segués Vitutia
+            </h1>
+        </div>
+        <div class="my-12">
+            <h2 class="text-3xl lg:text-5xl">
+                Web Developer
+            </h2>
+        </div>
+        <div class="flex flex-row space-x-4">
+            {
+                SOCIAL.map((social) => (
+                    <SocialButton social={social}/>
+                ))
+            }
+        </div>
+    </div>
+    <div class="flex justify-center items-center mt-8 md:mt-0">
+        <img src="/images/pau-segues.webp" alt="Pau Segués Vitutia" class="w-[300px] md:w-[500px] lg:w-[700px] h-auto">
+    </div>
+</section>

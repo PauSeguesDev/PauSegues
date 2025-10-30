@@ -1,0 +1,68 @@
+<header class="bg-web-dark-blue">
+    <div class="px-4 sm:px-10 md:px-24 lg:px-36 py-4">
+        <nav>
+            <div class="flex justify-between">
+                <!-- Brand -->
+                <div>
+                    <a href="#" class="text-2xl font-bold">
+                        Pau Segués Vitutia
+                    </a>
+                </div>
+
+                <!-- Mobile Button -->
+                <div class="md:hidden">
+                    <button id="menu-btn" class="flex flex-col justify-between w-6 h-6 p-1 rounded hover:bg-web-pearl-blue cursor-pointer">
+                        <span class="block h-0.5 w-full bg-white transition-transform duration-300 origin-center"></span>
+                        <span class="block h-0.5 w-full bg-white transition-opacity duration-300"></span>
+                        <span class="block h-0.5 w-full bg-white transition-transform duration-300 origin-center"></span>
+                    </button>
+                </div>
+
+                <!-- Menú desktop -->
+                <div class="hidden md:flex">
+                    <ul class="flex flex-row space-x-4 [&>li]:hover:scale-110">
+                        <li><a href="">Home</a></li>
+                        <li><a href="">About Me</a></li>
+                        <li><a href="">Projectes</a></li>
+                        <li><a href="">Contacte</a></li>
+                    </ul>
+                    </div>
+                </div>
+
+                <!-- Menú móvil -->
+                <div id="mobile-menu" class="hidden md:hidden mt-2">
+                    <ul class="flex flex-col space-y-2">
+                    <li><a href="">Home</a></li>
+                    <li><a href="">About Me</a></li>
+                    <li><a href="">Projectes</a></li>
+                    <li><a href="">Contacte</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<script >
+    document.addEventListener('DOMContentLoaded', () => {
+        const btn = document.getElementById('menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        if (btn && menu) {
+            const spans = btn.querySelectorAll('span');
+
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+                
+                spans[0].classList.toggle('rotate-45');
+                spans[0].classList.toggle('translate-y-1.5');
+
+                spans[1].classList.toggle('opacity-0');
+                spans[1].classList.toggle('scale-x-0'); // petita millora: desapareix amb escalat
+
+                spans[2].classList.toggle('-rotate-45');
+                spans[2].classList.toggle('-translate-y-1.5');
+            });
+        }
+    });
+</script>
