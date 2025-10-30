@@ -29,6 +29,9 @@ import Footer from "@/sections/footer.astro";
 		<main>
 			<slot />
 		</main>
-		<Footer />
+		<Footer 
+			legal={["Legal Notice", ""]}
+			privacity={["Privacy policy", ""]}
+		/>
 	</body>
 </html>
