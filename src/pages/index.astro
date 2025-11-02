@@ -1,9 +1,12 @@
 ---
-import LayoutCA from '@/layouts/LayoutCA.astro';
+import { indexTranslations } from '@/i18n/indexTranslations';
+const IndexTranslationsCA = indexTranslations['ca']
+
+import LayoutCA from '@/layouts/Layout.astro';
 
 import Hero from '@/sections/hero.astro';
 ---
 
-<LayoutCA title='Pau Segués Vitutia' description='Pau Segués Vitutia Web'>
-	<Hero subtitle='Programador Web'/>
+<LayoutCA title={IndexTranslationsCA['pageTitle']} description={IndexTranslationsCA['pageDescription']}>
+	<Hero subtitle={IndexTranslationsCA['HeroSubtitle']}/>
 </LayoutCA>

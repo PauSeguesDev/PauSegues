@@ -1,9 +1,12 @@
 ---
+import { indexTranslations } from '@/i18n/indexTranslations';
+const IndexTranslationsEN = indexTranslations['en']
+
 import LayoutEN from '@/layouts/LayoutEN.astro';
 
 import Hero from '@/sections/hero.astro';
 ---
 
-<LayoutEN title='Pau Segués Vitutia' description='Pau Segués Vitutia Web'>
-	<Hero subtitle='Web developer' />
+<LayoutEN title={IndexTranslationsEN['pageTitle']} description={IndexTranslationsEN['pageDescription']}>
+	<Hero subtitle={IndexTranslationsEN['HeroSubtitle']}/>
 </LayoutEN>

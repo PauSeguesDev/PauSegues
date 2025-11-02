@@ -8,11 +8,14 @@ const { title, description } = Astro.props;
 
 import "@/styles/global.css";
 
+import { LayoutTranslations } from "@/i18n/layoutTranslations";
+const LayoutTranslationsES = LayoutTranslations['es']
+
 import Header from "@/sections/header.astro";
 import Footer from "@/sections/footer.astro";
 ---
 <!doctype html>
-<html lang="es">
+<html lang="ca">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -23,15 +26,15 @@ import Footer from "@/sections/footer.astro";
 	</head>
 	<body>
 		<Header 
-			linksTexts={['Home', 'Sobre Mi', 'Proyectos', 'Contacto']}
-			linksHref={['/es/', '', '', '']}
+			linksTexts={LayoutTranslationsES['headerLinkTexts']}
+			linksHref={LayoutTranslationsES['headerLinksHref']}
 		/>
 		<main>
 			<slot />
 		</main>
 		<Footer 
-			legal={["Aviso Legal", ""]}
-			privacity={["Política de privacidad", ""]}
+			legal={LayoutTranslationsES['footerLegal']}
+			privacity={LayoutTranslationsES['footerPrivacity']}
 		/>
 	</body>
 </html>
