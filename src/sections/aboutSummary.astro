@@ -1,0 +1,43 @@
+---
+interface Props {
+    Title: string,
+    AboutLine01: string,
+    AboutLine02: string,
+    AboutLine03: string,
+}
+const { Title, AboutLine01, AboutLine02, AboutLine03 } = Astro.props
+---
+<section class="h-dvh w-full py-24 px-4 sm:px-10 md:px-24 lg:px-36">
+    <div class="flex justify-center items-center mb-6 md:mb-12">
+        <h3 class="text-2xl lg:text-4xl font-bold">
+            { Title }
+        </h3> 
+    </div>
+    <div class="flex justify-center items-center">
+        <div class="bg-web-dark-blue p-6 rounded-2xl border-2 border-web-grey">
+            <ul class="text-lg space-y-4 list-disc p-4">
+                <li>
+                    <p>
+                        { AboutLine01 }
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        { AboutLine02 }
+                    </p>
+                </li>
+                <li>
+                    <p>
+                        { AboutLine03 }
+                    </p>
+                </li>
+            </ul>
+        </div>
+        <div>
+            
+        </div>
+    </div>
+    <div>
+
+    </div>
+</section>

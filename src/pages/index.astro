@@ -5,8 +5,15 @@ const IndexTranslationsCA = indexTranslations['ca']
 import LayoutCA from '@/layouts/Layout.astro';
 
 import Hero from '@/sections/hero.astro';
+import AboutSummary from '@/sections/aboutSummary.astro';
 ---
 
 <LayoutCA title={IndexTranslationsCA['pageTitle']} description={IndexTranslationsCA['pageDescription']}>
 	<Hero subtitle={IndexTranslationsCA['HeroSubtitle']}/>
+	<AboutSummary 
+		Title={IndexTranslationsCA['AboutTitle']} 
+		AboutLine01= {IndexTranslationsCA['AboutLine01']} 
+		AboutLine02={IndexTranslationsCA['AboutLine02']} 
+		AboutLine03={IndexTranslationsCA['AboutLine03']} 
+	/>
 </LayoutCA>
