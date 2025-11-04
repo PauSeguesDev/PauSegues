@@ -1,11 +1,11 @@
 ---
 interface Props {
     Title: string,
-    AboutLine01: string,
-    AboutLine02: string,
-    AboutLine03: string,
+    AboutText: string,
 }
-const { Title, AboutLine01, AboutLine02, AboutLine03 } = Astro.props
+const { Title, AboutText } = Astro.props
+
+import Button from "@/components/button.astro"
 ---
 <section class="h-dvh w-full py-24 px-4 sm:px-10 md:px-24 lg:px-36">
     <div class="flex justify-center items-center mb-6 md:mb-12">
@@ -13,31 +13,16 @@ const { Title, AboutLine01, AboutLine02, AboutLine03 } = Astro.props
             { Title }
         </h3> 
     </div>
-    <div class="flex justify-center items-center">
-        <div class="bg-web-dark-blue p-6 rounded-2xl border-2 border-web-grey">
-            <ul class="text-lg space-y-4 list-disc p-4">
-                <li>
-                    <p>
-                        { AboutLine01 }
-                    </p>
-                </li>
-                <li>
-                    <p>
-                        { AboutLine02 }
-                    </p>
-                </li>
-                <li>
-                    <p>
-                        { AboutLine03 }
-                    </p>
-                </li>
-            </ul>
+    <div class="flex flex-col md:flex-row justify-center items-center space-x-12">
+        <div class="shrink-0">
+            <img src="/images/pau-segues.webp" alt="Pau Segués Vitutia" 
+                 class="w-[250px] sm:w-[300px] md:w-[350px] lg:w-[400px] h-auto rounded-2xl">
         </div>
         <div>
-            
+            <p class="w-[600px] text-xl mb-8">
+                { AboutText }
+            </p>
+            <Button Text={Title} Link="" />
         </div>
-    </div>
-    <div>
-
     </div>
 </section>

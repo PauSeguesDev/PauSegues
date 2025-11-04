@@ -5,8 +5,13 @@ const IndexTranslationsEN = indexTranslations['en']
 import LayoutEN from '@/layouts/LayoutEN.astro';
 
 import Hero from '@/sections/hero.astro';
+import AboutSummary from '@/sections/aboutSummary.astro';
 ---
 
 <LayoutEN title={IndexTranslationsEN['pageTitle']} description={IndexTranslationsEN['pageDescription']}>
 	<Hero subtitle={IndexTranslationsEN['HeroSubtitle']}/>
+	<AboutSummary 
+		Title={IndexTranslationsEN['AboutTitle']} 
+		AboutText= {IndexTranslationsEN['AboutText']} 
+	/>
 </LayoutEN>
