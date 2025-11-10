@@ -2,9 +2,10 @@
 interface Props {
     legal: string[];
     privacity: string[];
+    cookies: string[];
 }
 
-const { legal, privacity } = Astro.props
+const { legal, privacity, cookies } = Astro.props
 ---
 <footer class="bg-web-dark-blue">
     <div>
@@ -13,5 +14,6 @@ const { legal, privacity } = Astro.props
     <div class="flex justify-center items-center space-x-6 py-4 [&>a]:hover:scale-110">
         <a href={legal[1]}>{legal[0]}</a>
         <a href={privacity[1]}>{privacity[0]}</a>
+        <a href={cookies[1]}>{cookies[0]}</a>
     </div>
 </footer>

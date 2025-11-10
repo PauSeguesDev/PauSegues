@@ -5,6 +5,7 @@ export const LayoutTranslations = {
         
         'footerLegal': ["Avis Legal", ""],
         'footerPrivacity': ["Política de Privacitat", ""],
+        'footerCookies': ["Política de Cookies", ""],
     },
     'es': {
         'headerLinkTexts': ['Home', 'Sobre Mi', 'Proyectos', 'Contacto'],
@@ -12,6 +13,7 @@ export const LayoutTranslations = {
         
         'footerLegal': ["Aviso Legal", ""],
         'footerPrivacity': ["Política de privacidad", ""],
+        'footerCookies': ["Política de cookies", ""],
     },
     'en': {
         'headerLinkTexts': ['Home', 'About Me', 'Projects', 'Contact'],
@@ -19,5 +21,6 @@ export const LayoutTranslations = {
         
         'footerLegal': ["Legal Notice", ""],
         'footerPrivacity': ["Privacy policy", ""],
+        'footerCookies': ["Cookie policy", ""],
     }
 }
