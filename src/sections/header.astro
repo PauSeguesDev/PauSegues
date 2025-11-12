@@ -1,8 +1,7 @@
 ---
-// Header.astro
 interface Props {
     linksTexts: string[]
-    linksHref: string[]
+    linksHref: string[] 
 }
 
 const { linksTexts, linksHref } = Astro.props;
@@ -15,13 +14,13 @@ const { linksTexts, linksHref } = Astro.props;
                 <!-- Brand -->
                 <div>
                     <a href={linksHref[0]} class="text-2xl font-bold">
-                        <img src="/images/logo.webp" alt="" class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 hover:scale-110">
+                        <img src="/images/logo.webp" alt="" class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 hover:scale-110 transition-all duration-300 ease-out">
                     </a>
                 </div>
 
                 <!-- Menú desktop -->
                 <div class="hidden md:flex items-center space-x-6">
-                    <ul class="flex flex-row space-x-4 [&>li]:hover:scale-110">
+                    <ul class="flex flex-row space-x-8 [&>li]:hover:scale-110 [&>li]:text-xl [&>li]:hover:underline [&>li]:transition-all [&>li]:duration-300 [&>li]:ease-out">
                         {
                             linksTexts.map((text, i) => (
                                 <li><a href={linksHref[i]}>{text}</a></li>
@@ -30,11 +29,12 @@ const { linksTexts, linksHref } = Astro.props;
                     </ul>
 
                     <!-- Select de idioma -->
-                    <select id="language-select" class="bg-web-dark-blue text-white border border-white rounded p-1 cursor-pointer">
+                    <select id="language-select" class="bg-web-dark-blue text-white border-2 rounded-lg px-4 py-2 cursor-pointer appearance-none focus:outline-none">
                         <option value="/">CAT</option>
                         <option value="/es/">ES</option>
                         <option value="/en/">EN</option>
                     </select>
+
                 </div>
 
                 <!-- Mobile Button -->
@@ -49,14 +49,14 @@ const { linksTexts, linksHref } = Astro.props;
 
             <!-- Menú móvil -->
             <div id="mobile-menu" class="hidden md:hidden mt-2">
-                <ul class="flex flex-col space-y-2 [&>li]:hover:scale-110">
+                <ul class="flex flex-col space-y-6 [&>li]:text-xl [&>li]:hover:underline [&>li]:transition-all [&>li]:duration-300 [&>li]:ease-out">
                         {
                             linksTexts.map((text, i) => (
-                                <li><a href={linksHref[i]}>text</a></li>
+                                <li><a href={linksHref[i]}>{text}</a></li>
                             ))
                         }
                     <li>
-                        <select id="mobile-language-select" class="bg-web-dark-blue text-white border border-white rounded p-1 w-full cursor-pointer">
+                        <select id="mobile-language-select" class="bg-web-dark-blue text-white border-2 rounded-lg px-4 py-2 cursor-pointer appearance-none focus:outline-none">
                             <option value="/">CAT</option>
                             <option value="/es/">ES</option>
                             <option value="/en/">EN</option>
