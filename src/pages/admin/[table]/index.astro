@@ -1,0 +1,117 @@
+---
+import LayoutAdmin from "@/layouts/LayoutAdmin.astro"; // Layout general per pàgines d'admin
+import Button from "@/components/button.astro"; // Botó reutilitzable
+
+import { supabase } from "@/lib/supabase"; // Instància de Supabase per fer consultes i autenticació
+
+// Tipus per validar la taula que s'utilitza
+type TableName = 'projects';
+
+interface Props {
+    table: TableName;
+}
+
+// Obté el paràmetre de la ruta i el força al tipus TableName
+const { table } = Astro.params as { table: TableName };
+let entries = null;
+
+// Si no hi ha cap taula, redirigeix al dashboard
+if (!table) {
+    return Astro.redirect('/admin/dashboard');
+}
+
+try {
+    // Consulta la taula amb Supabase per veure si existeix i obtenir les dades
+    const { data, error } = await supabase
+        .from(table)
+        .select('*');
+
+    // Si hi ha error a la consulta, redirigeix al dashboard
+    if (error) {
+        return Astro.redirect('/admin/dashboard');
+    }
+    
+    entries = data; // Guarda les entrades obtingudes
+
+} catch (error) {
+    // Si hi ha un error inesperat, redirigeix al dashboard
+    return Astro.redirect('/admin/dashboard');
+}
+
+// Comprovació d'autenticació amb cookies
+const accessToken = Astro.cookies.get("sb-access-token");
+const refreshToken = Astro.cookies.get("sb-refresh-token");
+
+// Si no hi ha tokens, redirigeix al login
+if (!accessToken || !refreshToken) {
+  return Astro.redirect("/admin");
+}
+
+let session;
+try {
+  // Estableix la sessió a Supabase amb els tokens
+  session = await supabase.auth.setSession({
+    refresh_token: refreshToken.value,
+    access_token: accessToken.value,
+  });
+
+  // Si hi ha error en la sessió, elimina cookies i redirigeix al login
+  if (session.error) {
+    Astro.cookies.delete("sb-access-token", { path: "/" });
+    Astro.cookies.delete("sb-refresh-token", { path: "/" });
+    return Astro.redirect("/admin");
+  }
+} catch (error) {
+  // En cas d'error inesperat, elimina cookies i redirigeix al login
+  Astro.cookies.delete("sb-access-token", { path: "/" });
+  Astro.cookies.delete("sb-refresh-token", { path: "/" });
+  return Astro.redirect("/admin");
+}
+---
+
+<!-- Utilitza el layout d'administració i defineix el títol -->
+<LayoutAdmin title="Dashboard">
+  <!-- Secció de títol de la taula -->
+  <section class="flex flex-col items-center justify-center mt-12">
+      <div class="text-center space-y-1">
+          <h1 class="text-2xl md:text-4xl font-bold uppercase">{table}</h1>
+          <p class="text-base md:text-lg">Gestió de contingut</p>
+      </div>
+  </section>
+
+  <!-- Secció amb botó per crear nova entrada i taula de dades -->
+  <section class="mt-8">
+    <div class="flex justify-center items-center flex-col space-y-4">
+      <!-- Botó per afegir nova entrada a la taula -->
+      <Button Text={`New ${table}`} Link={`/admin/${table}/new`} />
+
+      <!-- Taula amb les dades de la taula seleccionada -->
+      <table class="overflow-x-auto shadow-lg border border-web-dark-blue/30 bg-white/80 backdrop-blur-sm w-2xl">
+          <thead class="text-center uppercase bg-web-dark-blue">
+              <tr class="[&>th]:p-2">
+                  <th>Títol</th>
+                  <th>Accions</th>
+              </tr>
+          </thead>
+          <tbody class="text-center bg-web-pearl-blue">
+              {entries?.map((entry: any) => (
+                  <tr class="[&>td]:px-4 [&>td]:py-3">
+                      <!-- Enllaç al formulari d'edició per cada entrada -->
+                      <td>
+                        <a href={`/admin/${table}/edit/${entry.id}`} class="hover:scale-110 hover:underline transition-all duration-300 ease-out">
+                          {entry.title_ca}
+                        </a>
+                      </td>
+                      <td>
+                        <div class="flex flex-col sm:flex-row items-center justify-center gap-2">
+                          <!-- Botó per eliminar l'entrada -->
+                          <Button Text="Eliminar" Link={`/admin/${table}/delete/${entry.id}`} />
+                        </div>
+                      </td>
+                  </tr>
+              ))}
+          </tbody>
+      </table>
+    </div>
+  </section>
+</LayoutAdmin>

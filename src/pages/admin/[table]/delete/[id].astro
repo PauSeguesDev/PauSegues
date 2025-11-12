@@ -1,0 +1,114 @@
+---
+import LayoutAdmin from "@/layouts/LayoutAdmin.astro"; // Layout general d'admin
+import ButtonForm from "@/components/buttonForm.astro"; // Botó reutilitzable
+import { supabase } from "@/lib/supabase"; // Instància de Supabase
+
+const { table, id } = Astro.params as { table: string; id: string };
+
+// 🔒 Comprovació d’autenticació
+const accessToken = Astro.cookies.get("sb-access-token")?.value;
+const refreshToken = Astro.cookies.get("sb-refresh-token")?.value;
+
+// Si no hi ha tokens, redirigeix al login
+if (!accessToken || !refreshToken) {
+  return Astro.redirect("/admin");
+}
+
+try {
+  // Intenta establir la sessió amb Supabase
+  const { error } = await supabase.auth.setSession({
+    access_token: accessToken,
+    refresh_token: refreshToken,
+  });
+  if (error) {
+    // Si hi ha error, elimina cookies i redirigeix
+    Astro.cookies.delete("sb-access-token", { path: "/" });
+    Astro.cookies.delete("sb-refresh-token", { path: "/" });
+    return Astro.redirect("/admin");
+  }
+} catch {
+  // En cas d'error inesperat, elimina cookies i redirigeix
+  Astro.cookies.delete("sb-access-token", { path: "/" });
+  Astro.cookies.delete("sb-refresh-token", { path: "/" });
+  return Astro.redirect("/admin");
+}
+
+// 🔍 Obtenir dades del registre a eliminar
+let item = null;
+try {
+  const { data, error } = await supabase
+    .from(table)
+    .select("*")
+    .eq("id", id) // Filtra per id
+    .single();    // Només retorna un registre
+
+  if (error || !data) {
+    // Si no existeix l'entrada o hi ha error, redirigeix al llistat
+    return Astro.redirect(`/admin/${table}`);
+  }
+
+  item = data; // Guarda l'entrada
+} catch {
+  return Astro.redirect(`/admin/${table}`);
+}
+
+// 🗑️ Gestió del POST (confirmació d'eliminació)
+if (Astro.request.method === "POST") {
+  try {
+    // 🧹 1️⃣ Eliminar la imatge del bucket si existeix
+    if (item?.image) {
+      try {
+        const oldFileName = item.image.split("/").pop(); // Nom del fitxer
+        if (oldFileName) {
+          await supabase.storage.from("images").remove([oldFileName]);
+        }
+      } catch {
+        // Silenciat: error al suprimir la imatge, però continuem
+      }
+    }
+
+    // 🧾 2️⃣ Eliminar el registre de la base de dades
+    try {
+      await supabase.from(table).delete().eq("id", id);
+    } catch {
+      // Silenciat: si falla, igualment redirigim
+    }
+
+    // 🔁 3️⃣ Redirigir al llistat de la taula després d’eliminar
+    return Astro.redirect(`/admin/${table}`);
+  } catch {
+    // Silenciar qualsevol error i redirigir igualment
+    return Astro.redirect(`/admin/${table}`);
+  }
+}
+---
+
+<!-- Layout i títol de la pàgina d’eliminació -->
+<LayoutAdmin title={`Eliminar ${table}`}>
+  <section class="flex flex-col items-center justify-center mt-12 text-center space-y-4">
+    <h1 class="text-2xl md:text-4xl font-bold uppercase">Eliminar {table}</h1>
+    <p class="text-lg">Vols eliminar aquesta entrada? Aquesta acció no es pot desfer.</p>
+  </section>
+
+  <!-- Caixa de confirmació amb informació del registre -->
+  <div class="flex flex-col items-center justify-center mt-12">
+    <div class="bg-web-dark-blue rounded-2xl p-10 space-y-6 max-w-md text-center">
+      <h2 class="text-xl font-semibold">{item?.title_ca || "Sense títol"}</h2>
+
+      {item?.image && (
+        <img src={item.image} alt="Imatge" class="w-48 rounded-lg mx-auto" />
+      )}
+
+      <!-- Formulari de confirmació -->
+      <form method="post" class="flex flex-col gap-4 mt-6">
+        <!-- Botó per confirmar eliminació -->
+        <ButtonForm Text="Confirmar eliminació" />
+
+        <!-- Enllaç per cancel·lar i tornar al llistat -->
+        <a href={`/admin/${table}`} class="text-web-pearl-blue underline hover:text-white">
+          Cancel·lar
+        </a>
+      </form>
+    </div>
+  </div>
+</LayoutAdmin>

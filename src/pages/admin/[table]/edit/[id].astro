@@ -1,0 +1,154 @@
+---
+import LayoutAdmin from "@/layouts/LayoutAdmin.astro";
+import ButtonForm from "@/components/buttonForm.astro";
+import { supabase } from "@/lib/supabase";
+
+const { table, id } = Astro.params as { table: string; id: string };
+
+const accessToken = Astro.cookies.get("sb-access-token")?.value;
+const refreshToken = Astro.cookies.get("sb-refresh-token")?.value;
+
+if (!accessToken || !refreshToken) {
+  return Astro.redirect("/admin");
+}
+
+let session;
+try {
+  const { data, error } = await supabase.auth.setSession({
+    access_token: accessToken,
+    refresh_token: refreshToken,
+  });
+
+  if (error) {
+    Astro.cookies.delete("sb-access-token", { path: "/" });
+    Astro.cookies.delete("sb-refresh-token", { path: "/" });
+    return Astro.redirect("/admin");
+  }
+
+  session = data.session;
+} catch {
+  Astro.cookies.delete("sb-access-token", { path: "/" });
+  Astro.cookies.delete("sb-refresh-token", { path: "/" });
+  return Astro.redirect("/admin");
+}
+
+// 🔍 Obtenir dades actuals del registre
+let item = null;
+try {
+  const { data, error } = await supabase
+    .from(table)
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (error || !data) {
+    return Astro.redirect(`/admin/${table}`);
+  }
+
+  item = data;
+} catch {
+  return Astro.redirect(`/admin/${table}`);
+}
+
+// 📝 Gestió del POST (actualitzar entrada)
+if (Astro.request.method === "POST") {
+  try {
+    const formData = await Astro.request.formData();
+    const newData = Object.fromEntries(formData.entries());
+    const imageFile = formData.get("image") as File | null;
+
+    if (imageFile && imageFile.size > 0) {
+      // 🔥 1️⃣ Eliminar la imatge antiga (si existeix)
+      if (item.image) {
+        try {
+          const oldFileName = item.image.split("/").pop();
+          if (oldFileName) {
+            await supabase.storage.from("images").remove([oldFileName]);
+          }
+        } catch {
+          
+        }
+      }
+
+      // 📤 2️⃣ Pujar la nova imatge
+      try {
+        const fileName = `${Date.now()}_${imageFile.name}`;
+        const arrayBuffer = await imageFile.arrayBuffer();
+        const buffer = Buffer.from(arrayBuffer);
+
+        const { error: uploadError } = await supabase.storage
+          .from("images")
+          .upload(fileName, buffer, {
+            contentType: imageFile.type,
+            upsert: false,
+          });
+
+        if (!uploadError) {
+          const { data: publicData } = supabase.storage
+            .from("images")
+            .getPublicUrl(fileName);
+
+          newData.image = publicData.publicUrl;
+        } else {
+          newData.image = item.image;
+        }
+      } catch {
+        newData.image = item.image;
+      }
+    } else {
+      newData.image = item.image;
+    }
+
+    // 🔧 3️⃣ Actualitzar el registre
+    await supabase.from(table).update(newData).eq("id", id);
+    return Astro.redirect(`/admin/${table}`);
+  } catch {
+    return Astro.redirect(`/admin/${table}`);
+  }
+}
+---
+
+<LayoutAdmin title={`Edit ${table}`}>
+  <section class="flex flex-col items-center justify-center mt-12">
+    <div class="text-center space-y-4">
+      <h1 class="text-2xl md:text-4xl font-bold uppercase">Edit {table}</h1>
+    </div>
+  </section>
+
+  <div class="flex flex-col items-center justify-center mt-12">
+    <form
+      method="post"
+      enctype="multipart/form-data"
+      novalidate
+      class="flex flex-col gap-2 rounded-2xl p-10 space-y-2
+             [&>input]:bg-web-pearl-blue [&>input]:p-2 [&>input]:rounded-lg
+             [&>textarea]:bg-web-pearl-blue [&>textarea]:p-2 [&>textarea]:rounded-lg">
+
+      <label for="title_ca">Títol (ca)</label>
+      <input type="text" name="title_ca" id="title_ca" required value={item?.title_ca || ""} />
+
+      <label for="title_es">Títol (es)</label>
+      <input type="text" name="title_es" id="title_es" required value={item?.title_es || ""} />
+
+      <label for="title_en">Títol (en)</label>
+      <input type="text" name="title_en" id="title_en" required value={item?.title_en || ""} />
+
+      <label for="description_ca">Descripció (ca)</label>
+      <textarea name="description_ca" id="description_ca" required>{item?.description_ca || ""}</textarea>
+
+      <label for="description_es">Descripció (es)</label>
+      <textarea name="description_es" id="description_es" required>{item?.description_es || ""}</textarea>
+
+      <label for="description_en">Descripció (en)</label>
+      <textarea name="description_en" id="description_en" required>{item?.description_en || ""}</textarea>
+
+      <label for="image">Imatge actual</label>
+      {item?.image && <img src={item.image} alt="Imatge actual" class="w-48 rounded-lg mb-4" />}
+
+      <label for="image">Canviar imatge (opcional)</label>
+      <input type="file" name="image" id="image" accept="image/*" />
+
+      <ButtonForm Text="Actualitza" />
+    </form>
+  </div>
+</LayoutAdmin>
