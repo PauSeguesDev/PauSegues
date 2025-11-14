@@ -6,10 +6,16 @@ import LayoutCA from '@/layouts/Layout.astro';
 
 import Hero from '@/sections/hero.astro';
 import AboutSummary from '@/sections/aboutSummary.astro';
+import LastsProjects from '@/sections/lastsProjects.astro';
 ---
 
 <LayoutCA title={IndexTranslationsCA['pageTitle']} description={IndexTranslationsCA['pageDescription']}>
 	<Hero subtitle={IndexTranslationsCA['HeroSubtitle']}/>
+	<LastsProjects 
+		lang="ca" 
+		title={IndexTranslationsCA['LastsProjectsTitle']} 
+		buttonText={IndexTranslationsCA['LastsProjectsButtonText']}
+	/>
 	<AboutSummary 
 		Title={IndexTranslationsCA['AboutTitle']} 
 		AboutText= {IndexTranslationsCA['AboutText']} 

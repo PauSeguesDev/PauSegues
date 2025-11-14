@@ -6,10 +6,16 @@ import LayoutEN from '@/layouts/LayoutEN.astro';
 
 import Hero from '@/sections/hero.astro';
 import AboutSummary from '@/sections/aboutSummary.astro';
+import LastsProjects from '@/sections/lastsProjects.astro';
 ---
 
 <LayoutEN title={IndexTranslationsEN['pageTitle']} description={IndexTranslationsEN['pageDescription']}>
 	<Hero subtitle={IndexTranslationsEN['HeroSubtitle']}/>
+	<LastsProjects 
+		lang="en" 
+		title={IndexTranslationsEN['LastsProjectsTitle']} 
+		buttonText={IndexTranslationsEN['LastsProjectsButtonText']}
+	/>
 	<AboutSummary 
 		Title={IndexTranslationsEN['AboutTitle']} 
 		AboutText= {IndexTranslationsEN['AboutText']} 

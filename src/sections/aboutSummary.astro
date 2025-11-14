@@ -5,21 +5,21 @@ interface Props {
 }
 const { Title, AboutText } = Astro.props
 
-import Button from "@/components/button.astro"
+import Button from "@/components/buttons/button.astro"
 ---
-<section class="h-dvh w-full py-24 px-4 sm:px-10 md:px-24 lg:px-36">
+<section class="min-h-dvh w-full pb-24 px-4 sm:px-10 md:px-24 lg:px-36">
     <div class="flex justify-center items-center mb-6 md:mb-12">
         <h3 class="text-2xl lg:text-4xl font-bold">
             { Title }
         </h3> 
     </div>
-    <div class="flex flex-col md:flex-row justify-center items-center space-x-12">
+<div class="flex flex-col md:flex-row justify-center items-center gap-10 md:gap-12">
         <div class="shrink-0">
             <img src="/images/pau-segues.webp" alt="Pau Segués Vitutia" 
                  class="w-[250px] sm:w-[300px] md:w-[350px] lg:w-[400px] h-auto rounded-2xl">
         </div>
         <div>
-            <p class="w-[600px] text-xl mb-8">
+            <p class="max-w-xl text-xl mb-8">
                 { AboutText }
             </p>
             <Button Text={Title} Link="" />
