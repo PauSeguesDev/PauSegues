@@ -1,6 +1,6 @@
 ---
 import LayoutAdmin from "@/layouts/LayoutAdmin.astro"; // Layout general d'admin
-import ButtonForm from "@/components/buttonForm.astro"; // Botó reutilitzable
+import ButtonForm from "@/components/buttons/buttonForm.astro"; // Botó reutilitzable
 import { supabase } from "@/lib/supabase"; // Instància de Supabase
 
 const { table, id } = Astro.params as { table: string; id: string };

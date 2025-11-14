@@ -1,6 +1,6 @@
 ---
 import LayoutAdmin from "@/layouts/LayoutAdmin.astro";
-import ButtonForm from "@/components/buttonForm.astro";
+import ButtonForm from "@/components/buttons/buttonForm.astro";
 import { supabase } from "@/lib/supabase";
 
 const { table } = Astro.params as { table: string };
@@ -31,6 +31,10 @@ try {
   Astro.cookies.delete("sb-refresh-token", { path: "/" });
   return Astro.redirect("/admin");
 }
+
+// Generació dinàmica de camps del formulari
+import { dbTables } from "@/consts/dbTables";
+const tableFields = dbTables.find((t) => t.name === table)?.fields;
 
 // Gestió del POST per crear nova entrada amb imatge
 if (Astro.request.method === 'POST') {
@@ -92,28 +96,23 @@ if (Astro.request.method === 'POST') {
       class="flex flex-col gap-2 rounded-2xl p-10 space-y-2
              [&>input]:bg-web-pearl-blue [&>input]:p-2 [&>input]:rounded-lg
              [&>textarea]:bg-web-pearl-blue [&>textarea]:p-2 [&>textarea]:rounded-lg">
-
-      <label for="title_ca">Títol (ca)</label>
-      <input type="text" name="title_ca" id="title_ca" required />
-
-      <label for="title_es">Títol (es)</label>
-      <input type="text" name="title_es" id="title_es" required />
-
-      <label for="title_en">Títol (en)</label>
-      <input type="text" name="title_en" id="title_en" required />
-
-      <label for="description_ca">Descripció (ca)</label>
-      <textarea name="description_ca" id="description_ca" required></textarea>
-
-      <label for="description_es">Descripció (es)</label>
-      <textarea name="description_es" id="description_es" required></textarea>
-
-      <label for="description_en">Descripció (en)</label>
-      <textarea name="description_en" id="description_en" required></textarea>
-
-      <label for="image">Imatge</label>
-      <input type="file" name="image" id="image" accept="image/*" required />
-
+      {tableFields?.map(field => (
+        <>
+          <label for={field.name}>{field.name}</label>
+          {field.type === "textarea" ? (
+            <textarea name={field.name} id={field.name} required></textarea>
+          ) : (
+            <input
+              type={field.type === "file" ? "file" : field.type}
+              name={field.name}
+              id={field.name}
+              required={field.name !== "link" && field.type !== "file"}
+              placeholder={field.type === "url" ? "https://example.com" : ""}
+              accept={field.type === "file" ? "image/*" : undefined}
+            />
+          )}
+        </>
+      ))}
       <ButtonForm Text="Guarda" />
     </form>
   </div>
