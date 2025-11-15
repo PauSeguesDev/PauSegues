@@ -1,6 +1,12 @@
+@import "./general-sans.css";
 @import "tailwindcss";
 
 @theme {
+    /* -- Fonts -- */
+    --font-fallback: 'Adjusted Arial Fallback', system-ui, -apple-system, blinkmacsystemfont, 'Segoe UI',
+    'Noto Sans', helvetica, arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+    --font-primary: 'GeneralSans';
+
     /* --- Web Colors ---*/
     --color-web-grey: #e0e1dd;
     --color-web-pearl-blue: #778da9;
@@ -17,7 +23,12 @@
     }
 }
 
-html, body { 
+html, body {
+    font-family: 'GeneralSans', var(--font-fallback);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    
     background: var(--color-web-night-blue);
 	color: var(--color-web-grey);
 	margin: 0;
@@ -38,4 +49,13 @@ html, body {
   mask-image: linear-gradient(to bottom, transparent, black 5%, black 90%, transparent);
   mask-repeat: no-repeat;
   mask-size: 100% 100%;
+}
+
+@font-face {
+  font-family: 'Adjusted Arial Fallback';
+  src: local(Arial);
+  size-adjust: 112%;
+  ascent-override: 74%;
+  descent-override: normal;
+  line-gap-override: normal;
 }
