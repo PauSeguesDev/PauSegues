@@ -1,0 +1,21 @@
+---
+import Layout from "@/layouts/Layout.astro";
+
+import { contactTranslations } from "@/i18n/contactTranslations";
+const ContactTranslationsCA = contactTranslations['ca']
+
+import InnerTitle from "@/sections/innerTitle.astro";
+import ContactForm from "@/sections/contactForm.astro";
+---
+<Layout title={ContactTranslationsCA['pageTitle']} description={ContactTranslationsCA['pageDescription']}>
+    <InnerTitle title={ContactTranslationsCA['title']} path={ContactTranslationsCA['path']}/>
+    <ContactForm
+        nameLabel={ContactTranslationsCA['form']['nameLabel']}
+        surnameLabel={ContactTranslationsCA['form']['surnameLabel']}
+        emailLabel={ContactTranslationsCA['form']['emailLabel']}
+        messageLabel={ContactTranslationsCA['form']['messageLabel']}
+        buttonLabel={ContactTranslationsCA['form']['buttonLabel']}
+        sendSuccessMessage={ContactTranslationsCA['form']['sendSuccessMessage']}
+        sendErrorMessage={ContactTranslationsCA['form']['sendErrorMessage']}
+    />
+</Layout>

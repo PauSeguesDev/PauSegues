@@ -1,0 +1,76 @@
+---
+interface Props {
+    nameLabel: string;
+    surnameLabel: string;
+    emailLabel: string;
+    messageLabel: string;
+    buttonLabel: string;
+
+    sendSuccessMessage: string;
+    sendErrorMessage: string;
+}
+
+const { nameLabel, surnameLabel, emailLabel, messageLabel, buttonLabel, sendSuccessMessage, sendErrorMessage } = Astro.props;
+
+import ButtonForm from "@/components/buttons/buttonForm.astro"
+---
+<section>
+    <div class="flex flex-col gap-4 justify-center items-center my-12">
+        <form id="contactForm" method="POST" action="/api/contact" class="flex flex-col gap-4 items-center justify-center">
+            <div class="flex flex-row gap-2 w-full">
+                <div class="w-full">
+                    <label for="name">{nameLabel}</label>
+                    <input type="text" name="name" class="border border-web-grey rounded-md p-2 w-full">
+                </div>
+                <div class="w-full">
+                    <label for="surname">{surnameLabel}</label>
+                    <input type="text" name="surname" class="border border-web-grey rounded-md p-2 w-full">
+                </div>
+            </div>
+            <div class="w-full">
+                <label for="email">{emailLabel}</label>
+                <input type="text" name="email" class="border border-web-grey rounded-md p-2 w-full">
+            </div>
+            <div class="w-full">
+                <label for="message">{messageLabel}</label>
+                <textarea name="message" class="border border-web-grey rounded-md p-2 w-full"></textarea>
+            </div>
+            <ButtonForm Text={buttonLabel}/>
+        </form>
+
+        <p id="statusMessage" class="text-green-600 mt-4"></p>
+    </div>
+</section>
+
+<script define:vars={{ sendSuccessMessage, sendErrorMessage }}>
+    /** @type {HTMLFormElement} */
+    const form = document.getElementById('contactForm');
+    const statusMessage = document.getElementById('statusMessage');
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        body: formData
+      });
+
+      const result = await response.json();
+
+      if (result.ok) {
+        if (statusMessage) {
+          statusMessage.textContent = sendSuccessMessage;
+          statusMessage.classList.remove('text-red-600');
+          statusMessage.classList.add('text-green-600');
+        }
+        form?.reset();
+      } else {
+        if (statusMessage) {
+          statusMessage.textContent = sendErrorMessage;
+          statusMessage.classList.remove('text-green-600');
+          statusMessage.classList.add('text-red-600');
+        }
+      }
+    });
+  </script>
