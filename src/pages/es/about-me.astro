@@ -1,13 +1,26 @@
 ---
-import LayoutES from "@/layouts/LayoutES.astro";
+import Layout from "@/layouts/LayoutES.astro";
 
 import { aboutTranslations } from "@/i18n/aboutTranslations";
-const AboutTranslationsES = aboutTranslations['es']
+const AboutTranslations = aboutTranslations['es']
 
 import InnerTitle from "@/sections/innerTitle.astro";
 import TextImageSection from "@/sections/textImageSection.astro";
 ---
-<LayoutES title={AboutTranslationsES['pageTitle']} description={AboutTranslationsES['pageDescription']}>
-    <InnerTitle title={AboutTranslationsES['title']} path={AboutTranslationsES['path']}/>
-    <TextImageSection subtitle={AboutTranslationsES['subtitle']} content={AboutTranslationsES['content']} image={AboutTranslationsES['image']}/>
-</LayoutES>
+<Layout title={AboutTranslations['metaTitle']} description={AboutTranslations['metaDescription']}>
+    <InnerTitle 
+        title={AboutTranslations['title']} 
+        path={[
+            { name: AboutTranslations['pathNames'][0], href: '/' },
+            { name: AboutTranslations['pathNames'][1], href: '/about-me' },
+        ]}
+    />
+    <TextImageSection 
+        subtitle={AboutTranslations['subtitle']} 
+        content={AboutTranslations['content']}
+        image={{
+            src: '/images/pau-segues.webp',
+            alt: AboutTranslations['imageAlt']
+        }}
+    />
+</Layout>

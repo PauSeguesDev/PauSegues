@@ -1,13 +1,10 @@
 export const contactTranslations = {
     'ca': {
-        'pageTitle': 'Contacte',
-        'pageDescription': 'Formulari de contacte',
+        'metaTitle': 'Contacte',
+        'metaDescription': 'Formulari de contacte',
 
         'title': 'Contacte',
-        'path': [
-            { name: 'Home', href: '/' },
-            { name: 'Contacte', href: '/contact' },
-        ],
+        'pathNames': [ 'Home', 'Contacte' ],
 
         'form': {
             'nameLabel': 'Nom',
@@ -20,14 +17,11 @@ export const contactTranslations = {
         }
     },
     'es': {
-        'pageTitle': 'Contacto',
-        'pageDescription': 'Formulario de contacto',
+        'metaTitle': 'Contacto',
+        'metaDescription': 'Formulario de contacto',
 
         'title': 'Contacto',
-        'path': [
-            { name: 'Home', href: '/es/' },
-            { name: 'Contacto', href: '/es/contact' },
-        ],
+        'pathNames': [ 'Home', 'Contacto' ],
 
         'form': {
             'nameLabel': 'Nombre',
@@ -40,14 +34,11 @@ export const contactTranslations = {
         }
     },
     'en': {
-        'pageTitle': 'Contact',
-        'pageDescription': 'Contact form',
+        'metaTitle': 'Contact',
+        'metaDescription': 'Contact form',
 
         'title': 'Contact',
-        'path': [
-            { name: 'Home', href: '/en/' },
-            { name: 'Contact', href: '/en/contact' },
-        ],
+        'pathNames': [ 'Home', 'Contact' ],
 
         'form': {
             'nameLabel': 'Name',

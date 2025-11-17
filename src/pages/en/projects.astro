@@ -1,13 +1,19 @@
 ---
-import LayoutEN from "@/layouts/LayoutEN.astro";
+import Layout from "@/layouts/LayoutEN.astro";
 
 import { projectsTranslations } from "@/i18n/projectsTranslations";
-const ProjectsTranslationsEN = projectsTranslations['en']
+const ProjectsTranslations = projectsTranslations['en']
 
 import InnerTitle from "@/sections/innerTitle.astro";
 import FullProjectsList from "@/sections/fullProjectsList.astro";
 ---
-<LayoutEN title={ProjectsTranslationsEN['pageTitle']} description={ProjectsTranslationsEN['pageDescription']}>
-    <InnerTitle title={ProjectsTranslationsEN['title']} path={ProjectsTranslationsEN['path']}/>
-    <FullProjectsList lang={'en'} title={ProjectsTranslationsEN['subtitle']} buttonText={ProjectsTranslationsEN['buttonText']}/>
-</LayoutEN>
+<Layout title={ProjectsTranslations['metaTitle']} description={ProjectsTranslations['metaDescription']}>
+    <InnerTitle 
+        title={ProjectsTranslations['title']} 
+        path={[
+            { name: ProjectsTranslations['pathNames'][0], href: '/' },
+            { name: ProjectsTranslations['pathNames'][1], href: '/projects' },
+        ]}
+    />
+    <FullProjectsList lang={'en'} title={ProjectsTranslations['subtitle']} buttonText={ProjectsTranslations['buttonText']}/>
+</Layout>

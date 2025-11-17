@@ -1,6 +1,6 @@
 ---
 import { indexTranslations } from '@/i18n/indexTranslations';
-const IndexTranslationsCA = indexTranslations['ca']
+const IndexTranslations = indexTranslations['ca']
 
 import Layout from '@/layouts/Layout.astro';
 
@@ -9,15 +9,15 @@ import AboutSummary from '@/sections/index/aboutSummary.astro';
 import LastsProjects from '@/sections/index/lastsProjects.astro';
 ---
 
-<Layout title={IndexTranslationsCA['pageTitle']} description={IndexTranslationsCA['pageDescription']}>
-	<Hero subtitle={IndexTranslationsCA['HeroSubtitle']}/>
+<Layout title={IndexTranslations['metaTitle']} description={IndexTranslations['metaDescription']}>
+	<Hero subtitle={IndexTranslations['HeroSubtitle']}/>
 	<LastsProjects 
 		lang="ca" 
-		title={IndexTranslationsCA['LastsProjectsTitle']} 
-		buttonText={IndexTranslationsCA['LastsProjectsButtonText']}
+		title={IndexTranslations['LastsProjectsTitle']} 
+		buttonText={IndexTranslations['LastsProjectsButtonText']}
 	/>
 	<AboutSummary 
-		Title={IndexTranslationsCA['AboutTitle']} 
-		AboutText= {IndexTranslationsCA['AboutText']} 
+		Title={IndexTranslations['AboutTitle']} 
+		AboutText= {IndexTranslations['AboutText']} 
 	/>
 </Layout>

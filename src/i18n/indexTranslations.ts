@@ -1,7 +1,7 @@
 export const indexTranslations = {
     'ca': {
-        'pageTitle': 'Pau Segués Vitutia',
-        'pageDescription': 'Pau Segués Vitutia Web',
+        'metaTitle': 'Pau Segués Vitutia',
+        'metaDescription': 'Pau Segués Vitutia Web',
 
         'HeroSubtitle': 'Desenvolupador Web',
 
@@ -12,8 +12,8 @@ export const indexTranslations = {
         'LastsProjectsButtonText': "Veure projecte"
     },
     'es': {
-        'pageTitle': 'Pau Segués Vitutia',
-        'pageDescription': 'Pau Segués Vitutia Web',
+        'metaTitle': 'Pau Segués Vitutia',
+        'metaDescription': 'Pau Segués Vitutia Web',
 
         'HeroSubtitle': 'Programador Web',
 
@@ -24,8 +24,8 @@ export const indexTranslations = {
         'LastsProjectsButtonText': "Ver proyecto"
     },
     'en': {
-        'pageTitle': 'Pau Segués Vitutia',
-        'pageDescription': 'Pau Segués Vitutia Web',
+        'metaTitle': 'Pau Segués Vitutia',
+        'metaDescription': 'Pau Segués Vitutia Web',
 
         'HeroSubtitle': 'Web Developer',
 

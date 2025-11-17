@@ -1,21 +1,27 @@
 ---
-import LayoutEN from "@/layouts/LayoutEN.astro";
+import Layout from "@/layouts/LayoutEN.astro";
 
 import { contactTranslations } from "@/i18n/contactTranslations";
-const ContactTranslationsEN = contactTranslations['en']
+const ContactTranslations = contactTranslations['en']
 
 import InnerTitle from "@/sections/innerTitle.astro";
 import ContactForm from "@/sections/contactForm.astro";
 ---
-<LayoutEN title={ContactTranslationsEN['pageTitle']} description={ContactTranslationsEN['pageDescription']}>
-    <InnerTitle title={ContactTranslationsEN['title']} path={ContactTranslationsEN['path']}/>
-    <ContactForm
-        nameLabel={ContactTranslationsEN['form']['nameLabel']}
-        surnameLabel={ContactTranslationsEN['form']['surnameLabel']}
-        emailLabel={ContactTranslationsEN['form']['emailLabel']}
-        messageLabel={ContactTranslationsEN['form']['messageLabel']}
-        buttonLabel={ContactTranslationsEN['form']['buttonLabel']}
-        sendSuccessMessage={ContactTranslationsEN['form']['sendSuccessMessage']}
-        sendErrorMessage={ContactTranslationsEN['form']['sendErrorMessage']}
+<Layout title={ContactTranslations['metaTitle']} description={ContactTranslations['metaDescription']}>
+    <InnerTitle 
+        title={ContactTranslations['title']} 
+        path={[ 
+            { name: ContactTranslations['pathNames'][0], href: '/' },
+            { name: ContactTranslations['pathNames'][1], href: '/contact' },
+        ]}
     />
-</LayoutEN>
+    <ContactForm
+        nameLabel={ContactTranslations['form']['nameLabel']}
+        surnameLabel={ContactTranslations['form']['surnameLabel']}
+        emailLabel={ContactTranslations['form']['emailLabel']}
+        messageLabel={ContactTranslations['form']['messageLabel']}
+        buttonLabel={ContactTranslations['form']['buttonLabel']}
+        sendSuccessMessage={ContactTranslations['form']['sendSuccessMessage']}
+        sendErrorMessage={ContactTranslations['form']['sendErrorMessage']}
+    />
+</Layout>
