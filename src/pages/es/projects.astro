@@ -1,0 +1,13 @@
+---
+import LayoutES from "@/layouts/LayoutES.astro";
+
+import { projectsTranslations } from "@/i18n/projectsTranslations";
+const ProjectsTranslationsES = projectsTranslations['es']
+
+import InnerTitle from "@/sections/innerTitle.astro";
+import FullProjectsList from "@/sections/fullProjectsList.astro";
+---
+<LayoutES title={ProjectsTranslationsES['pageTitle']} description={ProjectsTranslationsES['pageDescription']}>
+    <InnerTitle title={ProjectsTranslationsES['title']} path={ProjectsTranslationsES['path']}/>
+    <FullProjectsList lang={'es'} title={ProjectsTranslationsES['subtitle']} buttonText={ProjectsTranslationsES['buttonText']}/>
+</LayoutES>

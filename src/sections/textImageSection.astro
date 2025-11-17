@@ -1,0 +1,26 @@
+---
+interface Props {
+    subtitle: string;
+    content: string[];
+    image: {
+        src: string;
+        alt: string;
+    };
+}
+
+const { subtitle, content, image } = Astro.props;
+---
+<section class="w-full h-[70dvh]">
+    <div class="flex flex-col md:flex-row items-center justify-center align-middle h-full w-full
+        px-4 sm:px-12 md:px-24 lg:px-64 py-8 md:space-x-24 space-y-4 md:space-y-0">
+        <div class="w-full h-full md:w-2/3 flex flex-col justify-center space-y-4">
+            <h2 class="text-2xl font-bold">{subtitle}</h2>
+            {content.map((item) => (
+                <p>{item}</p>
+            ))}
+        </div>
+        <div class="w-full h-full md:w-1/2">
+            <img src={image.src} alt={image.alt} class="h-full w-auto rounded-2xl">
+        </div>
+    </div>
+</section>

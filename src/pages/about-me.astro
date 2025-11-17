@@ -1,0 +1,13 @@
+---
+import Layout from "@/layouts/Layout.astro";
+
+import { aboutTranslations } from "@/i18n/aboutTranslations";
+const AboutTranslationsCA = aboutTranslations['ca']
+
+import InnerTitle from "@/sections/innerTitle.astro";
+import TextImageSection from "@/sections/textImageSection.astro";
+---
+<Layout title={AboutTranslationsCA['pageTitle']} description={AboutTranslationsCA['pageDescription']}>
+    <InnerTitle title={AboutTranslationsCA['title']} path={AboutTranslationsCA['path']}/>
+    <TextImageSection subtitle={AboutTranslationsCA['subtitle']} content={AboutTranslationsCA['content']} image={AboutTranslationsCA['image']}/>
+</Layout>

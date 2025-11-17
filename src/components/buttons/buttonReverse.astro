@@ -2,10 +2,12 @@
 interface Props {
     Text: string,
     Link: string,
+    target?: string;
+    rel?: string;
 }
-const { Text, Link } = Astro.props
+const { Text, Link, target, rel } = Astro.props
 ---
-<a href={Link}
+<a href={Link} target={target} rel={rel}
    class="px-6 py-2 rounded-xl border-2 border-web-pearl-blue bg-web-night-blue font-semibold text-lg shadow-lg 
         hover:shadow-2xl hover:bg-web-pearl-blue hover:scale-105 transition-transform duration-300 cursor-pointer">
     { Text }
