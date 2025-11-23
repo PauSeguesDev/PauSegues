@@ -2,17 +2,18 @@
 interface Props {
 	title: string;
 	description: string;
+	lang: 'ca' | 'es' | 'en';
 }
 
-const { title, description } = Astro.props;
+const { title, description, lang } = Astro.props;
 
 import "@/styles/global.css";
 
 import { LayoutTranslations } from "@/i18n/layoutTranslations";
-const LayoutTranslationsCA = LayoutTranslations['ca']
+const LayoutTranslation = LayoutTranslations[lang]
 
-import Header from "@/sections/header.astro";
-import Footer from "@/sections/footer.astro";
+import Header from "@/sections/global/header.astro";
+import Footer from "@/sections/global/footer.astro";
 import Loading from "@/components/loading.astro";
 ---
 <!doctype html>
@@ -20,8 +21,17 @@ import Loading from "@/components/loading.astro";
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
+
+		<!-- Favicon -->
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<meta name="apple-mobile-web-app-title" content="Pau Segués" />
+		<link rel="manifest" href="/site.webmanifest" />
+
+		<!-- Meta title and description -->
 		<title>{title}</title>
 		<meta name="description" content={description} />
 	</head>
@@ -29,18 +39,18 @@ import Loading from "@/components/loading.astro";
 		<Loading />
 		<div id="pageWrapper" class="opacity-0 transition-opacity duration-500">
 			<Header 
-				linksTexts={LayoutTranslationsCA['headerLinkTexts']}
-				linksHref={LayoutTranslationsCA['headerLinksHref']}
+				linksTexts={LayoutTranslation['headerLinkTexts']}
+				linksHref={LayoutTranslation['headerLinksHref']}
 			/>
 			<main>
 				<slot />
 			</main>
 			<Footer 
-				legal={LayoutTranslationsCA['footerLegal']}
-				privacity={LayoutTranslationsCA['footerPrivacity']}
-				cookies={LayoutTranslationsCA['footerCookies']}
-				description={LayoutTranslationsCA['description']}
-				titleSocial={LayoutTranslationsCA['titleSocial']}
+				legal={LayoutTranslation['footerLegal']}
+				privacity={LayoutTranslation['footerPrivacity']}
+				cookies={LayoutTranslation['footerCookies']}
+				description={LayoutTranslation['description']}
+				titleSocial={LayoutTranslation['titleSocial']}
 			/>
 		</div>
 	</body>

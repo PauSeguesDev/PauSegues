@@ -1,18 +1,20 @@
 ---
-import { indexTranslations } from '@/i18n/indexTranslations';
-const IndexTranslations = indexTranslations['en']
+const lang = 'en';
 
-import Layout from '@/layouts/LayoutEN.astro';
+import { indexTranslations } from '@/i18n/indexTranslations';
+const IndexTranslations = indexTranslations[lang]
+
+import Layout from '@/layouts/Layout.astro';
 
 import Hero from '@/sections/index/hero.astro';
 import AboutSummary from '@/sections/index/aboutSummary.astro';
 import LastsProjects from '@/sections/index/lastsProjects.astro';
 ---
 
-<Layout title={IndexTranslations['metaTitle']} description={IndexTranslations['metaDescription']}>
+<Layout title={IndexTranslations['metaTitle']} description={IndexTranslations['metaDescription']} lang={lang}>
 	<Hero subtitle={IndexTranslations['HeroSubtitle']}/>
 	<LastsProjects 
-		lang="en" 
+		lang={lang} 
 		title={IndexTranslations['LastsProjectsTitle']} 
 		buttonText={IndexTranslations['LastsProjectsButtonText']}
 	/>

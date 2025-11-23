@@ -1,18 +1,20 @@
 ---
+const lang = 'es';
+
 import { indexTranslations } from '@/i18n/indexTranslations';
 const IndexTranslations = indexTranslations['es']
 
-import Layout from '@/layouts/LayoutES.astro';
+import Layout from '@/layouts/Layout.astro';
 
 import Hero from '@/sections/index/hero.astro';
 import AboutSummary from '@/sections/index/aboutSummary.astro';
 import LastsProjects from '@/sections/index/lastsProjects.astro';
 ---
 
-<Layout title={IndexTranslations['metaTitle']} description={IndexTranslations['metaDescription']}>
+<Layout title={IndexTranslations['metaTitle']} description={IndexTranslations['metaDescription']} lang={lang}>
 	<Hero subtitle={IndexTranslations['HeroSubtitle']}/>
 	<LastsProjects 
-		lang="es" 
+		lang={lang} 
 		title={IndexTranslations['LastsProjectsTitle']} 
 		buttonText={IndexTranslations['LastsProjectsButtonText']}
 	/>

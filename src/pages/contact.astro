@@ -1,13 +1,15 @@
 ---
+const lang = 'ca';
+
 import Layout from "@/layouts/Layout.astro";
 
 import { contactTranslations } from "@/i18n/contactTranslations";
-const ContactTranslations = contactTranslations['ca']
+const ContactTranslations = contactTranslations[lang]
 
 import InnerTitle from "@/sections/innerTitle.astro";
 import ContactForm from "@/sections/contactForm.astro";
 ---
-<Layout title={ContactTranslations['metaTitle']} description={ContactTranslations['metaDescription']}>
+<Layout title={ContactTranslations['metaTitle']} description={ContactTranslations['metaDescription']} lang={lang}>
     <InnerTitle title={ContactTranslations['title']} path={[
         { name: ContactTranslations['pathNames'][0], href: '/' },
         { name: ContactTranslations['pathNames'][1], href: '/contact' },
