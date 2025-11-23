@@ -6,7 +6,7 @@ export const projectsTranslations = {
         'title': 'Projectes',
         'pathNames': [ 'Home', 'Projectes' ],
 
-        'subtitle': 'Tots els Projectes',
+        'subtitle': 'Aquí tens la llista de tots els meus projectes',
         'buttonText': 'Veure projecte'
     },
     'es': {
@@ -16,7 +16,7 @@ export const projectsTranslations = {
         'title': 'Proyectos',
         'pathNames': [ 'Home', 'Proyectos' ],
 
-        'subtitle': 'Todos los Proyectos',
+        'subtitle': 'Aquí tienes la lista de todos mis proyectos',
         'buttonText': 'Ver proyecto'
     },
     'en': {
@@ -26,7 +26,7 @@ export const projectsTranslations = {
         'title': 'Projects',
         'pathNames': [ 'Home', 'Projects' ],
 
-        'subtitle': 'All Projects',
+        'subtitle': 'Here is my list of all my projects',
         'buttonText': 'View project'
     }
 }
