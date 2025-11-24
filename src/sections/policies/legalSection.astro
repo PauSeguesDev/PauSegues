@@ -1,0 +1,36 @@
+---
+interface Props {
+    owner: string[];
+    SectionTranslation: { [key: string]: {title: string, description?: string, list?: string[]}};
+}
+
+const { SectionTranslation, owner } = Astro.props;
+---
+<section class="px-4 sm:px-12 md:px-24 lg:px-64 py-4 my-12">
+    <div class="flex flex-col gap-4">
+        <div>
+            <p class="font-bold">{owner[0]}</p>
+            {
+                owner.slice(1).map((item: string) => (
+                    <p set:html={item}></p>
+                ))
+            }
+        </div>
+        {
+        Object.entries(SectionTranslation).map(([key, item]: [string, {title: string, description?: string, list?: string[]}]) => (
+            <div>
+            <h3 class="font-bold">{item.title}</h3>
+            {item.list ? (
+                <ul>
+                {item.list.map((li: string) => (
+                    <li>{li}</li>
+                ))}
+                </ul>
+            ) : (
+                <p set:html={item.description}></p>
+            )}
+            </div>
+        ))
+        }
+  </div>
+</section>

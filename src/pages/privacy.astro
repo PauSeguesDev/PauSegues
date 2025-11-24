@@ -1,0 +1,23 @@
+---
+const lang = 'ca';
+
+import Layout from "@/layouts/Layout.astro";
+import { privacyTranslations } from "@/i18n/privacyTranslations";
+const PrivacyTranslations = privacyTranslations[lang];
+
+import InnerTitle from "@/sections/innerTitle.astro";
+import PrivacySection from "@/sections/policies/privacySection.astro";
+---
+<Layout title={PrivacyTranslations['metaTitle']} description={PrivacyTranslations['metaDescription']} lang={lang}>
+    <InnerTitle 
+    title={PrivacyTranslations['title']} 
+    path={[
+        { name: PrivacyTranslations['pathNames'][0], href: '/' },
+        { name: PrivacyTranslations['pathNames'][1], href: '/privacy' },
+    ]}/>
+    <PrivacySection 
+        lastUpdateDate={PrivacyTranslations['lastUpdateDate']} 
+        lastUpdate={PrivacyTranslations['lastUpdate']} 
+        SectionTranslation={PrivacyTranslations['section']}
+    />
+</Layout>
