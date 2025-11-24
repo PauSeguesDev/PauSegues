@@ -3,7 +3,7 @@ export const LayoutTranslations = {
         'headerLinkTexts': ['Home', 'Sobre Mi', 'Projectes', 'Contacte'],
         'headerLinksHref': ['/', '/about-me', '/projects', '/contact'],
         
-        'description': "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        'description': "Hola, sóc el Pau. Estudiant de Desenvolupament d’Aplicacions Web a Lacetània (Manresa). M’apassiona la tecnologia i la programació. M'agrada buscar i crear solucions digitals funcionals i creatives.",
         'titleSocial': "Les meves xarxes socials:",
         'footerLegal': ["Avis Legal", "/legal"],
         'footerPrivacity': ["Política de Privacitat", "/privacy"],
@@ -13,7 +13,7 @@ export const LayoutTranslations = {
         'headerLinkTexts': ['Home', 'Sobre Mi', 'Proyectos', 'Contacto'],
         'headerLinksHref': ['/es/', '/es/about-me', '/es/projects', '/es/contact'],
         
-        'description': "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        'description': "Hola, soy Pau. Estudiante de Desarrollo de Aplicaciones Web en Lacetània (Manresa). Me apasiona la tecnología y la programación. Me gusta buscar y crear soluciones digitales funcionales y creativas.",
         'titleSocial': "Mis redes sociales:",
         'footerLegal': ["Aviso Legal", "/es/legal"],
         'footerPrivacity': ["Política de privacidad", "/es/privacy"],
@@ -23,7 +23,7 @@ export const LayoutTranslations = {
         'headerLinkTexts': ['Home', 'About Me', 'Projects', 'Contact'],
         'headerLinksHref': ['/en/', '/en/about-me', '/en/projects', '/en/contact'],
         
-        'description': "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        'description': "Hi, I’m Pau. A Web Application Development student at Lacetània (Manresa). I’m passionate about technology and programming. I enjoy designing and creating functional, creative digital solutions.",
         'titleSocial': "My social networks:",
         'footerLegal': ["Legal Notice", "/en/legal"],
         'footerPrivacity': ["Privacy policy", "/en/privacy"],
