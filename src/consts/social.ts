@@ -3,6 +3,7 @@ import type { Social } from "@/types/socialType";
 import X from "@/icons/x.svg";
 import Instagram from "@/icons/instagram.svg";
 import GitHub from "@/icons/github.svg";
+import Linkedin from "@/icons/Linkedin.svg";
 
 export const SOCIAL: Social[] = [
   {
@@ -36,6 +37,17 @@ export const SOCIAL: Social[] = [
     label: "Visit my GitHub profile",
     image: {
       logo: GitHub,
+      width: 200,
+      height: 200,
+    },
+  },
+  {
+    id: "linkedin",
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/in/pau-segu%C3%A9s-vitutia-29734339a/",
+    label: "Visit my LinkedIn profile",
+    image: {
+      logo: Linkedin,
       width: 200,
       height: 200,
     },

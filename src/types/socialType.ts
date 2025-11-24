@@ -1,6 +1,6 @@
-type SocialId = "x" | "instagram" | "github" ;
+type SocialId = "x" | "instagram" | "github" | "linkedin" ;
 
-type SocialName = "X" | "Instagram" | "GitHub" ;
+type SocialName = "X" | "Instagram" | "GitHub" | "LinkedIn" ;
 
 export interface Social {
   id: SocialId;
