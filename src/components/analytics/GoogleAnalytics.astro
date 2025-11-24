@@ -1,0 +1,63 @@
+---
+// src/components/GoogleAnalytics.astro
+interface Props {
+  measurementId: string;
+}
+
+const { measurementId } = Astro.props;
+---
+
+<div id="ga-params" data-id={measurementId} class="hidden"></div>
+
+<script>
+  import { getCookieConsent } from "@/lib/cookies";
+  import { COOKIE_EVENT_NAME } from "@/types/cookiesTypes";
+
+  // 1. Recuperem l'ID que hem passat des del servidor
+  const gaElement = document.getElementById("ga-params");
+  const GA_ID = gaElement?.dataset.id;
+
+  if (!GA_ID) {
+    console.error("❌ Google Analytics: No s'ha trobat el Measurement ID");
+  } else {
+    // 3. La funció que injecta l'script
+    const loadGoogleAnalytics = () => {
+      if (window.ga_loaded) return;
+
+      console.log(`📊 Carregant Google Analytics (${GA_ID})...`);
+
+      // Script extern de Google
+      const script = document.createElement("script");
+      script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+      script.async = true;
+      document.head.appendChild(script);
+
+      // Configuració interna
+      window.dataLayer = window.dataLayer || [];
+      function gtag(...args: any[]) {
+        window.dataLayer.push(args);
+      }
+      window.gtag = gtag;
+
+      gtag("js", new Date());
+      gtag("config", GA_ID);
+
+      window.ga_loaded = true;
+    };
+
+    // 4. Lògica d'execució (Igual que teníem abans)
+
+    // A) En entrar a la web
+    const currentConsent = getCookieConsent();
+    if (currentConsent.analytics) {
+      loadGoogleAnalytics();
+    }
+
+    // B) En acceptar al banner/configuració
+    window.addEventListener(COOKIE_EVENT_NAME, ((event: CustomEvent) => {
+      if (event.detail.analytics) {
+        loadGoogleAnalytics();
+      }
+    }) as EventListener);
+  }
+</script>

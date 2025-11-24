@@ -1,0 +1,30 @@
+---
+const lang = 'ca';
+
+import Layout from "@/layouts/Layout.astro";
+import { cookiesTranslations } from "@/i18n/cookiesTranslations";
+const CookiesTranslations = cookiesTranslations[lang] 
+
+import InnerTitle from "@/sections/innerTitle.astro";
+import CookiesSection from "@/sections/policies/cookiesSection.astro";
+import CookiesForm from "@/sections/policies/cookiesForm.astro";
+---
+<Layout title={CookiesTranslations['metaTitle']} description={CookiesTranslations['metaDescription']} lang={lang}>
+    <InnerTitle 
+    title={CookiesTranslations['title']} 
+    path={[ 
+        { name: CookiesTranslations['pathNames'][0], href: '/' },
+        { name: CookiesTranslations['pathNames'][1], href: '/cookies' },
+    ]}/>
+    <CookiesSection SectionTranslation={CookiesTranslations['cookiesSection']} />
+    <CookiesForm 
+        formTitle={CookiesTranslations['formTitle']}
+        formDescription={CookiesTranslations['formDescription']}
+        necessaryTitle={CookiesTranslations['necessaryTitle']}
+        necessaryDescription={CookiesTranslations['necessaryDescription']}
+        analyticsTitle={CookiesTranslations['analyticsTitle']}
+        analyticsDescription={CookiesTranslations['analyticsDescription']}
+        ButtonFormText={CookiesTranslations['ButtonFormText']}
+        CorrectSave={CookiesTranslations['CorrectSave']}
+    />
+</Layout>

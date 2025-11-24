@@ -1,0 +1,92 @@
+---
+interface Props {
+  lang: 'ca' | 'es' | 'en';
+}
+
+const { lang } = Astro.props;
+
+import { cookiesBannerTranslations } from "@/i18n/cookiesBannerTranslations";
+const CookiesBannerTranslations = cookiesBannerTranslations[lang];
+---
+
+<div
+  id="cookie-banner"
+  class="fixed bottom-0 left-0 right-0 z-50 hidden flex-col md:flex-row items-center justify-between gap-4 p-5 bg-web-dark-blue"
+>
+  <div class="text-sm md:max-w-2xl">
+    <p class="font-bold mb-1 text-lg">{CookiesBannerTranslations.title}</p>
+    <p>
+      {CookiesBannerTranslations.description}
+    </p>
+  </div>
+
+  <div class="flex gap-3 shrink-0 flex-col md:flex-row">
+    <a
+      href="/politica-cookies"
+      class="px-4 py-2 text-sm font-medium underline hover:decoration-web-pearl-blue hover:text-web-pearl-blue transition-all"
+    >
+      {CookiesBannerTranslations.configure}
+    </a>
+
+    <button
+      id="btn-reject-all"
+      class="px-5 py-2 text-sm font-bold bg-red-600 hover:bg-red-700 rounded transition-colors cursor-pointer"
+    >
+      {CookiesBannerTranslations.rejectAll}
+    </button>
+
+    <button
+      id="btn-accept-all"
+      class="px-5 py-2 text-sm font-bold text-web-night-blue bg-green-400 hover:bg-green-300 rounded transition-colors cursor-pointer"
+    >
+      {CookiesBannerTranslations.acceptAll}
+    </button>
+  </div>
+</div>
+
+<script>
+  // Importem la lògica que hem creat a LIB
+  import { setCookieConsent } from "@/lib/cookies";
+  import type { CookiesConsent } from "@/types/cookiesTypes";
+
+  const banner = document.getElementById("cookie-banner");
+  const acceptBtn = document.getElementById("btn-accept-all");
+  const rejectBtn = document.getElementById("btn-reject-all");
+
+  // 1. Mostrar el banner només si NO hi ha res guardat
+  // Comprovem directament el localStorage per saber si és la primera visita
+  const hasConsent = localStorage.getItem("cookie_consent");
+
+  if (!hasConsent && banner) {
+    banner.classList.remove("hidden");
+    banner.classList.add("flex");
+  }
+
+  // Funció per amagar el banner
+  const hideBanner = () => {
+    if (banner) {
+      banner.classList.add("hidden");
+      banner.classList.remove("flex");
+    }
+  };
+
+  // 2. Acció: ACCEPTAR TOT
+  acceptBtn?.addEventListener("click", () => {
+    const allAccepted: CookiesConsent = {
+      necessary: true,
+      analytics: true,
+    };
+    setCookieConsent(allAccepted);
+    hideBanner();
+  });
+
+  // 3. Acció: REBUTJAR (només necessàries)
+  rejectBtn?.addEventListener("click", () => {
+    const allRejected: CookiesConsent = {
+      necessary: true,
+      analytics: false,
+    };
+    setCookieConsent(allRejected);
+    hideBanner();
+  });
+</script>

@@ -1,0 +1,113 @@
+---
+interface Props {
+  formTitle :string
+  formDescription :string
+
+  necessaryTitle :string
+  necessaryDescription :string
+
+  analyticsTitle :string
+  analyticsDescription :string
+
+  ButtonFormText :string
+  CorrectSave: string
+}
+
+const { 
+    formTitle, 
+    formDescription, 
+    necessaryTitle, 
+    necessaryDescription, 
+    analyticsTitle, 
+    analyticsDescription, 
+    ButtonFormText, 
+    CorrectSave 
+} = Astro.props;
+
+import ButtonForm from "@/components/buttons/buttonForm.astro"
+---
+<section class="px-4 sm:px-12 md:px-24 lg:px-64 py-4 mb-12">
+  <div class="flex flex-col gap-2">
+    <h2 class="font-bold text-2xl">{formTitle}</h2>
+    <p>{formDescription}</p>
+  </div>
+
+  <div class="flex flex-col gap-4 pt-8">
+    <form id="cookie-form" class="space-y-6">
+      <div class="flex items-end justify-start gap-4">
+        <div>
+          <h3 class="font-semibold">{necessaryTitle}</h3>
+          <p>{necessaryDescription}</p>
+        </div>
+        <div>
+          <input 
+            type="checkbox" 
+            checked 
+            disabled 
+            class="w-5 h-5 rounded cursor-not-allowed"
+          >
+        </div>
+      </div>
+      
+      <div class="flex items-end justify-start gap-4">
+        <div>
+          <h3 class="font-semibold">{analyticsTitle}</h3>
+          <p>{analyticsDescription}</p>
+        </div>
+        <div>
+          <input 
+            type="checkbox" 
+            id="consent-analytics" 
+            class="w-5 h-5 rounded cursor-pointer"
+          >
+        </div>
+      </div>
+
+      <div>
+        <ButtonForm Text={ButtonFormText}/>
+      </div>
+
+      <div>
+        <span id="save-feedback" class="text-green-600 text-sm font-medium opacity-0 transition-opacity duration-300">
+          {CorrectSave}
+        </span>
+      </div>
+    </form>
+  </div>
+</section>
+
+<script>
+  // Importem la lògica que hem creat abans
+  import { getCookieConsent, setCookieConsent } from '@/lib/cookies';
+
+  // Elements del DOM
+  const form = document.getElementById('cookie-form') as HTMLFormElement;
+  const analyticsCheckbox = document.getElementById('consent-analytics') as HTMLInputElement;
+  const feedbackMsg = document.getElementById('save-feedback') as HTMLSpanElement;
+
+  // 1. CARREGAR L'ESTAT ACTUAL
+  // Quan l'usuari entra a la pàgina, volem que els checkbox mostrin el que ja té guardat.
+  const currentSettings = getCookieConsent();
+  
+  if (analyticsCheckbox) analyticsCheckbox.checked = currentSettings.analytics;
+
+  // 2. GUARDAR NOUS CANVIS
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault(); // Evitem que la pàgina es recarregui
+
+    // Creem l'objecte amb els nous valors
+    const newSettings = {
+      necessary: true,
+      analytics: analyticsCheckbox.checked,
+    };
+
+    // Fem servir la nostra utilitat per guardar
+    setCookieConsent(newSettings);
+
+    // Mostrem missatge de "Guardat"
+    feedbackMsg.classList.remove('opacity-0');
+    setTimeout(() => {
+      feedbackMsg.classList.add('opacity-0');
+    }, 2500);
+  });
+</script>

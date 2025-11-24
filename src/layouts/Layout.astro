@@ -15,6 +15,9 @@ const LayoutTranslation = LayoutTranslations[lang]
 import Header from "@/sections/global/header.astro";
 import Footer from "@/sections/global/footer.astro";
 import Loading from "@/components/loading.astro";
+
+import CookiesBanner from "@/components/cookiesBanner.astro";
+import GoogleAnalytics from "@/components/analytics/GoogleAnalytics.astro";
 ---
 <!doctype html>
 <html lang="ca">
@@ -34,6 +37,9 @@ import Loading from "@/components/loading.astro";
 		<!-- Meta title and description -->
 		<title>{title}</title>
 		<meta name="description" content={description} />
+
+		<!-- Google Analytics -->
+		<GoogleAnalytics measurementId={import.meta.env.GA_MEASUREMENT_ID} />
 	</head>
 	<body class="relative">
 		<Loading />
@@ -44,6 +50,7 @@ import Loading from "@/components/loading.astro";
 			/>
 			<main>
 				<slot />
+				<CookiesBanner lang={lang} />
 			</main>
 			<Footer 
 				legal={LayoutTranslation['footerLegal']}
