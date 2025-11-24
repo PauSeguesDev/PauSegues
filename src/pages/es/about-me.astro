@@ -8,6 +8,7 @@ const AboutTranslations = aboutTranslations[lang]
 
 import InnerTitle from "@/sections/innerTitle.astro";
 import TextImageSection from "@/sections/textImageSection.astro";
+import Skills from "@/sections/skills.astro";
 ---
 <Layout title={AboutTranslations['metaTitle']} description={AboutTranslations['metaDescription']} lang={lang}>
     <InnerTitle 
@@ -22,7 +23,8 @@ import TextImageSection from "@/sections/textImageSection.astro";
         content={AboutTranslations['content']}
         image={{
             src: '/images/pau-segues.webp',
-            alt: AboutTranslations['imageAlt']
+            alt: AboutTranslations['subtitle']
         }}
     />
+    <Skills sectionTitle={AboutTranslations['skillsTitle']} />
 </Layout>
