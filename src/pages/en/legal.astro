@@ -1,0 +1,22 @@
+---
+const lang = 'en';
+
+import Layout from "@/layouts/Layout.astro";
+import { legalTranslations } from "@/i18n/legalTranslations";
+const LegalTranslations = legalTranslations[lang] 
+
+import InnerTitle from "@/sections/innerTitle.astro";
+import LegalSection from "@/sections/policies/legalSection.astro";
+---
+<Layout title={LegalTranslations['metaTitle']} description={LegalTranslations['metaDescription']} lang={lang}>
+    <InnerTitle 
+        title={LegalTranslations['title']} 
+        path={[
+            { name: LegalTranslations['pathNames'][0], href: '/' },
+            { name: LegalTranslations['pathNames'][1], href: '/legal' },
+        ]}/>
+    <LegalSection 
+        owner={LegalTranslations['owner']}
+        SectionTranslation={LegalTranslations['termsSection']}
+    />
+</Layout>
