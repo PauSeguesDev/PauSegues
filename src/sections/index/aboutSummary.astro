@@ -2,8 +2,9 @@
 interface Props {
     Title: string,
     AboutText: string,
+    lang: string,
 }
-const { Title, AboutText } = Astro.props
+const { Title, AboutText, lang } = Astro.props
 
 import Button from "@/components/buttons/button.astro"
 ---
@@ -22,8 +23,8 @@ import Button from "@/components/buttons/button.astro"
             <p class="max-w-xl text-xl mb-8">
                 { AboutText }
             </p>
-            <div class="flex justify-center">
-                <Button Text={Title} Link="" />
+            <div class="flex justify-center md:justify-start">
+                <Button Text={Title} Link={lang === 'ca' ? '/about-me' : lang === 'es' ? '/es/about-me' : '/en/about-me'} />
             </div>
         </div>
     </div>
