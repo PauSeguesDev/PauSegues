@@ -80,7 +80,7 @@ try {
   </section>
 
   <!-- Secció amb botó per crear nova entrada i taula de dades -->
-  <section class="mt-8">
+  <section class="mt-8 mb-12">
     <div class="flex justify-center items-center flex-col space-y-4">
       <!-- Botó per afegir nova entrada a la taula -->
       <Button Text={`New ${table}`} Link={`/admin/${table}/new`} />
@@ -89,7 +89,9 @@ try {
       <table class="overflow-x-auto shadow-lg border border-web-dark-blue/30 bg-white/80 backdrop-blur-sm w-2xl">
           <thead class="text-center uppercase bg-web-dark-blue">
               <tr class="[&>th]:p-2">
-                  <th>Títol</th>
+                  <th>{
+                    table === "projects" ? "Títol" : "Nom"
+                  }</th>
                   <th>Accions</th>
               </tr>
           </thead>
@@ -99,7 +101,7 @@ try {
                       <!-- Enllaç al formulari d'edició per cada entrada -->
                       <td>
                         <a href={`/admin/${table}/edit/${entry.id}`} class="hover:scale-110 hover:underline transition-all duration-300 ease-out">
-                          {entry.title_ca}
+                          {entry.title_ca || entry.name}
                         </a>
                       </td>
                       <td>

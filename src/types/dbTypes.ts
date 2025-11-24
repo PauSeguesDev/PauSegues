@@ -1,5 +1,5 @@
 // Llista de tipus d'input permesos
-export const TypeInput = ["text", "textarea", "url", "file"] as const;
+export const TypeInput = ["text", "textarea", "url", "file", "select"] as const;
 
 // Tipus derivat de la constant
 export type DbFieldType = (typeof TypeInput)[number];
@@ -8,6 +8,7 @@ export type DbFieldType = (typeof TypeInput)[number];
 export interface DbField {
   name: string;
   type: DbFieldType;
+  options?: string[];
 }
 
 export interface DbTable {

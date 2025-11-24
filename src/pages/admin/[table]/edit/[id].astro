@@ -149,6 +149,23 @@ if (Astro.request.method === "POST") {
               class="bg-web-pearl-blue p-2 rounded-lg"
             />
           </>
+        ) : field.type === "select" ? (
+          <select
+            name={field.name}
+            id={field.name}
+            required={field.name !== "image" && field.name !== "link"}
+            class="bg-web-pearl-blue p-2 rounded-lg"
+          >
+            {field.options?.map(option => (
+              <option 
+                value={option} 
+                class="p-2" 
+                selected={item?.[field.name] === option}
+              >
+                {option}
+              </option>
+            ))}
+          </select>
         ) : (
           <input
             type={field.type}

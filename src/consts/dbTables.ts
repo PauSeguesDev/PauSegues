@@ -14,4 +14,12 @@ export const dbTables: DbTableType = [
       { name: "image", type: "file" },
     ],
   },
+  {
+    name: "skills",
+    fields: [
+      { name: "name", type: "text" },
+      { name: "type", type: "select", options: ["frontend", "backend", "database", "tools"] },
+      { name: "icon_url", type: "text" },
+    ],
+  },
 ];

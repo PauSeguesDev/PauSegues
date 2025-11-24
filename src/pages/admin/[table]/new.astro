@@ -75,8 +75,14 @@ if (Astro.request.method === 'POST') {
 
   // Inserir les dades a la taula
   const { error: insertError } = await supabase.from(table).insert([data]);
+
   if (insertError) {
-    throw new Error("Error inserint les dades");
+    // Log the full error object to the terminal
+    console.error("SUPABASE INSERT ERROR:", insertError); 
+    console.error("DATA BEING SENT:", data);
+    
+    // Throw the specific message so you see it in the browser
+    throw new Error(`Error inserint les dades: ${insertError.message}`);
   }
 
   // Redirigir al llistat de la taula
@@ -101,6 +107,12 @@ if (Astro.request.method === 'POST') {
           <label for={field.name}>{field.name}</label>
           {field.type === "textarea" ? (
             <textarea name={field.name} id={field.name} required></textarea>
+          ) : field.type === "select" ? (
+            <select name={field.name} id={field.name} required class="bg-web-pearl-blue p-2 rounded-lg">
+              {field.options?.map(option => (
+                <option value={option} class="p-2">{option}</option>
+              ))}
+            </select>
           ) : (
             <input
               type={field.type === "file" ? "file" : field.type}
