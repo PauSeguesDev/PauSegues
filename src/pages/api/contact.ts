@@ -10,7 +10,31 @@ export const POST: APIRoute = async ({ request }) => {
     const message = data.get("message");
 
     if (!name || !surname || !email || !message) {
-      return new Response(JSON.stringify({ ok: false, error: "Missing required fields" }), { status: 400 });
+      return new Response(
+        JSON.stringify({ ok: false, error: "Missing required fields" }),
+        { status: 400 }
+      );
+    }
+
+    const recaptchaResponse = data.get("g-recaptcha-response");
+    if (!recaptchaResponse) {
+      return new Response(
+        JSON.stringify({ ok: false, error: "Missing reCAPTCHA" }),
+        { status: 400 }
+      );
+    }
+
+    const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${
+      import.meta.env.RECAPTCHA_SECRET_KEY
+    }&response=${recaptchaResponse}`;
+    const verifyResponse = await fetch(verifyUrl, { method: "POST" });
+    const verifyData = await verifyResponse.json();
+
+    if (!verifyData.success) {
+      return new Response(
+        JSON.stringify({ ok: false, error: "Invalid reCAPTCHA" }),
+        { status: 400 }
+      );
     }
 
     const transporter = nodemailer.createTransport({
@@ -31,7 +55,9 @@ export const POST: APIRoute = async ({ request }) => {
         <h2>Nou missatge del contacte de Pau Segués Web</h2>
         <p><strong>Nom:</strong> ${name.toString()} ${surname.toString()}</p>
         <p><strong>Email:</strong> ${email.toString()}</p>
-        <p><strong>Missatge:</strong><br>${message.toString().replace(/\n/g, '<br>')}</p>
+        <p><strong>Missatge:</strong><br>${message
+          .toString()
+          .replace(/\n/g, "<br>")}</p>
         <hr>
         <p>Missatge enviat desde el formulari de contacte</p>
       `,
