@@ -1,32 +1,39 @@
 ---
 interface Props {
-    lang: string;
-    title: string;
-    buttonText: string;
+  lang: string;
+  title: string;
+  buttonText: string;
 }
 
 const { lang, title, buttonText } = Astro.props;
 
 import ProjectCard from "@/components/projectCard.astro";
 
-import { supabase } from "@/lib/supabase";
-const { data, error } = await supabase.from("projects").select("*").order("created_at", { ascending: false });
+import { createSupabase } from "@/lib/supabase";
+const supabase = createSupabase();
+const { data } = await supabase
+  .from("projects")
+  .select("*")
+  .order("created_at", { ascending: false });
 ---
+
 <section class="min-h-dvh w-full py-24 px-4 sm:px-10 md:px-24 lg:px-36">
-    <div class="flex justify-center items-center mb-10 md:mb-24">
-        <p class="text-xl lg:text-2xl">
-            {title}
-        </p>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {data?.map((project) => (
-            <ProjectCard
-                title={project[`title_${lang}`]}
-                description={project[`description_${lang}`]}
-                image={project.image}
-                link={project.link}
-                buttonText={buttonText}
-            />
-        ))}
-    </div>
+  <div class="flex justify-center items-center mb-10 md:mb-24">
+    <p class="text-xl lg:text-2xl">
+      {title}
+    </p>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {
+      data?.map((project) => (
+        <ProjectCard
+          title={project[`title_${lang}`]}
+          description={project[`description_${lang}`]}
+          image={project.image}
+          link={project.link}
+          buttonText={buttonText}
+        />
+      ))
+    }
+  </div>
 </section>

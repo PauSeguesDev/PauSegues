@@ -1,7 +1,7 @@
 ---
 import LayoutAdmin from "@/layouts/LayoutAdmin.astro";
 import ButtonForm from "@/components/buttons/buttonForm.astro";
-import { supabase } from "@/lib/supabase";
+import { createSupabase } from "@/lib/supabase";
 
 const { table } = Astro.params as { table: string };
 
@@ -15,6 +15,7 @@ if (!accessToken || !refreshToken) {
 
 let session;
 try {
+  const supabase = createSupabase();
   const { data, error } = await supabase.auth.setSession({
     access_token: accessToken,
     refresh_token: refreshToken,
@@ -37,7 +38,7 @@ import { dbTables } from "@/consts/dbTables";
 const tableFields = dbTables.find((t) => t.name === table)?.fields;
 
 // Gestió del POST per crear nova entrada amb imatge
-if (Astro.request.method === 'POST') {
+if (Astro.request.method === "POST") {
   const formData = await Astro.request.formData();
   const data = Object.fromEntries(formData.entries());
 
@@ -53,34 +54,36 @@ if (Astro.request.method === 'POST') {
       const buffer = Buffer.from(arrayBuffer);
 
       // Puja la imatge a Supabase Storage
-      const { data: uploadData, error: uploadError } = await supabase
-        .storage
+      const supabase = createSupabase();
+      const { data: uploadData, error: uploadError } = await supabase.storage
         .from("images")
-        .upload(fileName, buffer, { contentType: imageFile.type, upsert: false });
+        .upload(fileName, buffer, {
+          contentType: imageFile.type,
+          upsert: false,
+        });
 
       if (uploadError) throw uploadError;
 
       // Obtenir la URL pública de la imatge
-      const { data: publicData } = supabase
-        .storage
+      const { data: publicData } = supabase.storage
         .from("images")
         .getPublicUrl(fileName);
 
       data.image = publicData.publicUrl;
-
     } catch (err) {
       throw new Error("Error pujant la imatge");
     }
   }
 
   // Inserir les dades a la taula
+  const supabase = createSupabase();
   const { error: insertError } = await supabase.from(table).insert([data]);
 
   if (insertError) {
     // Log the full error object to the terminal
-    console.error("SUPABASE INSERT ERROR:", insertError); 
+    console.error("SUPABASE INSERT ERROR:", insertError);
     console.error("DATA BEING SENT:", data);
-    
+
     // Throw the specific message so you see it in the browser
     throw new Error(`Error inserint les dades: ${insertError.message}`);
   }
@@ -98,33 +101,46 @@ if (Astro.request.method === 'POST') {
   </section>
 
   <div class="flex flex-col items-center justify-center mt-12">
-    <form method="post" enctype="multipart/form-data" novalidate
+    <form
+      method="post"
+      enctype="multipart/form-data"
+      novalidate
       class="flex flex-col gap-2 rounded-2xl p-10 space-y-2
              [&>input]:bg-web-pearl-blue [&>input]:p-2 [&>input]:rounded-lg
-             [&>textarea]:bg-web-pearl-blue [&>textarea]:p-2 [&>textarea]:rounded-lg">
-      {tableFields?.map(field => (
-        <>
-          <label for={field.name}>{field.name}</label>
-          {field.type === "textarea" ? (
-            <textarea name={field.name} id={field.name} required></textarea>
-          ) : field.type === "select" ? (
-            <select name={field.name} id={field.name} required class="bg-web-pearl-blue p-2 rounded-lg">
-              {field.options?.map(option => (
-                <option value={option} class="p-2">{option}</option>
-              ))}
-            </select>
-          ) : (
-            <input
-              type={field.type === "file" ? "file" : field.type}
-              name={field.name}
-              id={field.name}
-              required={field.name !== "link" && field.type !== "file"}
-              placeholder={field.type === "url" ? "https://example.com" : ""}
-              accept={field.type === "file" ? "image/*" : undefined}
-            />
-          )}
-        </>
-      ))}
+             [&>textarea]:bg-web-pearl-blue [&>textarea]:p-2 [&>textarea]:rounded-lg"
+    >
+      {
+        tableFields?.map((field) => (
+          <>
+            <label for={field.name}>{field.name}</label>
+            {field.type === "textarea" ? (
+              <textarea name={field.name} id={field.name} required />
+            ) : field.type === "select" ? (
+              <select
+                name={field.name}
+                id={field.name}
+                required
+                class="bg-web-pearl-blue p-2 rounded-lg"
+              >
+                {field.options?.map((option) => (
+                  <option value={option} class="p-2">
+                    {option}
+                  </option>
+                ))}
+              </select>
+            ) : (
+              <input
+                type={field.type === "file" ? "file" : field.type}
+                name={field.name}
+                id={field.name}
+                required={field.name !== "link" && field.type !== "file"}
+                placeholder={field.type === "url" ? "https://example.com" : ""}
+                accept={field.type === "file" ? "image/*" : undefined}
+              />
+            )}
+          </>
+        ))
+      }
       <ButtonForm Text="Guarda" />
     </form>
   </div>

@@ -2,7 +2,7 @@
 import LayoutAdmin from "@/layouts/LayoutAdmin.astro"; // Layout general per pàgines d'admin
 import Button from "@/components/buttons/button.astro"; // Botó reutilitzable
 
-import { supabase } from "@/lib/supabase"; // Instància de Supabase per fer consultes i autenticació
+import { createSupabase } from "@/lib/supabase"; // Instància de Supabase per fer consultes i autenticació
 
 // Tipus per validar la taula que s'utilitza
 type TableName = 'projects';
@@ -22,6 +22,7 @@ if (!table) {
 
 try {
     // Consulta la taula amb Supabase per veure si existeix i obtenir les dades
+    const supabase = createSupabase();
     const { data, error } = await supabase
         .from(table)
         .select('*');
@@ -50,6 +51,7 @@ if (!accessToken || !refreshToken) {
 let session;
 try {
   // Estableix la sessió a Supabase amb els tokens
+  const supabase = createSupabase();
   session = await supabase.auth.setSession({
     refresh_token: refreshToken.value,
     access_token: accessToken.value,

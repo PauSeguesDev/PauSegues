@@ -1,33 +1,35 @@
 ---
 interface Props {
-    sectionTitle: string;
+  sectionTitle: string;
 }
 
 const { sectionTitle } = Astro.props;
 
-import { supabase } from '@/lib/supabase';
+import { createSupabase } from "@/lib/supabase";
+const supabase = createSupabase();
 
-const { data: skills } = await supabase.from('skills').select('*');
+const { data: skills } = await supabase.from("skills").select("*");
 
-const frontend = skills?.filter((skill) => skill.type === 'frontend') || [];
-const backend = skills?.filter((skill) => skill.type === 'backend') || [];
-const database = skills?.filter((skill) => skill.type === 'database') || [];
-const tools = skills?.filter((skill) => skill.type === 'tools') || [];
+const frontend = skills?.filter((skill) => skill.type === "frontend") || [];
+const backend = skills?.filter((skill) => skill.type === "backend") || [];
+const database = skills?.filter((skill) => skill.type === "database") || [];
+const tools = skills?.filter((skill) => skill.type === "tools") || [];
 
-import SkillsCard from '@/components/skillsCard.astro';
+import SkillsCard from "@/components/skillsCard.astro";
 ---
+
 <section class="my-8">
-    <div class="flex justify-center items-center mb-8">
-        <h2 class="text-xl lg:text-2xl font-bold">
-            {sectionTitle}
-        </h2>
+  <div class="flex justify-center items-center mb-8">
+    <h2 class="text-xl lg:text-2xl font-bold">
+      {sectionTitle}
+    </h2>
+  </div>
+  <div class="flex justify-center items-start gap-4">
+    <div class="grid grid-cols-2 gap-8">
+      <SkillsCard title="Frontend" skills={frontend} />
+      <SkillsCard title="Backend" skills={backend} />
+      <SkillsCard title="Database" skills={database} />
+      <SkillsCard title="Tools" skills={tools} />
     </div>
-    <div class="flex justify-center items-start gap-4">
-        <div class="grid grid-cols-2 gap-8">
-            <SkillsCard title="Frontend" skills={frontend} />
-            <SkillsCard title="Backend" skills={backend} />
-            <SkillsCard title="Database" skills={database} />
-            <SkillsCard title="Tools" skills={tools} />
-        </div>
-    </div>
+  </div>
 </section>

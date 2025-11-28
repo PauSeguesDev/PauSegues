@@ -1,6 +1,6 @@
 ---
 import LayoutAdmin from "@/layouts/LayoutAdmin.astro"; // Layout general per pàgines d'admin
-import { supabase } from "@/lib/supabase"; // Instància de Supabase per gestionar autenticació
+import { createSupabase } from "@/lib/supabase"; // Instància de Supabase per gestionar autenticació
 
 // Agafa les cookies d'autenticació
 const accessToken = Astro.cookies.get("sb-access-token");
@@ -14,6 +14,7 @@ if (!accessToken || !refreshToken) {
 let session;
 try {
   // Intenta establir la sessió amb Supabase utilitzant els tokens
+  const supabase = createSupabase();
   session = await supabase.auth.setSession({
     refresh_token: refreshToken.value,
     access_token: accessToken.value,
@@ -47,16 +48,16 @@ try {
   <section class="flex flex-col items-center justify-center mt-12">
     <div class="text-center space-y-4">
       <h1 class="text-2xl md:text-4xl font-bold">Pau Segués Vitutia Web</h1>
-      <p class="text-base md:text-lg">
-        Panell de control d'administració
-      </p>
+      <p class="text-base md:text-lg">Panell de control d'administració</p>
     </div>
   </section>
 
   <!-- Secció amb opcions del panell -->
   <section class="flex flex-col items-center justify-center mt-12">
     <div>
-      <ul class="flex flex-col gap-4 [&>li]:py-4 [&>li]:px-12 [&>li]:hover:scale-105 [&>li]:transition [&>li]:border-2 [&>li]:bg-web-pearl-blue [&>li]:hover:bg-web-dark-blue [&>li]:hover:cursor-pointer">
+      <ul
+        class="flex flex-col gap-4 [&>li]:py-4 [&>li]:px-12 [&>li]:hover:scale-105 [&>li]:transition [&>li]:border-2 [&>li]:bg-web-pearl-blue [&>li]:hover:bg-web-dark-blue [&>li]:hover:cursor-pointer"
+      >
         <!-- Item de llista per accedir a la secció de projectes -->
         <li
           class="flex items-center justify-center p-6 rounded-xl border-2 border-web-dark-blue bg-web-pearl-blue font-semibold text-lg shadow-lg hover:shadow-2xl hover:bg-web-dark-blue hover:scale-105 transition-transform duration-300 cursor-pointer"

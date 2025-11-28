@@ -1,7 +1,7 @@
 ---
 import LayoutAdmin from "@/layouts/LayoutAdmin.astro";
 import ButtonForm from "@/components/buttons/buttonForm.astro";
-import { supabase } from "@/lib/supabase";
+import { createSupabase } from "@/lib/supabase";
 
 const { table, id } = Astro.params as { table: string; id: string };
 
@@ -14,6 +14,7 @@ if (!accessToken || !refreshToken) {
 
 let session;
 try {
+  const supabase = createSupabase();
   const { data, error } = await supabase.auth.setSession({
     access_token: accessToken,
     refresh_token: refreshToken,
@@ -39,6 +40,7 @@ const tableFields = dbTables.find((t) => t.name === table)?.fields;
 // 🔍 Obtenir dades actuals del registre
 let item = null;
 try {
+  const supabase = createSupabase();
   const { data, error } = await supabase
     .from(table)
     .select("*")
@@ -67,11 +69,10 @@ if (Astro.request.method === "POST") {
         try {
           const oldFileName = item.image.split("/").pop();
           if (oldFileName) {
+            const supabase = createSupabase();
             await supabase.storage.from("images").remove([oldFileName]);
           }
-        } catch {
-          
-        }
+        } catch {}
       }
 
       // 📤 2️⃣ Pujar la nova imatge
@@ -80,6 +81,7 @@ if (Astro.request.method === "POST") {
         const arrayBuffer = await imageFile.arrayBuffer();
         const buffer = Buffer.from(arrayBuffer);
 
+        const supabase = createSupabase();
         const { error: uploadError } = await supabase.storage
           .from("images")
           .upload(fileName, buffer, {
@@ -104,6 +106,7 @@ if (Astro.request.method === "POST") {
     }
 
     // 🔧 3️⃣ Actualitzar el registre
+    const supabase = createSupabase();
     await supabase.from(table).update(newData).eq("id", id);
     return Astro.redirect(`/admin/${table}`);
   } catch {
@@ -120,68 +123,80 @@ if (Astro.request.method === "POST") {
   </section>
 
   <div class="flex flex-col items-center justify-center mt-12">
-  <form method="post" enctype="multipart/form-data" novalidate
-    class="flex flex-col gap-2 rounded-2xl p-10 space-y-2
+    <form
+      method="post"
+      enctype="multipart/form-data"
+      novalidate
+      class="flex flex-col gap-2 rounded-2xl p-10 space-y-2
           [&>input]:bg-web-pearl-blue [&>input]:p-2 [&>input]:rounded-lg
-          [&>textarea]:bg-web-pearl-blue [&>textarea]:p-2 [&>textarea]:rounded-lg">
-    
-    {tableFields?.map((field) => (
-      <>
-        <label for={field.name}>{field.name}</label>
-
-        {field.type === "textarea" ? (
-          <textarea
-            name={field.name}
-            id={field.name}
-            required={field.name !== "image" && field.name !== "link"}
-            class="bg-web-pearl-blue p-2 rounded-lg"
-          >{item?.[field.name] || ""}</textarea>
-        ) : field.type === "file" ? (
+          [&>textarea]:bg-web-pearl-blue [&>textarea]:p-2 [&>textarea]:rounded-lg"
+    >
+      {
+        tableFields?.map((field) => (
           <>
-            {item?.[field.name] && (
-              <img src={item[field.name]} alt="Imatge actual" class="w-48 rounded-lg mb-4" />
-            )}
-            <input
-              type="file"
-              name={field.name}
-              id={field.name}
-              accept="image/*"
-              class="bg-web-pearl-blue p-2 rounded-lg"
-            />
-          </>
-        ) : field.type === "select" ? (
-          <select
-            name={field.name}
-            id={field.name}
-            required={field.name !== "image" && field.name !== "link"}
-            class="bg-web-pearl-blue p-2 rounded-lg"
-          >
-            {field.options?.map(option => (
-              <option 
-                value={option} 
-                class="p-2" 
-                selected={item?.[field.name] === option}
+            <label for={field.name}>{field.name}</label>
+
+            {field.type === "textarea" ? (
+              <textarea
+                name={field.name}
+                id={field.name}
+                required={field.name !== "image" && field.name !== "link"}
+                class="bg-web-pearl-blue p-2 rounded-lg"
               >
-                {option}
-              </option>
-            ))}
-          </select>
-        ) : (
-          <input
-            type={field.type}
-            name={field.name}
-            id={field.name}
-            value={item?.[field.name] || ""}
-            required={field.name !== "link"}
-            placeholder={field.type === "url" ? "https://example.com" : undefined}
-            class="bg-web-pearl-blue p-2 rounded-lg"
-          />
-        )}
-      </>
-    ))}
+                {item?.[field.name] || ""}
+              </textarea>
+            ) : field.type === "file" ? (
+              <>
+                {item?.[field.name] && (
+                  <img
+                    src={item[field.name]}
+                    alt="Imatge actual"
+                    class="w-48 rounded-lg mb-4"
+                  />
+                )}
+                <input
+                  type="file"
+                  name={field.name}
+                  id={field.name}
+                  accept="image/*"
+                  class="bg-web-pearl-blue p-2 rounded-lg"
+                />
+              </>
+            ) : field.type === "select" ? (
+              <select
+                name={field.name}
+                id={field.name}
+                required={field.name !== "image" && field.name !== "link"}
+                class="bg-web-pearl-blue p-2 rounded-lg"
+              >
+                {field.options?.map((option) => (
+                  <option
+                    value={option}
+                    class="p-2"
+                    selected={item?.[field.name] === option}
+                  >
+                    {option}
+                  </option>
+                ))}
+              </select>
+            ) : (
+              <input
+                type={field.type}
+                name={field.name}
+                id={field.name}
+                value={item?.[field.name] || ""}
+                required={field.name !== "link"}
+                placeholder={
+                  field.type === "url" ? "https://example.com" : undefined
+                }
+                class="bg-web-pearl-blue p-2 rounded-lg"
+              />
+            )}
+          </>
+        ))
+      }
 
-    <ButtonForm Text="Actualitza" />
-  </form>
-</div>
-
+      <ButtonForm Text="Actualitza" />
+    </form>
+  </div>
 </LayoutAdmin>

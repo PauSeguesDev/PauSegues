@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { supabase } from "@/lib/supabase";
+import { createSupabase } from "@/lib/supabase";
 
 export const POST: APIRoute = async ({ request, cookies }) => {
   const formData = await request.formData();
@@ -13,6 +13,7 @@ export const POST: APIRoute = async ({ request, cookies }) => {
     });
   }
 
+  const supabase = createSupabase();
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
     password,
