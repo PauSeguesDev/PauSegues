@@ -13,14 +13,14 @@ import LastsProjects from '@/sections/index/lastsProjects.astro';
 
 <Layout title={IndexTranslations['metaTitle']} description={IndexTranslations['metaDescription']} lang={lang}>
 	<Hero subtitle={IndexTranslations['HeroSubtitle']}/>
+	<AboutSummary 
+		ButtonText={IndexTranslations['AboutButton']} 
+		AboutText= {IndexTranslations['AboutText']} 
+		lang={lang}
+	/>
 	<LastsProjects 
 		lang={lang}
 		title={IndexTranslations['LastsProjectsTitle']} 
 		buttonText={IndexTranslations['LastsProjectsButtonText']}
-	/>
-	<AboutSummary 
-		Title={IndexTranslations['AboutTitle']} 
-		AboutText= {IndexTranslations['AboutText']} 
-		lang={lang}
 	/>
 </Layout>
