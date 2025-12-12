@@ -1,8 +1,8 @@
 ---
 interface Props {
-	title: string;
-	description: string;
-	lang: 'ca' | 'es' | 'en';
+  title: string;
+  description: string;
+  lang: "ca" | "es" | "en";
 }
 
 const { title, description, lang } = Astro.props;
@@ -10,7 +10,11 @@ const { title, description, lang } = Astro.props;
 import "@/styles/global.css";
 
 import { LayoutTranslations } from "@/i18n/layoutTranslations";
-const LayoutTranslation = LayoutTranslations[lang]
+const LayoutTranslation = LayoutTranslations[lang];
+
+import { routes } from "@/i18n/routes";
+const navKeys = ["home", "about", "projects", "contact"] as const;
+const headerLinksHref = navKeys.map((key) => routes[key][lang]);
 
 import Header from "@/sections/global/header.astro";
 import Footer from "@/sections/global/footer.astro";
@@ -19,48 +23,58 @@ import Loading from "@/components/loading.astro";
 import CookiesBanner from "@/components/cookiesBanner.astro";
 import GoogleAnalytics from "@/components/analytics/GoogleAnalytics.astro";
 ---
+
 <!doctype html>
 <html lang="ca">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
 
-		<!-- Favicon -->
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-		<link rel="shortcut icon" href="/favicon.ico" />
-		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-		<meta name="apple-mobile-web-app-title" content="Pau Segués" />
-		<link rel="manifest" href="/site.webmanifest" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Pau Segués" />
+    <link rel="manifest" href="/site.webmanifest" />
 
-		<!-- Meta title and description -->
-		<title>{title}</title>
-		<meta name="description" content={description} />
+    <!-- Meta title and description -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
 
-		<!-- Google Analytics -->
-		<GoogleAnalytics measurementId={import.meta.env.GA_MEASUREMENT_ID} />
-	</head>
-	<body class="relative">
-		<Loading />
-		<div id="pageWrapper" class="opacity-0 transition-opacity duration-500">
-			<Header 
-				linksTexts={LayoutTranslation['headerLinkTexts']}
-				linksHref={LayoutTranslation['headerLinksHref']}
-			/>
-			<main>
-				<slot />
-				<CookiesBanner lang={lang} />
-			</main>
-			<Footer 
-				legal={LayoutTranslation['footerLegal']}
-				privacity={LayoutTranslation['footerPrivacity']}
-				cookies={LayoutTranslation['footerCookies']}
-				description={LayoutTranslation['description']}
-				titleSocial={LayoutTranslation['titleSocial']}
-			/>
-		</div>
-	</body>
+    <!-- Google Analytics -->
+    <GoogleAnalytics measurementId={import.meta.env.GA_MEASUREMENT_ID} />
+  </head>
+  <body class="relative">
+    <Loading />
+    <div id="pageWrapper" class="opacity-0 transition-opacity duration-500">
+      <Header
+        linksTexts={LayoutTranslation["headerLinkTexts"]}
+        linksHref={headerLinksHref}
+      />
+      <main>
+        <slot />
+        <CookiesBanner lang={lang} />
+      </main>
+      <Footer
+        legal={{
+          text: LayoutTranslation["footerLegal"],
+          href: routes.legal[lang],
+        }}
+        privacity={{
+          text: LayoutTranslation["footerPrivacity"],
+          href: routes.privacy[lang],
+        }}
+        cookies={{
+          text: LayoutTranslation["footerCookies"],
+          href: routes.cookies[lang],
+        }}
+        description={LayoutTranslation["description"]}
+        titleSocial={LayoutTranslation["titleSocial"]}
+      />
+    </div>
+  </body>
 </html>
 
 <script is:inline>

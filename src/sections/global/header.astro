@@ -1,107 +1,178 @@
 ---
 interface Props {
-    linksTexts: string[]
-    linksHref: string[] 
+  linksTexts: string[];
+  linksHref: string[];
 }
 
 const { linksTexts, linksHref } = Astro.props;
 
 import HamburgerButton from "@/components/buttons/hamburgerButton.astro";
+import { routes } from "@/i18n/routes";
 ---
 
 <header class="bg-web-dark-blue sticky top-0 z-100">
-    <div class="px-4 sm:px-12 md:px-24 lg:px-64 py-4">
-        <nav>
-            <div class="flex justify-between items-center">
-                <!-- Brand -->
-                <div>
-                    <a href={linksHref[0]} class="text-2xl font-bold">
-                        <img src="/images/logo.webp" alt="" class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 hover:scale-110 transition-all duration-300 ease-out">
-                    </a>
-                </div>
+  <div class="px-4 sm:px-12 md:px-24 lg:px-64 py-4">
+    <nav>
+      <div class="flex justify-between items-center">
+        <!-- Brand -->
+        <div>
+          <a href={linksHref[0]} class="text-2xl font-bold">
+            <img
+              src="/images/logo.webp"
+              alt=""
+              class="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 hover:scale-110 transition-all duration-300 ease-out"
+            />
+          </a>
+        </div>
 
-                <!-- Menú desktop -->
-                <div class="hidden md:flex items-center space-x-6">
-                    <ul class="flex flex-row space-x-8 [&>li]:hover:scale-110 [&>li]:text-xl [&>li]:hover:underline [&>li]:transition-all [&>li]:duration-300 [&>li]:ease-out">
-                        {
-                            linksTexts.map((text, i) => (
-                                <li><a href={linksHref[i]}>{text}</a></li>
-                            ))
-                        }
-                    </ul>
+        <!-- Menú desktop -->
+        <div class="hidden md:flex items-center space-x-6">
+          <ul
+            class="flex flex-row space-x-8 [&>li]:hover:scale-110 [&>li]:text-xl [&>li]:hover:underline [&>li]:transition-all [&>li]:duration-300 [&>li]:ease-out"
+          >
+            {
+              linksTexts.map((text, i) => (
+                <li>
+                  <a href={linksHref[i]}>{text}</a>
+                </li>
+              ))
+            }
+          </ul>
 
-                    <!-- Select de idioma -->
-                    <select id="language-select" class="bg-web-dark-blue text-white border-2 rounded-lg px-4 py-2 cursor-pointer appearance-none focus:outline-none">
-                        <option value="/">CA</option>
-                        <option value="/es/">ES</option>
-                        <option value="/en/">EN</option>
-                    </select>
+          <!-- Select de idioma -->
+          <select
+            id="language-select"
+            class="bg-web-dark-blue text-white border-2 rounded-lg px-4 py-2 cursor-pointer appearance-none focus:outline-none"
+          >
+            <option value="/">CA</option>
+            <option value="/es/">ES</option>
+            <option value="/en/">EN</option>
+          </select>
+        </div>
 
-                </div>
+        <!-- Mobile Button -->
+        <div class="md:hidden">
+          <HamburgerButton id="menu-btn" />
+        </div>
+      </div>
 
-                <!-- Mobile Button -->
-                <div class="md:hidden">
-                    <HamburgerButton id="menu-btn"/>
-                </div>
-            </div>
-
-            <!-- Menú móvil -->
-            <div id="mobile-menu" class="hidden md:hidden mt-2">
-                <ul class="flex flex-col space-y-6 [&>li]:text-xl [&>li]:hover:underline [&>li]:transition-all [&>li]:duration-300 [&>li]:ease-out">
-                        {
-                            linksTexts.map((text, i) => (
-                                <li><a href={linksHref[i]}>{text}</a></li>
-                            ))
-                        }
-                    <li>
-                        <select id="mobile-language-select" class="bg-web-dark-blue text-white border-2 rounded-lg px-4 py-2 cursor-pointer appearance-none focus:outline-none">
-                            <option value="/">CA</option>
-                            <option value="/es/">ES</option>
-                            <option value="/en/">EN</option>
-                        </select>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
+      <!-- Menú móvil -->
+      <div id="mobile-menu" class="hidden md:hidden mt-2">
+        <ul
+          class="flex flex-col space-y-6 [&>li]:text-xl [&>li]:hover:underline [&>li]:transition-all [&>li]:duration-300 [&>li]:ease-out"
+        >
+          {
+            linksTexts.map((text, i) => (
+              <li>
+                <a href={linksHref[i]}>{text}</a>
+              </li>
+            ))
+          }
+          <li>
+            <select
+              id="mobile-language-select"
+              class="bg-web-dark-blue text-white border-2 rounded-lg px-4 py-2 cursor-pointer appearance-none focus:outline-none"
+            >
+              <option value="/">CA</option>
+              <option value="/es/">ES</option>
+              <option value="/en/">EN</option>
+            </select>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
 </header>
 
+<div id="routes-data" data-routes={JSON.stringify(routes)} class="hidden"></div>
+
 <script type="module">
-    const btn = document.getElementById('menu-btn');
-    const menu = document.getElementById('mobile-menu');
+  const btn = document.getElementById("menu-btn");
+  const menu = document.getElementById("mobile-menu");
 
-    if(btn && menu){
-        const spans = btn.querySelectorAll('span');
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
-        });
-    }
+  if (btn && menu) {
+    const spans = btn.querySelectorAll("span");
+    btn.addEventListener("click", () => {
+      menu.classList.toggle("hidden");
+    });
+  }
 
-    // Función de idioma
-    function setupLanguageSelect(selectId) {
-        const select = document.getElementById(selectId);
-        if (!select) return;
+  // Passem les rutes al client
+  const routes = JSON.parse(
+    document.getElementById("routes-data").dataset.routes
+  );
 
-        // Detectem l'idioma actual segons la URL
-        const path = window.location.pathname;
-        let currentLang = '/';
-        if (path.startsWith('/es/')) currentLang = '/es/';
-        else if (path.startsWith('/en/')) currentLang = '/en/';
-        select.value = currentLang;
+  // Función de idioma
+  function setupLanguageSelect(selectId) {
+    const select = document.getElementById(selectId);
+    if (!select) return;
 
-        select.addEventListener('change', () => {
-            const newLang = select.value;
-            // Substituïm el prefix si ja existeix
-            let newPath = path;
-            if (currentLang !== '/') {
-                newPath = path.replace(currentLang, newLang);
-            } else {
-                newPath = newLang + path.slice(1); // afegim el nou prefix
-            }
-            window.location.href = newPath;
-        });
-    }
+    // Detectem l'idioma actual segons la URL
+    const path = window.location.pathname;
+    let currentLang = "/";
+    // Normalitzem una mica per detectar idioma
+    if (path.startsWith("/es/")) currentLang = "/es/";
+    else if (path.startsWith("/en/")) currentLang = "/en/";
 
-    setupLanguageSelect('language-select');
-    setupLanguageSelect('mobile-language-select');
+    // Assegurem que el select marqui l'opció correcta
+    select.value = currentLang;
+
+    select.addEventListener("change", () => {
+      const targetLang = select.value; // '/' | '/es/' | '/en/'
+      const currentPath = window.location.pathname;
+
+      // Normalitzem la clau de l'idioma per buscar a l'objecte routes
+      // ruta '/' -> 'ca', '/es/' -> 'es', '/en/' -> 'en'
+      const targetLangKey =
+        targetLang === "/" ? "ca" : targetLang.replace(/\//g, "");
+
+      // 1. Busquem quina pàgina és la que estem visitant ara mateix
+      let pageKey = null;
+
+      // Recorrem totes les pàgines definides a routes
+      for (const [key, paths] of Object.entries(routes)) {
+        // paths és { ca: '...', es: '...', en: '...' }
+        // Mirem si el path actual coincideix amb algun dels paths d'aquesta pàgina
+        // 1. Coincidència exacta
+        // 2. Coincidència afegint un slash al final (per si el map en té)
+        // 3. Coincidència traient l'slash final del currentPath (per si el map NO en té)
+        if (
+          Object.values(paths).includes(currentPath) ||
+          Object.values(paths).includes(currentPath + "/") ||
+          (currentPath.endsWith("/") &&
+            currentPath !== "/" &&
+            Object.values(paths).includes(currentPath.slice(0, -1)))
+        ) {
+          pageKey = key;
+          break;
+        }
+      }
+
+      let newPath = "";
+
+      // 2. Si hem trobat la pàgina, busquem la traducció
+      if (pageKey && routes[pageKey][targetLangKey]) {
+        newPath = routes[pageKey][targetLangKey];
+      } else {
+        // 3. Fallback: Si no trobem la pàgina (e.g. 404 o pàgina no mapada), fem substitució de prefix 'a lo bèstia'
+        let langPrefix = "/";
+        if (currentPath.startsWith("/es/")) langPrefix = "/es/";
+        else if (currentPath.startsWith("/en/")) langPrefix = "/en/";
+
+        if (langPrefix !== "/") {
+          newPath = currentPath.replace(langPrefix, targetLang);
+        } else {
+          newPath = targetLang + currentPath.slice(1);
+        }
+
+        // Neteja de slashes dobles per si de cas
+        if (newPath.startsWith("//")) newPath = newPath.replace("//", "/");
+      }
+
+      window.location.href = newPath;
+    });
+  }
+
+  setupLanguageSelect("language-select");
+  setupLanguageSelect("mobile-language-select");
 </script>
