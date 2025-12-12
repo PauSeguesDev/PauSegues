@@ -57,31 +57,46 @@ try {
 // 🗑️ Gestió del POST (confirmació d'eliminació)
 if (Astro.request.method === "POST") {
   try {
+    const supabase = createSupabase();
+
+    // 🔑 Autenticar el client amb la sessió de l'usuari
+    const { error: authError } = await supabase.auth.setSession({
+      access_token: accessToken,
+      refresh_token: refreshToken,
+    });
+
+    if (authError) {
+      console.error("Auth error in POST:", authError);
+      return Astro.redirect("/admin");
+    }
+
     // 🧹 1️⃣ Eliminar la imatge del bucket si existeix
     if (item?.image) {
       try {
         const oldFileName = item.image.split("/").pop(); // Nom del fitxer
         if (oldFileName) {
-          const supabase = createSupabase();
           await supabase.storage.from("images").remove([oldFileName]);
         }
-      } catch {
-        // Silenciat: error al suprimir la imatge, però continuem
+      } catch (err) {
+        console.error("Error deleting image:", err);
       }
     }
 
     // 🧾 2️⃣ Eliminar el registre de la base de dades
-    try {
-      const supabase = createSupabase();
-      await supabase.from(table).delete().eq("id", id);
-    } catch {
-      // Silenciat: si falla, igualment redirigim
+    const { error: deleteError } = await supabase
+      .from(table)
+      .delete()
+      .eq("id", id);
+
+    if (deleteError) {
+      console.error("Delete error:", deleteError);
+      // Opcional: podríem redirigir amb un paràmetre d'error
     }
 
     // 🔁 3️⃣ Redirigir al llistat de la taula després d’eliminar
     return Astro.redirect(`/admin/${table}`);
-  } catch {
-    // Silenciar qualsevol error i redirigir igualment
+  } catch (err) {
+    console.error("Unexpected error in POST:", err);
     return Astro.redirect(`/admin/${table}`);
   }
 }

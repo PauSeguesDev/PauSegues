@@ -59,6 +59,19 @@ try {
 // 📝 Gestió del POST (actualitzar entrada)
 if (Astro.request.method === "POST") {
   try {
+    const supabase = createSupabase();
+
+    // 🔑 Autenticar el client abans de fer res
+    const { error: authError } = await supabase.auth.setSession({
+      access_token: accessToken,
+      refresh_token: refreshToken,
+    });
+
+    if (authError) {
+      console.error("Auth error in POST:", authError);
+      return Astro.redirect("/admin");
+    }
+
     const formData = await Astro.request.formData();
     const newData = Object.fromEntries(formData.entries());
     const imageFile = formData.get("image") as File | null;
@@ -69,10 +82,11 @@ if (Astro.request.method === "POST") {
         try {
           const oldFileName = item.image.split("/").pop();
           if (oldFileName) {
-            const supabase = createSupabase();
             await supabase.storage.from("images").remove([oldFileName]);
           }
-        } catch {}
+        } catch (err) {
+          console.error("Error deleting old image:", err);
+        }
       }
 
       // 📤 2️⃣ Pujar la nova imatge
@@ -81,7 +95,6 @@ if (Astro.request.method === "POST") {
         const arrayBuffer = await imageFile.arrayBuffer();
         const buffer = Buffer.from(arrayBuffer);
 
-        const supabase = createSupabase();
         const { error: uploadError } = await supabase.storage
           .from("images")
           .upload(fileName, buffer, {
@@ -96,9 +109,11 @@ if (Astro.request.method === "POST") {
 
           newData.image = publicData.publicUrl;
         } else {
+          console.error("Upload error:", uploadError);
           newData.image = item.image;
         }
-      } catch {
+      } catch (err) {
+        console.error("Image processing error:", err);
         newData.image = item.image;
       }
     } else {
@@ -106,10 +121,19 @@ if (Astro.request.method === "POST") {
     }
 
     // 🔧 3️⃣ Actualitzar el registre
-    const supabase = createSupabase();
-    await supabase.from(table).update(newData).eq("id", id);
+    const { error: updateError } = await supabase
+      .from(table)
+      .update(newData)
+      .eq("id", id);
+
+    if (updateError) {
+      console.error("Update error:", updateError);
+      // Opcionalment podries retornar un error visual aquí
+    }
+
     return Astro.redirect(`/admin/${table}`);
-  } catch {
+  } catch (err) {
+    console.error("Unexpected error in POST:", err);
     return Astro.redirect(`/admin/${table}`);
   }
 }
@@ -127,7 +151,7 @@ if (Astro.request.method === "POST") {
       method="post"
       enctype="multipart/form-data"
       novalidate
-      class="flex flex-col gap-2 rounded-2xl p-10 space-y-2
+      class="flex flex-col gap-2 rounded-2xl p-10 space-y-2 w-full max-w-2xl
           [&>input]:bg-web-pearl-blue [&>input]:p-2 [&>input]:rounded-lg
           [&>textarea]:bg-web-pearl-blue [&>textarea]:p-2 [&>textarea]:rounded-lg"
     >
