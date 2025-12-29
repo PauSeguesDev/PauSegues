@@ -2,7 +2,7 @@
 const lang = 'es';
 
 import { indexTranslations } from '@/i18n/indexTranslations';
-const IndexTranslations = indexTranslations['es']
+const IndexTranslations = indexTranslations[lang]
 
 import Layout from '@/layouts/Layout.astro';
 
@@ -19,7 +19,7 @@ import LastsProjects from '@/sections/index/lastsProjects.astro';
 		lang={lang}
 	/>
 	<LastsProjects 
-		lang={lang} 
+		lang={lang}
 		title={IndexTranslations['LastsProjectsTitle']} 
 		buttonText={IndexTranslations['LastsProjectsButtonText']}
 	/>

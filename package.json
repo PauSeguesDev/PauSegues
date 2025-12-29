@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@astrojs/vercel": "^9.0.2",
-    "@supabase/supabase-js": "^2.80.0",
     "@tailwindcss/vite": "^4.1.16",
     "astro": "^5.16.5",
     "nodemailer": "^7.0.10",

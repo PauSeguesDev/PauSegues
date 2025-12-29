@@ -8,7 +8,6 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  output: "server",
   adapter: vercel(),
   i18n: {
     locales: ["ca", "es", "en"],

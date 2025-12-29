@@ -1,20 +1,13 @@
 ---
 interface Props {
-  lang: string;
   title: string;
   buttonText: string;
+  projects: any;
 }
 
-const { lang, title, buttonText } = Astro.props;
+const { title, buttonText, projects } = Astro.props;
 
 import ProjectCard from "@/components/projectCard.astro";
-
-import { createSupabase } from "@/lib/supabase";
-const supabase = createSupabase();
-const { data } = await supabase
-  .from("projects")
-  .select("*")
-  .order("created_at", { ascending: false });
 ---
 
 <section class="min-h-dvh w-full py-24 px-4 sm:px-10 md:px-24 lg:px-36">
@@ -25,12 +18,12 @@ const { data } = await supabase
   </div>
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
     {
-      data?.map((project) => (
+      projects?.map((project?: any) => (
         <ProjectCard
-          title={project[`title_${lang}`]}
-          description={project[`description_${lang}`]}
+          title={project.title}
+          description={project.description}
           image={project.image}
-          link={project.link}
+          link={project.url}
           buttonText={buttonText}
         />
       ))
