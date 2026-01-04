@@ -1,26 +1,33 @@
 ---
-const lang = 'es';
+const lang = "es";
 
-import { indexTranslations } from '@/i18n/indexTranslations';
-const IndexTranslations = indexTranslations[lang]
+import { indexTranslations } from "@/i18n/indexTranslations";
+const IndexTranslations = indexTranslations[lang];
 
-import Layout from '@/layouts/Layout.astro';
+import { projectsTranslations } from "@/i18n/projectsTranslations";
+const ProjectsTranslations = projectsTranslations[lang];
 
-import Hero from '@/sections/index/hero.astro';
-import AboutSummary from '@/sections/index/aboutSummary.astro';
-import LastsProjects from '@/sections/index/lastsProjects.astro';
+import Layout from "@/layouts/Layout.astro";
+
+import Hero from "@/sections/index/hero.astro";
+import AboutSummary from "@/sections/index/aboutSummary.astro";
+import ProjectsList from "@/sections/projectsList.astro";
 ---
 
-<Layout title={IndexTranslations['metaTitle']} description={IndexTranslations['metaDescription']} lang={lang}>
-	<Hero subtitle={IndexTranslations['HeroSubtitle']}/>
-	<AboutSummary 
-		ButtonText={IndexTranslations['AboutButton']} 
-		AboutText= {IndexTranslations['AboutText']} 
+<Layout
+	title={IndexTranslations["metaTitle"]}
+	description={IndexTranslations["metaDescription"]}
+	lang={lang}
+>
+	<Hero subtitles={IndexTranslations["HeroSubtitles"]} />
+	<AboutSummary
+		ButtonText={IndexTranslations["AboutButton"]}
+		AboutText={IndexTranslations["AboutText"]}
 		lang={lang}
 	/>
-	<LastsProjects 
-		lang={lang}
-		title={IndexTranslations['LastsProjectsTitle']} 
-		buttonText={IndexTranslations['LastsProjectsButtonText']}
+	<ProjectsList
+		title={IndexTranslations["LastsProjectsTitle"]}
+		projects={ProjectsTranslations["projects"]}
+		limit={3}
 	/>
 </Layout>

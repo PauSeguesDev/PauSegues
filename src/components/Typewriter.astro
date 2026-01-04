@@ -1,0 +1,55 @@
+---
+interface Props {
+    words: string[];
+}
+
+const { words } = Astro.props;
+---
+
+<span id="typewriter" class="inline-block relative"></span>
+<span class="animate-pulse">|</span>
+
+<script define:vars={{ words }}>
+    const typewriterElement = document.getElementById("typewriter");
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let typeSpeed = 50;
+
+    function type() {
+        const currentWord = words[wordIndex];
+
+        if (isDeleting) {
+            typewriterElement.textContent = currentWord.substring(
+                0,
+                charIndex - 1,
+            );
+            charIndex--;
+            typeSpeed = 50;
+        } else {
+            typewriterElement.textContent = currentWord.substring(
+                0,
+                charIndex + 1,
+            );
+            charIndex++;
+            typeSpeed = 100;
+        }
+
+        if (!isDeleting && charIndex === currentWord.length) {
+            isDeleting = true;
+            typeSpeed = 2000; // Pause at end of word
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            wordIndex = (wordIndex + 1) % words.length;
+            typeSpeed = 500; // Pause before typing new word
+        }
+
+        setTimeout(type, typeSpeed);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        if (words && words.length > 0) {
+            type();
+        }
+    });
+</script>

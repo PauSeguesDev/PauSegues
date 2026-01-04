@@ -1,25 +1,36 @@
 ---
 interface Props {
-    ButtonText: string,
-    AboutText: string,
-    lang: string,
+    ButtonText: string;
+    AboutText: string;
+    lang: string;
 }
-const { ButtonText, AboutText, lang } = Astro.props
+const { ButtonText, AboutText, lang } = Astro.props;
 
-import Button from "@/components/buttons/button.astro"
+import { routes } from "@/i18n/routes";
+
+import Button from "@/components/buttons/button.astro";
 ---
+
 <section class="w-full py-12 px-4 sm:px-10 md:px-24 lg:px-36">
-    <div class="flex flex-col md:flex-row justify-center items-center gap-10 md:gap-12">
+    <div
+        class="flex flex-col md:flex-row justify-center items-center gap-10 md:gap-12"
+    >
         <div class="shrink-0">
-            <img src="/images/pau-segues.webp" alt="Pau Segués Vitutia" 
-                 class="w-[250px] sm:w-[300px] md:w-[350px] lg:w-[400px] h-auto rounded-2xl">
+            <img
+                src="/images/pau-segues.webp"
+                alt="Pau Segués Vitutia"
+                class="w-[250px] sm:w-[300px] md:w-[350px] lg:w-[400px] h-auto rounded-2xl"
+            />
         </div>
         <div>
             <p class="max-w-xl text-xl mb-8">
-                { AboutText }
+                {AboutText}
             </p>
             <div class="flex justify-center md:justify-start">
-                <Button Text={ButtonText} Link={lang === 'ca' ? '/about-me' : lang === 'es' ? '/es/about-me' : '/en/about-me'} />
+                <Button 
+                    Text={ButtonText} 
+                    Link={routes.about[lang as keyof typeof routes.about]} 
+                />
             </div>
         </div>
     </div>
