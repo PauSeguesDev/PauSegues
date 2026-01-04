@@ -1,4 +1,5 @@
 import type { APIRoute } from "astro";
+export const prerender = false;
 import nodemailer from "nodemailer";
 
 export const POST: APIRoute = async ({ request }) => {
@@ -24,9 +25,8 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${
-      import.meta.env.RECAPTCHA_SECRET_KEY
-    }&response=${recaptchaResponse}`;
+    const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${import.meta.env.RECAPTCHA_SECRET_KEY
+      }&response=${recaptchaResponse}`;
     const verifyResponse = await fetch(verifyUrl, { method: "POST" });
     const verifyData = await verifyResponse.json();
 
