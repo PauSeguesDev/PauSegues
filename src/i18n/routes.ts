@@ -33,5 +33,10 @@ export const routes = {
         ca: '/politica-cookies',
         es: '/es/politica-cookies',
         en: '/en/cookies-policy'
+    },
+    notFound: {
+        ca: '/404',
+        es: '/es/404',
+        en: '/en/404'
     }
 }

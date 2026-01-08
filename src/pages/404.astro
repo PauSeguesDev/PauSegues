@@ -1,0 +1,28 @@
+---
+const path = new URL(Astro.request.url).pathname;
+const lang = path.startsWith("/es/")
+    ? "es"
+    : path.startsWith("/en/")
+      ? "en"
+      : "ca";
+
+import Layout from "@/layouts/Layout.astro";
+
+import { notFoundTranslations } from "@/i18n/notFoundTranslations";
+const notFoundTranslation = notFoundTranslations[lang];
+---
+
+<Layout
+    title={notFoundTranslation.title}
+    description={notFoundTranslation.description}
+    lang={lang}
+>
+    <section class="flex flex-col justify-center items-center h-[75dvh] bg-grid-container">
+        <div class="text-left w-1/2">
+            <h1 class="text-7xl font-bold">{notFoundTranslation.title}</h1>
+        </div>
+        <div class="text-left w-1/2">
+            <p class="text-xl">{notFoundTranslation.description}</p>
+        </div>
+    </section>
+</Layout>
