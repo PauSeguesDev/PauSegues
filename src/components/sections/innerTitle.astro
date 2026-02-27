@@ -1,0 +1,45 @@
+---
+import { routes, navLabels } from "@/i18n/routes";
+import { getLangFromUrl } from "@/i18n/utils";
+
+interface Props {
+    title: string;
+    pageKeys: (keyof typeof routes)[];
+}
+
+const { title, pageKeys } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+---
+
+<section class="w-full h-[35dvh] bg-grid-container border-b border-white/5">
+    <div class="flex flex-col items-center justify-center h-full pt-12">
+        <h1 class="text-5xl md:text-6xl font-bold text-white mb-6">
+            {title}
+        </h1>
+        
+        <nav aria-label="Breadcrumb">
+            <ul class="flex items-center space-x-3 text-lg">
+                {pageKeys.map((key, index) => {
+                    const label = navLabels[key][lang];
+                    const href = routes[key][lang];
+                    const isLast = index === pageKeys.length - 1;
+
+                    return (
+                        <>
+                            <li>
+                                {isLast ? (
+                                    <span class="text-web-pearl-blue font-medium">{label}</span>
+                                ) : (
+                                    <a href={href} class="text-white/50 hover:text-white transition-colors">
+                                        {label}
+                                    </a>
+                                )}
+                            </li>
+                            {!isLast && <li class="text-white/20">/</li>}
+                        </>
+                    );
+                })}
+            </ul>
+        </nav>
+    </div>
+</section>
