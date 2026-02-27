@@ -20,6 +20,10 @@
                     "AI Solutions",
                     "Constantly Evolving 🚀"
                 ]
+            },
+            "WhoIAm": {
+                "AboutButton": "About me",
+                "AboutText": "Hi, I'm Pau. Studying Web Application Development at Lacetània (Manresa). I'm passionate about technology and programming. I enjoy finding and creating functional and creative digital solutions."
             }
         },
         "about-me": {

@@ -20,6 +20,10 @@
                     "Solucions amb IA",
                     "En constant evolució 🚀"
                 ]
+            },
+            "WhoIAm": {
+                "AboutButton": "Sobre Mi",
+                "AboutText": "Hola, sóc el Pau. Estudiant de Desenvolupament d’Aplicacions Web a Lacetània (Manresa). M’apassiona la tecnologia i la programació. M'agrada buscar i crear solucions digitals funcionals i creatives."
             }
         },
         "about-me": {
