@@ -1,0 +1,56 @@
+{
+    "layout": {
+        "footer": {
+            "description": "Hi, I'm Pau. Studying Web Application Development at Lacetània (Manresa). I'm passionate about technology and programming. I enjoy finding and creating functional and creative digital solutions.",
+            "socialTitle": "Follow me on social media",
+            "rights": "All rights reserved"
+        }
+    },
+
+    "pages": {
+        "home": {
+            "SEO": {
+                "title": "Pau Segués Vitutia",
+                "description": "Pau Segués Vitutia"
+            },
+            "hero": {
+                "subtitles": [
+                    "Web Developer",
+                    "Application Creator",
+                    "AI Solutions",
+                    "Constantly Evolving 🚀"
+                ]
+            }
+        },
+        "about-me": {
+            "SEO": {
+                "title": "About me - Pau Segués Vitutia",
+                "description": "About me - Pau Segués Vitutia"
+            },
+            "hero": {
+                "title": "About me",
+                "pathkeys": [ "home", "about" ]
+            }
+        },
+        "projects": {
+            "SEO": {
+                "title": "Projects - Pau Segués Vitutia",
+                "description": "Projects - Pau Segués Vitutia"
+            },
+            "hero": {
+                "title": "Projects",
+                "pathkeys": [ "home", "projects" ]
+            }
+        },
+        "contact": {
+            "SEO": {
+                "title": "Contact - Pau Segués Vitutia",
+                "description": "Contact - Pau Segués Vitutia"
+            },
+            "hero": {
+                "title": "Contact",
+                "pathkeys": [ "home", "contact" ]
+            }
+        }
+    }
+}

@@ -1,0 +1,56 @@
+{
+    "layout": {
+        "footer": {
+            "description": "Hola, soy Pau. Estudiante de Desarrollo de Aplicaciones Web en Lacetània (Manresa). Me apasiona la tecnología y la programación. Me gusta buscar y crear soluciones digitales funcionales y creativas.",
+            "socialTitle": "Sígueme en las redes sociales",
+            "rights": "Todos los derechos reservados"
+        }
+    },
+
+    "pages": {
+        "home": {
+            "SEO": {
+                "title": "Pau Segués Vitutia",
+                "description": "Pau Segués Vitutia"
+            },
+            "hero": {
+                "subtitles": [
+                    "Desarrollador Web",
+                    "Creador de Aplicaciones",
+                    "Soluciones con IA",
+                    "En constante evolución 🚀"
+                ]
+            }
+        },
+        "about-me": {
+            "SEO": {
+                "title": "Sobre mí - Pau Segués Vitutia",
+                "description": "Sobre mí - Pau Segués Vitutia"
+            },
+            "hero": {
+                "title": "Sobre mí",
+                "pathkeys": [ "home", "about" ]
+            }
+        },
+        "projects": {
+            "SEO": {
+                "title": "Proyectos - Pau Segués Vitutia",
+                "description": "Proyectos - Pau Segués Vitutia"
+            },
+            "hero": {
+                "title": "Proyectos",
+                "pathkeys": [ "home", "projects" ]
+            }
+        },
+        "contact": {
+            "SEO": {
+                "title": "Contacto - Pau Segués Vitutia",
+                "description": "Contacto - Pau Segués Vitutia"
+            },
+            "hero": {
+                "title": "Contacto",
+                "pathkeys": [ "home", "contact" ]
+            }
+        }
+    }
+}

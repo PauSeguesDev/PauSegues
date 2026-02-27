@@ -1,0 +1,97 @@
+---
+import { routes, navLabels } from "@/i18n/routes";
+import { getLangFromUrl } from "@/i18n/utils";
+import HamburgerButton from "@/components/buttons/HamburgerButton.astro";
+import LanguagePicker from "@/components/LanguagePicker.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const { pathname } = Astro.url;
+
+const visibleNavKeys = ['home', 'about', 'projects', 'contact'];
+
+const navItems = visibleNavKeys.map((key) => {
+  const k = key as keyof typeof navLabels;
+  const href = routes[k as keyof typeof routes][lang];
+  
+  const isActive = href === '/' || href === '/es/' || href === '/en/'
+    ? pathname === href
+    : pathname.startsWith(href);
+  
+  return {
+    label: navLabels[k][lang],
+    href,
+    isActive
+  };
+});
+---
+
+<header class="bg-web-dark-blue sticky top-0 z-100 border-b border-white/10">
+  <div class="px-4 sm:px-12 md:px-24 lg:px-64 py-4">
+    <nav class="flex justify-between items-center">
+      <a href={routes.home[lang]} class="relative z-110">
+        <img src="/images/logo.webp" alt="Logo" class="w-14 h-14 sm:w-20 sm:h-20 hover:scale-105 transition-transform" />
+      </a>
+
+      <div class="hidden md:flex items-center space-x-10">
+        <ul class="flex space-x-8 text-white font-medium">
+          {navItems.map((item) => (
+            <li class="relative group">
+              <a 
+                href={item.href} 
+                class={`text-lg transition-colors ${item.isActive ? 'text-blue-300' : 'hover:text-blue-200'}`}
+              >
+                {item.label}
+              </a>
+              <span class={`absolute -bottom-1 left-0 h-0.5 bg-blue-200 transition-all duration-300 ${item.isActive ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
+            </li>
+          ))}
+        </ul>
+        <div class="pl-4 border-l border-white/20">
+          <LanguagePicker />
+        </div>
+      </div>
+
+      <div class="md:hidden relative z-110">
+        <HamburgerButton id="menu-btn" />
+      </div>
+    </nav>
+
+    <div 
+      id="mobile-menu" 
+      class="fixed inset-0 bg-web-dark-blue z-90 flex flex-col items-center justify-center translate-x-full transition-transform duration-300 ease-in-out md:hidden"
+    >
+      <ul class="flex flex-col space-y-8 text-center text-white text-2xl font-semibold">
+        {navItems.map((item) => (
+          <li>
+            <a href={item.href} class={item.isActive ? 'text-blue-300' : 'hover:text-blue-200 transition-colors'}>
+              {item.label}
+            </a>
+          </li>
+        ))}
+        <li class="pt-8 mt-8 border-t border-white/10 w-32 mx-auto">
+          <LanguagePicker />
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById("menu-btn");
+  const menu = document.getElementById("mobile-menu");
+  const body = document.body;
+
+  btn?.addEventListener("click", () => {
+    btn.classList.toggle("is-active");
+    menu?.classList.toggle("translate-x-full");
+    body.classList.toggle("overflow-hidden");
+  });
+
+  menu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      btn?.classList.remove("is-active");
+      menu?.classList.add("translate-x-full");
+      body.classList.remove("overflow-hidden");
+    });
+  });
+</script>

@@ -1,0 +1,64 @@
+---
+interface Props {
+    words: string[];
+}
+
+const { words } = Astro.props;
+---
+
+<div class="inline-flex items-center">
+    <span id="typewriter" class="min-h-[1.2em]"></span>
+    <span class="w-[2px] h-[1.2em] bg-current ml-1 animate-blink"></span>
+</div>
+
+<style>
+    @keyframes blink {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0; }
+    }
+    .animate-blink {
+        animation: blink 0.8s infinite;
+    }
+</style>
+
+<script define:vars={{ words }}>
+    const initTypewriter = () => {
+        const typewriterElement = document.getElementById("typewriter");
+        if (!typewriterElement || !words || words.length === 0) return;
+
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;;
+
+        function type() {
+            const currentWord = words[wordIndex];
+            
+            const targetText = isDeleting 
+                ? currentWord.substring(0, charIndex - 1)
+                : currentWord.substring(0, charIndex + 1);
+            
+            typewriterElement.textContent = targetText;
+            charIndex = isDeleting ? charIndex - 1 : charIndex + 1;
+
+            // Velocidades
+            let typeSpeed = isDeleting ? 50 : 100;
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                isDeleting = true;
+                typeSpeed = 2000;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                typeSpeed = 500;
+            }
+
+            timeoutId = setTimeout(type, typeSpeed);
+        }
+
+        type();
+    };
+
+    initTypewriter();
+
+    document.addEventListener('astro:page-load', initTypewriter);
+</script>
