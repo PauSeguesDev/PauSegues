@@ -2,55 +2,44 @@
 @import "tailwindcss";
 
 @theme {
-    /* -- Fonts -- */
-    --font-fallback: 'Adjusted Arial Fallback', system-ui, -apple-system, blinkmacsystemfont, 'Segoe UI',
+  /* -- Fonts -- */
+  --font-fallback: 'Adjusted Arial Fallback', system-ui, -apple-system, blinkmacsystemfont, 'Segoe UI',
     'Noto Sans', helvetica, arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
-    --font-primary: 'GeneralSans';
+  --font-primary: 'GeneralSans';
 
-    /* --- Web Colors ---*/
-    --color-web-grey: #e0e1dd;
-    --color-web-pearl-blue: #778da9;
-    --color-web-dark-blue: #415a77;
-    --color-web-night-blue: #0D1B2A;
+  /* --- Web Colors ---*/
+  --color-web-grey: #e0e1dd;
+  --color-web-pearl-blue: #778da9;
+  --color-web-dark-blue: #415a77;
+  --color-web-night-blue: #0D1B2A;
 }
 
 @layer base {
-    /* Disable overscroll behavior */
-    html,
-    body {
-        overscroll-behavior: none;
-        overscroll-behavior-y: none;
-    }
+
+  /* Disable overscroll behavior */
+  html,
+  body {
+    overscroll-behavior: none;
+    overscroll-behavior-y: none;
+  }
 }
 
-html, body {
-    font-family: 'GeneralSans', var(--font-fallback);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    
-    background: var(--color-web-night-blue);
-	  color: var(--color-web-grey);
-	  margin: 0;
-    padding: 0;
+html,
+body {
+  font-family: 'GeneralSans', var(--font-fallback);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+
+  background: var(--color-web-night-blue);
+  color: var(--color-web-grey);
+  margin: 0;
+  padding: 0;
 }
 
-@utility bg-grid-container {
-  position: relative;
-  background-image: 
-  linear-gradient(to right, rgba(224, 225, 221, 0.1) 1px, transparent 1px),
-  linear-gradient(to bottom, rgba(224, 225, 221, 0.1) 1px, transparent 1px);
-  background-size: 60px 60px;
-
-  /* Difuminado arriba y abajo */
-  -webkit-mask-image: linear-gradient(to bottom, transparent, black 5%, black 90%, transparent);
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-size: 100% 100%;
-  mask-image: linear-gradient(to bottom, transparent, black 5%, black 90%, transparent);
-  mask-repeat: no-repeat;
-  mask-size: 100% 100%;
+@utility bg-gradient {
+  background: linear-gradient(to top, var(--color-web-night-blue), var(--color-web-dark-blue));
 }
-
 
 @font-face {
   font-family: 'Adjusted Arial Fallback';
