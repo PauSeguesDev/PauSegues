@@ -7,8 +7,10 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 import InnerTitle from "@/components/sections/innerTitle.astro";
+import ProjectsList from "@/components/sections/projects/projectsList.astro";
 ---
 
 <Layout title={t('pages.projects.SEO.title')} description={t('pages.projects.SEO.description')} lang={lang}>
     <InnerTitle title={t('pages.projects.hero.title')} pageKeys={t('pages.projects.hero.pathkeys')} />
+    <ProjectsList />
 </Layout>

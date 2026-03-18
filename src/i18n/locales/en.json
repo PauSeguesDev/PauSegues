@@ -7,6 +7,21 @@
         }
     },
 
+    "projects": {
+        "titles": {
+            "all": "The list of my projects",
+            "last": "The last projects"
+        },
+        "list": [
+            {
+                "title": "Solsona Experience Web",
+                "description": "Since 2023, I have been managing the website for the Solsona Experience cooperative, boosting its digital presence and improving communication with its visitors.",
+                "image": "/images/projects/solsonaexperience.webp",
+                "url": "https://solsonaexperience.com"
+            }
+        ]
+    },
+
     "pages": {
         "home": {
             "SEO": {
@@ -33,6 +48,15 @@
                 "image": {
                     "src": "/images/jo.png",
                     "alt": "Pau Segués Vitutia"
+                }
+            },
+            "skills": {
+                "sectiontitle": "My skills",
+                "titlelist": {
+                    "frontend": "Frontend",
+                    "backend": "Backend",
+                    "tools": "Tools",
+                    "database": "Databases"
                 }
             }
         },

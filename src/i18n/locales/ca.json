@@ -8,15 +8,18 @@
     },
 
     "projects": {
-        "title": "La llista dels meus projectes",
+        "titles": {
+            "all": "La llista dels meus projectes",
+            "last": "Els últims projectes"
+        },
         "list": [
-        {
-            "title": "Solsona Experience Web",
-            "description": "Des del 2023 gestiono la pàgina web de la cooperativa Solsona Experience, impulsant la seva presència digital i millorant la comunicació amb els seus visitants.",
-            "image": "/images/projects/solsonaexperience.webp",
-            "url": "https://solsonaexperience.com"
-        }
-    ]
+            {
+                "title": "Solsona Experience Web",
+                "description": "Des del 2023 gestiono la pàgina web de la cooperativa Solsona Experience, impulsant la seva presència digital i millorant la comunicació amb els seus visitants.",
+                "image": "/images/projects/solsonaexperience.webp",
+                "url": "https://solsonaexperience.com"
+            }
+        ]
     },
 
     "pages": {
@@ -45,6 +48,15 @@
                 "image": {
                     "src": "/images/jo.png",
                     "alt": "Pau Segués Vitutia"
+                }
+            },
+            "skills": {
+                "sectiontitle": "Les meves habilitats",
+                "titlelist": {
+                    "frontend": "Frontend",
+                    "backend": "Backend",
+                    "tools": "Eines",
+                    "database": "Bases de dades"
                 }
             }
         },
