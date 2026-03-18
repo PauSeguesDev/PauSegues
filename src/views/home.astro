@@ -8,10 +8,11 @@ import Layout from "@/layouts/Layout.astro";
 
 import Hero from "@/components/sections/home/hero.astro";
 import WhoIAm from "@/components/sections/home/whoIAm.astro";
-
+import Skills from '@/components/sections/home/skills.astro';
 ---
 
 <Layout title={t('pages.home.SEO.title')} description={t('pages.home.SEO.description')} lang={lang}>
 	<Hero />
 	<WhoIAm />
+	<Skills />
 </Layout>

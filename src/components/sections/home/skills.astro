@@ -1,0 +1,16 @@
+---
+import { SKILLS } from "@/consts/skills";
+import SkillsCard from "@/components/skillsCard.astro";
+---
+
+<section class="my-8">
+    <div class="flex justify-center items-start gap-4">
+        <div class="grid grid-cols-2 gap-8">
+            {
+                SKILLS.map((group) => (
+                    <SkillsCard title={group.name} skills={group.skills} />
+                ))
+            }
+        </div>
+    </div>
+</section>

@@ -12,11 +12,6 @@ export const navLabels = {
         es: 'Inicio',
         en: 'Home'
     },
-    about: {
-        ca: 'Sobre mi',
-        es: 'Sobre mí',
-        en: 'About me'
-    },
     projects: {
         ca: 'Projectes',
         es: 'Proyectos',
@@ -54,11 +49,6 @@ export const routes = {
         ca: '/',
         es: '/es/',
         en: '/en/'
-    },
-    about: {
-        ca: '/sobre-mi',
-        es: '/es/sobre-mi',
-        en: '/en/about-me'
     },
     projects: {
         ca: '/projectes',

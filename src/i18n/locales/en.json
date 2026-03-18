@@ -18,22 +18,22 @@
                     "Web Developer",
                     "Application Creator",
                     "AI Solutions",
-                    "Constantly Evolving 🚀"
+                    "Constantly Evolving"
                 ]
             },
-            "WhoIAm": {
-                "AboutButton": "About me",
-                "AboutText": "Hi, I'm Pau. Studying Web Application Development at Lacetània (Manresa). I'm passionate about technology and programming. I enjoy finding and creating functional and creative digital solutions."
-            }
-        },
-        "about-me": {
-            "SEO": {
-                "title": "About me - Pau Segués Vitutia",
-                "description": "About me - Pau Segués Vitutia"
-            },
-            "hero": {
-                "title": "About me",
-                "pathkeys": [ "home", "about" ]
+            "presentation": {
+                "subtitle": "Hi, I'm Pau",
+                "paragrafs": [
+                    "I create digital solutions.",
+                    "I'm from Solsona and currently studying Web Application Development (DAW) in Manresa, and I'm passionate about the technology ecosystem.",
+                    "My philosophy is clear: detect challenges and build solutions. I don't settle for making the code 'simply work'; I strive for the result to be robust, creative, and well-made. That's why I enjoy transforming abstract ideas into real solutions that add value.",
+                    "In a sector that never stops, I'm naturally curious: I like to stay updated, trying new tools and exploring the latest development trends.",
+                    "Looking for someone with energy and passion for code? <a href=\"/en/contact\" class=\"underline\">Let's talk!</a>"
+                ],
+                "image": {
+                    "src": "/images/jo.png",
+                    "alt": "Pau Segués Vitutia"
+                }
             }
         },
         "projects": {

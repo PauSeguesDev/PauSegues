@@ -18,22 +18,22 @@
                     "Desarrollador Web",
                     "Creador de Aplicaciones",
                     "Soluciones con IA",
-                    "En constante evolución 🚀"
+                    "En constante evolución"
                 ]
             },
-            "WhoIAm": {
-                "AboutButton": "Sobre mí",
-                "AboutText": "Hola, soy Pau. Estudiante de Desarrollo de Aplicaciones Web en Lacetània (Manresa). Me apasiona la tecnología y la programación. Me gusta buscar y crear soluciones digitales funcionales y creativas."
-            }
-        },
-        "about-me": {
-            "SEO": {
-                "title": "Sobre mí - Pau Segués Vitutia",
-                "description": "Sobre mí - Pau Segués Vitutia"
-            },
-            "hero": {
-                "title": "Sobre mí",
-                "pathkeys": [ "home", "about" ]
+            "presentation": {   
+                "subtitle": "Hola, soy Pau",
+                "paragrafs": [
+                    "Creo soluciones digitales.",
+                    "Soy de Solsona y actualmente estoy estudiando Desarrollo de Aplicaciones Web (DAW) en Manresa, y me apasiona el ecosistema tecnológico.",
+                    "Mi filosofía es clara: detectar retos y construir soluciones. No me conformo con hacer que el código 'simplemente funcione'; me esfuerzo para que el resultado sea robusto, creativo y esté bien hecho. Por eso, disfruto transformando ideas abstractas en soluciones reales que aporten valor.",
+                    "En un sector que no se detiene nunca, soy curioso por naturaleza: me gusta estar al día, probando nuevas herramientas y explorando las últimas tendencias del desarrollo.",
+                    "¿Buscas a alguien con energía y pasión por el código? <a href=\"/es/contacto\" class=\"underline\">¡Hablemos!</a>"
+                ],
+                "image": {
+                    "src": "/images/jo.png",
+                    "alt": "Pau Segués Vitutia"
+                }
             }
         },
         "projects": {

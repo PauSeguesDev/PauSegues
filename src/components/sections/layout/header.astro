@@ -7,7 +7,7 @@ import LanguagePicker from "@/components/LanguagePicker.astro";
 const lang = getLangFromUrl(Astro.url);
 const { pathname } = Astro.url;
 
-const visibleNavKeys = ['home', 'about', 'projects', 'contact'];
+const visibleNavKeys = ['home', 'projects', 'contact'];
 
 const navItems = visibleNavKeys.map((key) => {
   const k = key as keyof typeof navLabels;

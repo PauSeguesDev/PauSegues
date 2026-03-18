@@ -7,6 +7,18 @@
         }
     },
 
+    "projects": {
+        "title": "La llista dels meus projectes",
+        "list": [
+        {
+            "title": "Solsona Experience Web",
+            "description": "Des del 2023 gestiono la pàgina web de la cooperativa Solsona Experience, impulsant la seva presència digital i millorant la comunicació amb els seus visitants.",
+            "image": "/images/projects/solsonaexperience.webp",
+            "url": "https://solsonaexperience.com"
+        }
+    ]
+    },
+
     "pages": {
         "home": {
             "SEO": {
@@ -18,22 +30,22 @@
                     "Desenvolupador Web",
                     "Creador d'Aplicacions",
                     "Solucions amb IA",
-                    "En constant evolució 🚀"
+                    "En constant evolució"
                 ]
             },
-            "WhoIAm": {
-                "AboutButton": "Sobre Mi",
-                "AboutText": "Hola, sóc el Pau. Estudiant de Desenvolupament d’Aplicacions Web a Lacetània (Manresa). M’apassiona la tecnologia i la programació. M'agrada buscar i crear solucions digitals funcionals i creatives."
-            }
-        },
-        "about-me": {
-            "SEO": {
-                "title": "Sobre mi - Pau Segués Vitutia",
-                "description": "Sobre mi - Pau Segués Vitutia"
-            },
-            "hero": {
-                "title": "Sobre mi",
-                "pathkeys": [ "home", "about" ]
+            "presentation": {
+                "subtitle": "Hola, sóc el Pau",
+                "paragrafs": [
+                    "Creo solucions digitals.",
+                    "Soc de Solsona i actualment estic estudiant de Desenvolupament d'Aplicacions Web (DAW) a Manresa i soc un apassionat de l'ecosistema tecnològic.",
+                    "La meva filosofia és clara: detectar reptes i construir solucions. No em conformo amb fer que el codi \"simplement funcioni\"; m'esforço perquè el resultat sigui robust, creatiu i estigui ben fet. Per això, gaudeixo transformant idees abstractes en solucions reals que aportin valor.",
+                    "En un sector que no s'atura mai, soc curiós per naturalesa: m'agrada estar al dia, provant noves eines i explorant les últimes tendències del desenvolupament.",
+                    "Busques algú amb energia i passió pel codi? <a href=\"/contacte\" class=\"underline\">Parlem!</a>"
+                ],
+                "image": {
+                    "src": "/images/jo.png",
+                    "alt": "Pau Segués Vitutia"
+                }
             }
         },
         "projects": {
