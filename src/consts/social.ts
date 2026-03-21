@@ -1,24 +1,43 @@
+/**
+ * Social Media Configuration
+ * Defines the data structure and links for all social media integrations.
+ * Imports SVGs as components for optimized inline rendering.
+ */
 import X from "@/icons/x.svg";
 import Instagram from "@/icons/instagram.svg";
 import GitHub from "@/icons/github.svg";
 import Linkedin from "@/icons/Linkedin.svg";
 
+/** Restricted list of supported social media IDs */
 type SocialId = "x" | "instagram" | "github" | "linkedin" ;
 
+/** Restricted list of supported social media display names */
 type SocialName = "X" | "Instagram" | "GitHub" | "LinkedIn" ;
 
+/**
+ * Social Media Interface
+ * @property {SocialId} id - Internal identifier.
+ * @property {SocialName} name - Formal name of the platform.
+ * @property {string} url - External link to the profile.
+ * @property {string} label - Accessibility text for screen readers (aria-label).
+ * @property {object} image - Contains the component-ized logo and dimensions.
+ */
 export interface SocialType {
   id: SocialId;
   name: SocialName;
   url: string;
   label: string;
   image: {
-    logo: any;
+    logo: any; // The SVG component
     width: number;
     height: number;
   };
 }
 
+/**
+ * Global Social Media Registry
+ * Used across the Hero, Footer, and Contact sections.
+ */
 export const SOCIAL: SocialType[] = [
   {
     id: "x",

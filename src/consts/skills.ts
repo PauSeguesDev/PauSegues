@@ -1,16 +1,31 @@
+/**
+ * Skills Constants and Types
+ * This file serves as the single source of truth for the technology stack 
+ * displayed across the portfolio.
+ */
+
+/** Defines the allowed categories for skill groups */
 type skillGroup = "frontend" | "backend" | "database" | "tools";
 
+/** Individual skill structure */
 export type Skill = {
-    name: string;
-    icon_url: string;
+    name: string;      // The display name of the technology (e.g., "Astro")
+    icon_url: string;  // URL path to the SVG icon (hosted on DevIcons)
 }
 
+/** * Skill Group structure 
+ * Used to categorize skills into "Windows" (Frontend, Backend, etc.)
+ */
 export type SkillGroup = {
     id: number;
-    name: string;
-    skills: Skill[];
+    name: string;      // Category heading
+    skills: Skill[];   // Collection of individual technology objects
 }
 
+/**
+ * Main Skills Database
+ * Organized by category to be mapped by the SkillsSection component.
+ */
 export const SKILLS: SkillGroup[] = [
     {
         id: 1,

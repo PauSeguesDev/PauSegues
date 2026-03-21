@@ -1,0 +1,37 @@
+---
+interface Props {
+    limit?: number | undefined;
+}
+
+const { limit } = Astro.props;
+
+import ProjectCard from "@/components/projectsCard.astro";
+
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const projects = t("projects.list");
+const projectsToDisplay = limit ? projects?.slice(-limit) : projects;
+---
+
+<section class="min-h-dvh w-full py-24 px-4 sm:px-10 md:px-24 lg:px-36">
+    <div class="flex justify-center items-center mb-10">
+        <p class="text-xl lg:text-2xl font-semibold">
+            {t("projects.title")}
+        </p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {
+            projectsToDisplay?.map((project?: any) => (
+                <ProjectCard
+                    title={project.title}
+                    description={project.description}
+                    image={project.image}
+                    link={project.url}
+                />
+            ))
+        }
+    </div>
+</section>

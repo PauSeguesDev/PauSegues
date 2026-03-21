@@ -1,4 +1,12 @@
 ---
+/** *
+ * PrimaryButton component
+ * @property {string} Text - The label displayed inside the button.
+ * @property {string} Link - The URL the button points to.
+ * @property {string} [target] - Optional: Specifies where to open the linked document (e.g., '_blank').
+ * @property {string} [rel] - Optional: Specifies the relationship between the current and linked document.
+ * @property {"Default" | "Reverse"} [type] - Optional: Defines the visual style variant. Defaults to "Default".
+ */
 interface Props {
     Text: string;
     Link: string;
@@ -6,16 +14,23 @@ interface Props {
     rel?: string;
     type?: "Default" | "Reverse";
 }
+
+// Destructure the props with default value for type
 const { Text, Link, target, rel, type = "Default" } = Astro.props;
 
+/**
+ * Styling Dictionary
+ * Maps button types to Tailwind CSS utility classes for easy maintenance.
+ */
 const ButtonType = {
+    // Standard style: Blue border with pearl background
     Default: `inline-block px-6 py-2 rounded-xl border-2 border-web-dark-blue bg-web-pearl-blue font-semibold text-lg shadow-lg 
         hover:shadow-2xl hover:bg-web-dark-blue hover:scale-110 transition-transform duration-300 cursor-pointer`,
+    // Reverse style: Pearl border with dark night background
     Reverse: `px-6 py-2 rounded-xl border-2 border-web-pearl-blue bg-web-night-blue font-semibold text-lg shadow-lg 
         hover:shadow-2xl hover:bg-web-pearl-blue hover:scale-105 transition-transform duration-300 cursor-pointer`,
 };
 ---
-
 <a
     href={Link}
     target={target}

@@ -1,14 +1,27 @@
 ---
+/**
+ * Contact Page
+ * The entry point for the Contact section.
+ * Wraps the content in the global Layout and displays the standardized InnerTitle.
+ */
 import Layout from "@/layouts/Layout.astro";
 
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
+// i18n Setup: Detect current language and initialize the translation helper
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 import InnerTitle from "@/components/sections/innerTitle.astro";
 ---
 
-<Layout title={t('pages.contact.SEO.title')} description={t('pages.contact.SEO.description')} lang={lang}>
-    <InnerTitle title={t('pages.contact.hero.title')} pageKeys={t('pages.contact.hero.pathkeys')} />
+<Layout 
+    title={t('pages.contact.SEO.title')} 
+    description={t('pages.contact.SEO.description')} 
+    lang={lang}
+>
+    <InnerTitle 
+        title={t('pages.contact.hero.title')} 
+        pageKeys={t('pages.contact.hero.pathkeys')} 
+    />
 </Layout>

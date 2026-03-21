@@ -1,20 +1,34 @@
 ---
+/**
+ * Home Page (Index)
+ * The main entry point of the portfolio. 
+ * Orchestrates the sequence of sections: Hero, About, Featured Projects, and Skills.
+ */
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
+// i18n Setup: Detect language from URL and initialize translation helper
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 import Layout from "@/layouts/Layout.astro";
 
+// Section Components
 import Hero from "@/components/sections/home/hero.astro";
 import WhoIAm from "@/components/sections/home/whoIAm.astro";
 import Skills from '@/components/sections/home/skills.astro';
-import ProjectsList from '@/components/sections/projects/projectsList.astro';
+import ProjectsList from "@/components/sections/projects/projectsList.astro";
 ---
 
-<Layout title={t('pages.home.SEO.title')} description={t('pages.home.SEO.description')} lang={lang}>
-	<Hero />
-	<WhoIAm />
-	<ProjectsList limit={3} />
-	<Skills />
+<Layout 
+    title={t('pages.home.SEO.title')} 
+    description={t('pages.home.SEO.description')} 
+    lang={lang}
+>
+    <Hero />
+
+    <WhoIAm />
+
+    <ProjectsList limit={3} />
+
+    <Skills />
 </Layout>

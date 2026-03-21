@@ -1,7 +1,15 @@
 ---
+/**
+ * Project Card Component
+ * A visually rich link card used to showcase portfolio projects.
+ * Features a zoom-on-hover effect and a bottom-aligned title overlay.
+ */
 interface Props {
+    /** The title of the project to be displayed on the card */
     title: string;
+    /** The source URL for the project's preview image */
     image: string;
+    /** The destination URL (external or internal) */
     link: string;
 }
 
@@ -20,6 +28,7 @@ const { title, image, link } = Astro.props;
             class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
     </div>
+
     <div class="absolute inset-0 bg-linear-to-t from-web-night-blue/90 via-web-night-blue/20 to-transparent flex items-end p-6">
         <h3 class="text-web-grey text-xl md:text-2xl font-bold transition-transform duration-300 group-hover:translate-x-2">
             {title}

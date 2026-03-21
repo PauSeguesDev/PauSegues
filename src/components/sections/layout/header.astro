@@ -1,18 +1,32 @@
 ---
+/**
+ * Main Header & Navigation Component
+ * Features dynamic active state detection, i18n support, 
+ * and a fully responsive mobile menu with a slide-in animation.
+ */
 import { routes, navLabels } from "@/i18n/routes";
 import { getLangFromUrl } from "@/i18n/utils";
 import HamburgerButton from "@/components/buttons/HamburgerButton.astro";
 import LanguagePicker from "@/components/LanguagePicker.astro";
 
+// i18n and URL Setup
 const lang = getLangFromUrl(Astro.url);
 const { pathname } = Astro.url;
 
+// Define which keys from the routes/labels should appear in the navigation
 const visibleNavKeys = ['home', 'projects', 'contact'];
 
+/**
+ * Navigation Data Processing
+ * Maps keys to localized labels and URLs, and determines if a link is 'active'.
+ */
 const navItems = visibleNavKeys.map((key) => {
   const k = key as keyof typeof navLabels;
   const href = routes[k as keyof typeof routes][lang];
   
+  // Logic to determine if the link is active:
+  // For home routes, we check for an exact match.
+  // For subpages, we check if the current path starts with the link href.
   const isActive = href === '/' || href === '/es/' || href === '/en/'
     ? pathname === href
     : pathname.startsWith(href);
@@ -77,16 +91,27 @@ const navItems = visibleNavKeys.map((key) => {
 </header>
 
 <script>
+  // DOM Elements for the mobile menu logic
   const btn = document.getElementById("menu-btn");
   const menu = document.getElementById("mobile-menu");
   const body = document.body;
 
+  /**
+   * Toggle Menu State:
+   * - Rotates the hamburger bars via '.is-active'.
+   * - Slides the menu in/out via '.translate-x-full'.
+   * - Prevents background scrolling when menu is open via 'overflow-hidden'.
+   */
   btn?.addEventListener("click", () => {
     btn.classList.toggle("is-active");
     menu?.classList.toggle("translate-x-full");
     body.classList.toggle("overflow-hidden");
   });
 
+  /**
+   * Close menu when a link is clicked:
+   * Ensures the UI is reset when navigating between sections/pages.
+   */
   menu?.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       btn?.classList.remove("is-active");

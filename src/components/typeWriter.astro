@@ -1,5 +1,11 @@
 ---
+/**
+ * Typewriter Component
+ * Animates a series of strings by "typing" and "deleting" them one by one.
+ * Ideal for rotating headlines or job titles in a Hero section.
+ */
 interface Props {
+    /** An array of strings to cycle through */
     words: string[];
 }
 
@@ -8,10 +14,12 @@ const { words } = Astro.props;
 
 <div class="inline-flex items-center">
     <span id="typewriter" class="min-h-[1.2em]"></span>
+    
     <span class="w-[2px] h-[1.2em] bg-current ml-1 animate-blink"></span>
 </div>
 
 <style>
+    /* Standard blinking effect for the cursor */
     @keyframes blink {
         0%, 100% { opacity: 1; }
         50% { opacity: 0; }
@@ -22,43 +30,65 @@ const { words } = Astro.props;
 </style>
 
 <script define:vars={{ words }}>
+    /**
+     * Logic to handle the character-by-character animation.
+     * define:vars allows us to pass the 'words' prop from Astro (Server) to the Browser (Client).
+     */
     const initTypewriter = () => {
         const typewriterElement = document.getElementById("typewriter");
+        
+        // Safety check to ensure the element exists and we have words to type
         if (!typewriterElement || !words || words.length === 0) return;
 
-        let wordIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;;
+        let wordIndex = 0;   // Which word in the array are we on?
+        let charIndex = 0;   // How many characters of that word are shown?
+        let isDeleting = false; // Are we currently removing letters?
 
         function type() {
             const currentWord = words[wordIndex];
             
+            // Determine the next substring to display
             const targetText = isDeleting 
                 ? currentWord.substring(0, charIndex - 1)
                 : currentWord.substring(0, charIndex + 1);
             
             typewriterElement.textContent = targetText;
+            
+            // Move the character pointer forward or backward
             charIndex = isDeleting ? charIndex - 1 : charIndex + 1;
 
-            // Velocidades
+            /**
+             * Dynamic Speed Logic:
+             * - Deleting is usually faster than typing (50ms vs 100ms).
+             * - We pause significantly (2s) when a word is fully typed.
+             * - We pause briefly (0.5s) before starting a new word.
+             */
             let typeSpeed = isDeleting ? 50 : 100;
 
             if (!isDeleting && charIndex === currentWord.length) {
+                // Word is complete -> wait, then start deleting
                 isDeleting = true;
-                typeSpeed = 2000;
+                typeSpeed = 2000; 
             } else if (isDeleting && charIndex === 0) {
+                // Word is gone -> move to next word and start typing
                 isDeleting = false;
-                wordIndex = (wordIndex + 1) % words.length;
+                wordIndex = (wordIndex + 1) % words.length; // Loop back to start if at end
                 typeSpeed = 500;
             }
 
-            timeoutId = setTimeout(type, typeSpeed);
+            // Recursive call to create the animation loop
+            setTimeout(type, typeSpeed);
         }
 
         type();
     };
 
+    // Initialize on first load
     initTypewriter();
 
+    /** * View Transitions Support:
+     * If you use Astro's View Transitions, this ensures the script 
+     * re-runs when navigating between pages without a full refresh.
+     */
     document.addEventListener('astro:page-load', initTypewriter);
 </script>

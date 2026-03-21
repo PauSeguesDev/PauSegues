@@ -1,23 +1,40 @@
 ---
+/**
+ * Skills Section Component
+ * Displays a categorized grid of professional skills and technologies.
+ */
+
+// Data Import: Constant containing the array of skill groups (e.g., Frontend, Backend)
 import { SKILLS } from "@/consts/skills";
+
+// UI Component: Individual card to display a specific group of skills
 import SkillsCard from "@/components/skillsCard.astro";
 
+// Internationalization Utilities
 import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 
+// i18n Setup: Extract locale and initialize translation function
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-
 ---
 
 <section class="my-8">
     <div class="flex justify-center items-center mb-10">
         <h2 class="text-3xl font-bold">{t('pages.home.skills.sectiontitle')}</h2>
     </div>
+
     <div class="flex justify-center items-start gap-4">
         <div class="grid grid-cols-2 gap-8">
             {
+                /* Map through the SKILLS constant.
+                   For each group, we dynamically fetch the translated title 
+                   using the group name as part of the translation key.
+                */
                 SKILLS.map((group) => (
-                    <SkillsCard title={t(`pages.home.skills.titlelist.${group.name.toLowerCase()}`)} skills={group.skills} />
+                    <SkillsCard 
+                        title={t(`pages.home.skills.titlelist.${group.name.toLowerCase()}`)} 
+                        skills={group.skills} 
+                    />
                 ))
             }
         </div>

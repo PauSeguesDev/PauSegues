@@ -1,14 +1,23 @@
 ---
-// src/components/Footer.astro
+/**
+ * Footer Component
+ * Provides site navigation, social media presence, and legal links.
+ * Integrated with i18n for multi-language support.
+ */
 import { SOCIAL } from "@/consts/social";
 import { routes, navLabels } from "@/i18n/routes";
 import { getLangFromUrl, useTranslations } from "@/i18n/utils";
 
+// i18n initialization
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
+/** * Legal Links Configuration
+ * Defines the keys used to pull translated labels and routes.
+ */
 const footerLegalKeys = ['legal', 'privacy', 'cookies'] as const;
 
+// Transform keys into an array of objects containing the localized text and URL
 const legalLinks = footerLegalKeys.map((key) => ({
   text: navLabels[key][lang],
   href: routes[key][lang]

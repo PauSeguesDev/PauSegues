@@ -1,13 +1,23 @@
+/*
+ * Global Stylesheet (Tailwind CSS v4)
+ * Handles custom theme variables, typography, and base CSS resets.
+ */
+
 @import './general-sans.css';
 @import "tailwindcss";
 
 @theme {
-  /* -- Fonts -- */
+  /* * Typography Definitions
+   * --font-fallback: A carefully tuned stack to prevent Layout Shift (CLS).
+   * --font-primary: The custom branding font 'GeneralSans'.
+   */
   --font-fallback: 'Adjusted Arial Fallback', system-ui, -apple-system, blinkmacsystemfont, 'Segoe UI',
     'Noto Sans', helvetica, arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
   --font-primary: 'GeneralSans';
 
-  /* --- Web Colors ---*/
+  /* * Brand Color Palette
+   * Defined as CSS variables for use throughout Tailwind classes (e.g., bg-web-dark-blue).
+   */
   --color-web-grey: #e0e1dd;
   --color-web-pearl-blue: #778da9;
   --color-web-dark-blue: #415a77;
@@ -15,8 +25,9 @@
 }
 
 @layer base {
-
-  /* Disable overscroll behavior */
+  /* * Base Resets
+   * Disable overscroll to prevent "rubber-banding" effects, common in mobile browsers.
+   */
   html,
   body {
     overscroll-behavior: none;
@@ -24,10 +35,13 @@
   }
 }
 
+/* * Global Body Styling
+ * Sets the default font, colors, and text rendering optimizations.
+ */
 html,
 body {
   font-family: 'GeneralSans', var(--font-fallback);
-  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased; /* Smoother font rendering on macOS */
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 
@@ -37,10 +51,18 @@ body {
   padding: 0;
 }
 
+/* * Custom Utility Classes
+ * bg-gradient: A reusable gradient spanning from Night Blue to Dark Blue.
+ */
 @utility bg-gradient {
   background: linear-gradient(to top, var(--color-web-night-blue), var(--color-web-dark-blue));
 }
 
+/** * Font-Face Optimization
+ * This 'Adjusted Arial Fallback' uses size-adjust to match the metrics 
+ * of GeneralSans. This prevents the page from "jumping" when the 
+ * custom font finishes loading.
+ */
 @font-face {
   font-family: 'Adjusted Arial Fallback';
   src: local(Arial);
@@ -48,4 +70,4 @@ body {
   ascent-override: 74%;
   descent-override: normal;
   line-gap-override: normal;
-}
+} 

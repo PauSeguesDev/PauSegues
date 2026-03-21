@@ -1,8 +1,14 @@
 ---
+/**
+ * Projects Page
+ * The main archive for all portfolio work.
+ * Reuses the 'InnerTitle' for breadcrumbs and 'ProjectsList' for the grid.
+ */
 import Layout from "@/layouts/Layout.astro";
 
 import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 
+// i18n Setup: Detect current language and initialize the translation helper
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
@@ -10,7 +16,15 @@ import InnerTitle from "@/components/sections/innerTitle.astro";
 import ProjectsList from "@/components/sections/projects/projectsList.astro";
 ---
 
-<Layout title={t('pages.projects.SEO.title')} description={t('pages.projects.SEO.description')} lang={lang}>
-    <InnerTitle title={t('pages.projects.hero.title')} pageKeys={t('pages.projects.hero.pathkeys')} />
+<Layout 
+    title={t('pages.projects.SEO.title')} 
+    description={t('pages.projects.SEO.description')} 
+    lang={lang}
+>
+    <InnerTitle 
+        title={t('pages.projects.hero.title')} 
+        pageKeys={t('pages.projects.hero.pathkeys')} 
+    />
+
     <ProjectsList />
 </Layout>

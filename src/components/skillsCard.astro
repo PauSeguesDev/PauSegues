@@ -1,6 +1,13 @@
 ---
+/**
+ * Skills Card Component
+ * Displays a group of technologies (icons + labels) wrapped in a 
+ * "Mac-style" window UI container.
+ */
 interface Props {
+    /** Category name (e.g., "Frontend", "Backend") */
     title: string;
+    /** Array of skill objects containing the technology name and icon path */
     skills: { name: string; icon_url: string }[];
 }
 
@@ -13,8 +20,9 @@ const { title, skills } = Astro.props;
             <span class="h-3 w-3 bg-yellow-500 rounded-full transition-colors"></span>
             <span class="h-3 w-3 bg-green-500 rounded-full transition-colors"></span>
         </div>
-        <h2 class="font-bold text-lg mr-4">{title}</h2>
+        <h2 class="font-bold text-lg mr-4 text-web-dark-blue">{title}</h2>
     </div>
+
     <div class="p-8 grid grid-cols-4 gap-y-8 gap-x-4">
         {skills.map((skill: { name: string; icon_url: string }) => (
             <div class="flex flex-col items-center hover:scale-110 transition-all duration-300 space-y-2">
@@ -23,8 +31,9 @@ const { title, skills } = Astro.props;
                     alt={skill.name} 
                     width={60} 
                     height={60}
+                    loading="lazy"
                 />
-                <p>{skill.name}</p>
+                <p class="text-white text-sm text-center">{skill.name}</p>
             </div>
         ))}
     </div>

@@ -1,19 +1,34 @@
 ---
+/**
+ * Language Picker Component
+ * Dynamically detects the current page and language to allow users to 
+ * switch between locales (CA, ES, EN) while staying on the same content.
+ */
 import { routes, languages, type LanguageCode } from "@/i18n/routes";
 
 const { pathname } = Astro.url;
 
+/** * Reverse Route Lookup:
+ * We iterate through all defined routes to find which 'key' (e.g., 'projects')
+ * matches the current URL. This allows us to find the equivalent URL in other languages.
+ */
 let currentPageKey: keyof typeof routes = "home";
 
 for (const [key, paths] of Object.entries(routes)) {
     const values = Object.values(paths);
+    // Normalize paths by removing trailing slashes for accurate comparison
     const normalizedPath = pathname.replace(/\/$/, "") || "/";
+    
     if (values.some(p => (p.replace(/\/$/, "") || "/") === normalizedPath)) {
         currentPageKey = key as keyof typeof routes;
         break;
     }
 }
 
+/** * Language Detection:
+ * Identifies the current active language based on the URL prefix.
+ * Defaults to 'ca' (Catalan) if no prefix is found.
+ */
 const currentLang: LanguageCode = pathname.startsWith('/es') ? 'es' : pathname.startsWith('/en') ? 'en' : 'ca';
 ---
 
@@ -22,6 +37,7 @@ const currentLang: LanguageCode = pathname.startsWith('/es') ? 'es' : pathname.s
     onchange="window.location.href = this.value"
 >
   {
+    /* Iterate through available languages to build the dropdown options */
     Object.entries(languages).map(([code, label]) => (
       <option 
         value={routes[currentPageKey][code as LanguageCode]} 
