@@ -1,0 +1,17 @@
+---
+import ProjectView from '@/views/projectDetail.astro';
+import es from '@/i18n/locales/es.json';
+
+export function getStaticPaths() {
+    const projects = es.projects.list;
+    return projects.map((project) => {
+        return {
+            params: { slug: project.slug },
+            props: { project }
+        };
+    });
+}
+
+const { project } = Astro.props;
+---
+<ProjectView project={project} lang="es" />

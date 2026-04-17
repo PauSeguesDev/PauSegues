@@ -8,12 +8,15 @@ const { limit } = Astro.props;
 import ProjectCard from "@/components/projectsCard.astro";
 
 import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+import { routes } from "@/i18n/routes";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const projects = t("projects.list");
 const projectsToDisplay = limit ? projects?.slice(-limit).reverse() : projects?.toReversed();
+
+const basePath = routes.projects[lang as keyof typeof routes.projects];
 ---
 
 <section class="w-full py-24 px-4 sm:px-12 md:px-24 lg:px-38">
@@ -36,7 +39,7 @@ const projectsToDisplay = limit ? projects?.slice(-limit).reverse() : projects?.
                 <ProjectCard
                     title={project.title}
                     image={project.image}
-                    link={project.url}
+                    link={`${basePath}/${project.slug}`}
                 />
             ))
         }

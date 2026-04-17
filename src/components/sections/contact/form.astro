@@ -1,0 +1,205 @@
+---
+/**
+ * Contact Form Component (Full Section)
+ * Splits the information into two columns: 
+ * Left: Active contact form.
+ * Right: Contact information, social media, and location.
+ */
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+import { SOCIAL } from "@/consts/social";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+import SocialButton from "@/components/buttons/socialButton.astro";
+---
+
+<section class="py-12 md:py-24">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+            
+            <!-- LEFT COLUMN: THE FORM -->
+            <div id="form-container" class="order-2 lg:order-1">
+                <div class="bg-web-dark-blue/10 backdrop-blur-md p-8 md:p-12 rounded-4xl border border-web-pearl-blue/20 shadow-2xl">
+                    <form id="contact-form" class="space-y-8">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="flex flex-col gap-2">
+                                <label for="name" class="text-xs font-bold text-web-pearl-blue uppercase tracking-widest">
+                                    {t('pages.contact.form.name')}
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="name" 
+                                    name="name" 
+                                    required 
+                                    placeholder={t('pages.contact.form.placeholders.name')}
+                                    class="w-full px-0 py-3 bg-transparent border-b border-web-pearl-blue/20 text-web-grey placeholder:text-web-pearl-blue/30 focus:border-web-pearl-blue outline-none transition-all"
+                                />
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <label for="surname" class="text-xs font-bold text-web-pearl-blue uppercase tracking-widest">
+                                    {t('pages.contact.form.surname')}
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="surname" 
+                                    name="surname" 
+                                    required 
+                                    placeholder={t('pages.contact.form.placeholders.surname')}
+                                    class="w-full px-0 py-3 bg-transparent border-b border-web-pearl-blue/20 text-web-grey placeholder:text-web-pearl-blue/30 focus:border-web-pearl-blue outline-none transition-all"
+                                />
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col gap-2">
+                            <label for="email" class="text-xs font-bold text-web-pearl-blue uppercase tracking-widest">
+                                {t('pages.contact.form.email')}
+                            </label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                required 
+                                placeholder={t('pages.contact.form.placeholders.email')}
+                                class="w-full px-0 py-3 bg-transparent border-b border-web-pearl-blue/20 text-web-grey placeholder:text-web-pearl-blue/30 focus:border-web-pearl-blue outline-none transition-all"
+                            />
+                        </div>
+
+                        <div class="flex flex-col gap-2">
+                            <label for="message" class="text-xs font-bold text-web-pearl-blue uppercase tracking-widest">
+                                {t('pages.contact.form.message')}
+                            </label>
+                            <textarea 
+                                id="message" 
+                                name="message" 
+                                rows="4" 
+                                required 
+                                placeholder={t('pages.contact.form.placeholders.message')}
+                                class="w-full px-0 py-3 bg-transparent border-b border-web-pearl-blue/20 text-web-grey placeholder:text-web-pearl-blue/30 focus:border-web-pearl-blue outline-none transition-all resize-none"
+                            ></textarea>
+                        </div>
+
+                        <div class="pt-4">
+                            <button 
+                                type="submit" 
+                                id="submit-btn"
+                                class="cursor-pointer w-full md:w-auto px-10 py-5 bg-web-pearl-blue text-web-night-blue font-bold rounded-2xl hover:bg-web-grey transition-all transform hover:-translate-y-1 active:scale-95 disabled:opacity-50 disabled:translate-y-0 flex items-center justify-center gap-3 shadow-lg shadow-web-dark-blue/20"
+                            >
+                                <span id="btn-text">{t('pages.contact.form.send')}</span>
+                                <div id="loader" class="hidden w-5 h-5 border-2 border-web-night-blue/30 border-t-web-night-blue rounded-full animate-spin"></div>
+                            </button>
+                        </div>
+
+                        <div id="form-message" class="hidden mt-6 p-4 rounded-2xl text-sm font-semibold text-center"></div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: INFORMATION -->
+            <div class="order-1 lg:order-2 space-y-12 py-6 lg:py-12 lg:sticky lg:top-8">
+                <div class="space-y-4">
+                    <h2 class="text-4xl md:text-5xl font-bold text-web-grey leading-tight">
+                        {t('pages.contact.info.title')}
+                    </h2>
+                    <p class="text-web-pearl-blue text-lg max-w-md leading-relaxed">
+                        {t('pages.contact.info.description')}
+                    </p>
+                </div>
+
+                <div class="space-y-8">
+                    <!-- Email -->
+                    <div class="flex items-start gap-5">
+                        <div class="p-4 bg-web-dark-blue/20 rounded-2xl text-web-pearl-blue">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-web-pearl-blue/60 uppercase tracking-widest mb-1">{t('pages.contact.info.email')}</p>
+                            <a href="mailto:pauseguesdev@gmail.com" class="text-xl text-web-grey hover:text-white transition-colors">pauseguesdev@gmail.com</a>
+                        </div>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="flex items-start gap-5">
+                        <div class="p-4 bg-web-dark-blue/20 rounded-2xl text-web-pearl-blue">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-web-pearl-blue/60 uppercase tracking-widest mb-1">{t('pages.contact.info.location')}</p>
+                            <p class="text-xl text-web-grey">Solsona, Catalunya</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Media -->
+                <div class="space-y-6 pt-4">
+                    <p class="text-xs font-bold text-web-pearl-blue/60 uppercase tracking-widest">{t('pages.contact.info.social')}</p>
+                    <div class="flex flex-wrap gap-4">
+                        {SOCIAL.map((social) => (
+                            <SocialButton social={social} />
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script is:inline define:vars={{
+    successMsg: t('pages.contact.form.success'),
+    errorMsg: t('pages.contact.form.error'),
+    sendingMsg: t('pages.contact.form.sending'),
+    sendMsg: t('pages.contact.form.send')
+}}>
+    /**
+     * Client-side form submission handler
+     */
+    const form = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const btnText = document.getElementById('btn-text');
+    const loader = document.getElementById('loader');
+    const messageDiv = document.getElementById('form-message');
+
+    form?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        // Initial states
+        submitBtn.disabled = true;
+        btnText.textContent = sendingMsg;
+        loader.classList.remove('hidden');
+        messageDiv.classList.add('hidden');
+        messageDiv.className = 'hidden mt-6 p-4 rounded-2xl text-sm font-semibold text-center';
+
+        const formData = new FormData(form);
+        
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+
+            if (result.ok) {
+                messageDiv.textContent = successMsg;
+                messageDiv.classList.add('bg-green-500/10', 'text-green-400', 'block');
+                messageDiv.classList.remove('hidden');
+                form.reset();
+            } else {
+                throw new Error(result.error || 'Error');
+            }
+        } catch (error) {
+            messageDiv.textContent = errorMsg;
+            messageDiv.classList.add('bg-red-500/10', 'text-red-400', 'block');
+            messageDiv.classList.remove('hidden');
+        } finally {
+            submitBtn.disabled = false;
+            btnText.textContent = sendMsg;
+            loader.classList.add('hidden');
+        }
+    });
+</script>

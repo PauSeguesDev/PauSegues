@@ -14,10 +14,11 @@
         },
         "list": [
             {
-                "title": "Solsona Experience Web",
+                "title": "Solsona Experience",
                 "description": "Des del 2023 gestiono la pàgina web de la cooperativa Solsona Experience, impulsant la seva presència digital i millorant la comunicació amb els seus visitants.",
                 "image": "/images/projects/solsonaexperience.webp",
-                "url": "https://solsonaexperience.com"
+                "slug": "solsona-experience",
+                "externalUrl": "https://solsonaexperience.com"
             }
         ]
     },
@@ -78,7 +79,40 @@
             "hero": {
                 "title": "Contacte",
                 "pathkeys": [ "home", "contact" ]
+            },
+            "form": {
+                "name": "Nom",
+                "surname": "Cognoms",
+                "email": "Correu electrònic",
+                "message": "Missatge",
+                "send": "Enviar missatge",
+                "sending": "Enviant...",
+                "success": "Missatge enviat correctament! Em posaré en contacte tan aviat com sigui possible.",
+                "error": "S'ha produït un error en enviar el missatge. Torna-ho a provar més tard.",
+                "placeholders": {
+                    "name": "El teu nom",
+                    "surname": "Els teus cognoms",
+                    "email": "hola@exemple.com",
+                    "message": "Escriu el teu missatge aquí..."
+                }
+            },
+            "info": {
+                "title": "Dades de contacte",
+                "description": "Estic obert a noves oportunitats, col·laboracions o simplement a parlar de tecnologia. No dubtis a contactar-me!",
+                "email": "Envia'm un correu",
+                "location": "On sóc?",
+                "social": "Segueix-me"
             }
+        },
+        "projectDetail": {
+            "visit": "Visitar el projecte",
+            "back": "Tornar enrere",
+            "technologies": "Tecnologies",
+            "details": "Detalls del Projecte",
+            "general": "Informació General",
+            "client": "Client",
+            "date": "Data",
+            "role": "Rol"
         }
     }
 }

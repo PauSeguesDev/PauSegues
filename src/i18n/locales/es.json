@@ -14,10 +14,11 @@
         },
         "list": [
             {
-                "title": "Solsona Experience Web",
+                "title": "Solsona Experience",
                 "description": "Desde 2023, gestiono la página web de la cooperativa Solsona Experience, impulsando su presencia digital y mejorando la comunicación con sus visitantes.",
                 "image": "/images/projects/solsonaexperience.webp",
-                "url": "https://solsonaexperience.com"
+                "slug": "solsona-experience",
+                "externalUrl": "https://solsonaexperience.com"
             }
         ]
     },
@@ -78,7 +79,40 @@
             "hero": {
                 "title": "Contacto",
                 "pathkeys": [ "home", "contact" ]
+            },
+            "form": {
+                "name": "Nombre",
+                "surname": "Apellidos",
+                "email": "Correo electrónico",
+                "message": "Mensaje",
+                "send": "Enviar mensaje",
+                "sending": "Enviando...",
+                "success": "¡Mensaje enviado correctamente! Me pondré en contacto lo antes posible.",
+                "error": "Se ha producido un error al enviar el mensaje. Inténtalo de nuevo más tarde.",
+                "placeholders": {
+                    "name": "Tu nombre",
+                    "surname": "Tus apellidos",
+                    "email": "hola@ejemplo.com",
+                    "message": "Escribe tu mensaje aquí..."
+                }
+            },
+            "info": {
+                "title": "Datos de contacto",
+                "description": "Estoy abierto a nuevas oportunidades, colaboraciones o simplemente a hablar de tecnología. ¡No dudes en contactarme!",
+                "email": "Envíame un correo",
+                "location": "¿Dónde estoy?",
+                "social": "Sígueme"
             }
+        },
+        "projectDetail": {
+            "visit": "Visitar proyecto",
+            "back": "Volver atrás",
+            "technologies": "Tecnologías",
+            "details": "Detalles del Proyecto",
+            "general": "Información General",
+            "client": "Cliente",
+            "date": "Fecha",
+            "role": "Rol"
         }
     }
 }

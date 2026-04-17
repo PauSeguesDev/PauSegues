@@ -14,10 +14,11 @@
         },
         "list": [
             {
-                "title": "Solsona Experience Web",
+                "title": "Solsona Experience",
                 "description": "Since 2023, I have been managing the website for the Solsona Experience cooperative, boosting its digital presence and improving communication with its visitors.",
                 "image": "/images/projects/solsonaexperience.webp",
-                "url": "https://solsonaexperience.com"
+                "slug": "solsona-experience",
+                "externalUrl": "https://solsonaexperience.com"
             }
         ]
     },
@@ -78,7 +79,40 @@
             "hero": {
                 "title": "Contact",
                 "pathkeys": [ "home", "contact" ]
+            },
+            "form": {
+                "name": "First Name",
+                "surname": "Last Name",
+                "email": "Email address",
+                "message": "Message",
+                "send": "Send message",
+                "sending": "Sending...",
+                "success": "Message sent correctly! I'll get in touch as soon as possible.",
+                "error": "An error occurred while sending the message. Please try again later.",
+                "placeholders": {
+                    "name": "Your name",
+                    "surname": "Your last name",
+                    "email": "hello@example.com",
+                    "message": "Write your message here..."
+                }
+            },
+            "info": {
+                "title": "Contact Details",
+                "description": "I'm open to new opportunities, collaborations, or just to talk about technology. Don't hesitate to reach out!",
+                "email": "Send me an email",
+                "location": "Where am I?",
+                "social": "Follow me"
             }
+        },
+        "projectDetail": {
+            "visit": "Visit project",
+            "back": "Go back",
+            "technologies": "Technologies",
+            "details": "Project Details",
+            "general": "General Information",
+            "client": "Client",
+            "date": "Date",
+            "role": "Role"
         }
     }
 }

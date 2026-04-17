@@ -1,0 +1,17 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ProjectDetailCard from "@/components/sections/projects/projectDetailCard.astro";
+import InnerTitle from "@/components/sections/innerTitle.astro";
+
+const { project, lang } = Astro.props;
+---
+
+<Layout
+    title={`${project.title} - Pau Segués Vitutia`}
+    description={project.description}
+    lang={lang}
+>
+    <!-- Explicitly pass breadcrumb path keys for consistency -->
+    <!-- <InnerTitle title={project.title} pageKeys={["home", "projects"]} /> -->
+    <ProjectDetailCard project={project} lang={lang} />
+</Layout>

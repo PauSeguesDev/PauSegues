@@ -11,15 +11,12 @@ interface Props {
 }
 const { social } = Astro.props;
 ---
-
-<div class="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center rounded-3xl border-3
-    hover:scale-110 hover:bg-web-dark-blue transition duration-500">
-    <a 
-        href={social.url}
-        target="_blank" 
-        rel="noopener noreferrer" 
+<a 
+    href={social.url} 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    class="p-4 bg-web-dark-blue/20 border border-web-pearl-blue/10 rounded-2xl text-web-pearl-blue hover:text-white hover:bg-web-dark-blue/40 hover:border-web-pearl-blue/30 transition-all group"
         aria-label={social.label ?? social.name}
     >
-        <social.image.logo />
+        <social.image.logo class="w-6 h-6 fill-current group-hover:scale-110 transition-transform" />
     </a>
-</div>

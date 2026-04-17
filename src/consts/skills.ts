@@ -58,6 +58,10 @@ export const SKILLS: SkillGroup[] = [
             {
                 name: "Vue",
                 icon_url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg",
+            },
+            {
+                name: "React",
+                icon_url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
             }
         ]
     },
@@ -77,6 +81,14 @@ export const SKILLS: SkillGroup[] = [
                 name: "Django",
                 icon_url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/django/django-plain.svg",
             },
+            {
+                name: "Fastapi",
+                icon_url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg",
+            },
+            {
+                name: "Laravel",
+                icon_url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/laravel/laravel-original.svg",
+            }
         ]
     },
     {
@@ -84,17 +96,21 @@ export const SKILLS: SkillGroup[] = [
         name: "Database",
         skills: [
             {
+                name: "PostgreSQL",
+                icon_url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg",
+            },
+            {
+                name: "MongoDB",
+                icon_url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg",
+            },
+            {
                 name: "Supabase",
                 icon_url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg",
             },
             {
                 name: "Firebase",
                 icon_url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg",
-            },
-            {
-                name: "MongoDB",
-                icon_url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg",
-            },
+            }
         ]
     },
     {
@@ -113,6 +129,10 @@ export const SKILLS: SkillGroup[] = [
                 name: "VSCode",
                 icon_url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg",
             },
+            {
+                name: "Figma",
+                icon_url: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg",
+            }
         ]
     },
 ]

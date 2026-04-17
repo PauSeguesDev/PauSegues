@@ -13,6 +13,7 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 import InnerTitle from "@/components/sections/innerTitle.astro";
+import Form from "@/components/sections/contact/form.astro";
 ---
 
 <Layout 
@@ -24,4 +25,5 @@ import InnerTitle from "@/components/sections/innerTitle.astro";
         title={t('pages.contact.hero.title')} 
         pageKeys={t('pages.contact.hero.pathkeys')} 
     />
+    <Form />
 </Layout>
