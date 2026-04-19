@@ -15,5 +15,6 @@ export default defineConfig({
     vite: {
         plugins: [tailwindcss()]
     },
+    site: 'https://pausegues.vercel.app',
     adapter: vercel(),
 });
