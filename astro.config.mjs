@@ -17,4 +17,7 @@ export default defineConfig({
     },
     site: 'https://pausegues.vercel.app',
     adapter: vercel(),
+    security: {
+        checkOrigin: false,
+    }
 });
