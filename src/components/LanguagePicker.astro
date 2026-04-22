@@ -3,20 +3,21 @@
  * Language Picker Component
  * Dynamically detects the current page and language to allow users to 
  * switch between locales (CA, ES, EN) while staying on the same content.
+ * Enhanced with a custom premium dropdown UI.
  */
 import { routes, languages, type LanguageCode } from "@/i18n/routes";
 
 const { pathname } = Astro.url;
 
-/** * Reverse Route Lookup:
+/** 
+ * Reverse Route Lookup:
  * We iterate through all defined routes to find which 'key' (e.g., 'projects')
- * matches the current URL. This allows us to find the equivalent URL in other languages.
+ * matches the current URL.
  */
 let currentPageKey: keyof typeof routes = "home";
 
 for (const [key, paths] of Object.entries(routes)) {
     const values = Object.values(paths);
-    // Normalize paths by removing trailing slashes for accurate comparison
     const normalizedPath = pathname.replace(/\/$/, "") || "/";
     
     if (values.some(p => (p.replace(/\/$/, "") || "/") === normalizedPath)) {
@@ -25,26 +26,69 @@ for (const [key, paths] of Object.entries(routes)) {
     }
 }
 
-/** * Language Detection:
- * Identifies the current active language based on the URL prefix.
- * Defaults to 'ca' (Catalan) if no prefix is found.
+/** 
+ * Language Detection:
  */
 const currentLang: LanguageCode = pathname.startsWith('/es') ? 'es' : pathname.startsWith('/en') ? 'en' : 'ca';
+const currentLabel = languages[currentLang];
 ---
 
-<select
-    class="bg-web-dark-blue text-white border-2 rounded-lg px-4 py-2 cursor-pointer appearance-none focus:outline-none"
-    onchange="window.location.href = this.value"
->
-  {
-    /* Iterate through available languages to build the dropdown options */
-    Object.entries(languages).map(([code, label]) => (
-      <option 
-        value={routes[currentPageKey][code as LanguageCode]} 
-        selected={currentLang === code}
-      >
-        {label}
-      </option>
-    ))
-  }
-</select>
+<div class="language-picker-wrapper">
+  <div class="segmented-control bg-white/5 backdrop-blur-sm border border-white/10 rounded-full p-1 flex items-center relative">
+    {
+      Object.entries(languages).map(([code, label]) => {
+        const isActive = currentLang === code;
+        const href = routes[currentPageKey][code as LanguageCode];
+        
+        return (
+          <a
+            href={href}
+            class={`relative z-10 px-3 py-1.5 text-xs font-bold tracking-wider rounded-full transition-all duration-300 ${
+              isActive 
+              ? 'text-white' 
+              : 'text-white/40 hover:text-white/70'
+            }`}
+            aria-current={isActive ? 'page' : undefined}
+          >
+            {label}
+            {isActive && (
+              <div 
+                class="absolute inset-0 bg-blue-500/20 border border-blue-400/30 rounded-full -z-10 shadow-[0_0_15px_rgba(59,130,246,0.2)]"
+                layout-id="active-pill"
+              ></div>
+            )}
+          </a>
+        )
+      })
+    }
+  </div>
+</div>
+
+<style>
+    .language-picker-wrapper {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .segmented-control {
+        min-width: fit-content;
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    /* Subtle hover effect for the entire control */
+    .segmented-control:hover {
+        border-color: rgba(255,255,255,0.2);
+        background-color: rgba(255,255,255,0.08);
+        transition: all 0.3s ease;
+    }
+
+    @keyframes pulse-subtle {
+        0% { opacity: 0.6; }
+        50% { opacity: 1; }
+        100% { opacity: 0.6; }
+    }
+
+    .bg-blue-500\/20 {
+        animation: pulse-subtle 4s infinite ease-in-out;
+    }
+</style>
