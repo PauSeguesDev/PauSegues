@@ -18,7 +18,17 @@
                 "description": "Since 2023, I have been managing the website for the Solsona Experience cooperative, boosting its digital presence and improving communication with its visitors.",
                 "image": "/images/projects/solsonaexperience.webp",
                 "slug": "solsona-experience",
-                "externalUrl": "https://solsonaexperience.com"
+                "externalUrl": "https://solsonaexperience.com",
+                "skills": [
+                    {
+                        "name": "Angular",
+                        "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg"
+                    },
+                    {
+                        "name": "Firebase",
+                        "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg"
+                    }
+                ]
             }
         ]
     },
@@ -69,6 +79,9 @@
             "hero": {
                 "title": "Projects",
                 "pathkeys": [ "home", "projects" ]
+            },
+            "details": {
+                "skills": "Technologies used"
             }
         },
         "contact": {

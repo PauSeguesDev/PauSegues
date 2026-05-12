@@ -15,14 +15,29 @@ const { pathname } = Astro.url;
  * matches the current URL.
  */
 let currentPageKey: keyof typeof routes = "home";
+let currentSlug = "";
 
 for (const [key, paths] of Object.entries(routes)) {
     const values = Object.values(paths);
     const normalizedPath = pathname.replace(/\/$/, "") || "/";
     
+    // Check for exact match (static routes)
     if (values.some(p => (p.replace(/\/$/, "") || "/") === normalizedPath)) {
         currentPageKey = key as keyof typeof routes;
         break;
+    }
+
+    // Check for dynamic project routes
+    if (key === 'projects') {
+        for (const [lang, basePath] of Object.entries(paths)) {
+            const prefix = basePath.endsWith('/') ? basePath : basePath + '/';
+            if (pathname.startsWith(prefix) && pathname !== prefix) {
+                currentPageKey = 'projects';
+                currentSlug = pathname.substring(prefix.length);
+                break;
+            }
+        }
+        if (currentPageKey === 'projects') break;
     }
 }
 
@@ -38,7 +53,10 @@ const currentLabel = languages[currentLang];
     {
       Object.entries(languages).map(([code, label]) => {
         const isActive = currentLang === code;
-        const href = routes[currentPageKey][code as LanguageCode];
+        const basePath = routes[currentPageKey][code as LanguageCode];
+        const href = currentSlug 
+          ? (basePath.endsWith('/') ? basePath : basePath + '/') + currentSlug
+          : basePath;
         
         return (
           <a

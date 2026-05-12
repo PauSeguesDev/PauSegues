@@ -12,6 +12,7 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 import SocialButton from "@/components/buttons/socialButton.astro";
+import PrimaryButton from "@/components/buttons/primaryButton.astro";
 ---
 
 <section class="py-12 md:py-24">
@@ -80,14 +81,14 @@ import SocialButton from "@/components/buttons/socialButton.astro";
                         </div>
 
                         <div class="pt-4">
-                            <button 
+                            <PrimaryButton 
                                 type="submit" 
                                 id="submit-btn"
-                                class="cursor-pointer w-full md:w-auto px-10 py-5 bg-web-pearl-blue text-web-night-blue font-bold rounded-2xl hover:bg-web-grey transition-all transform hover:-translate-y-1 active:scale-95 disabled:opacity-50 disabled:translate-y-0 flex items-center justify-center gap-3 shadow-lg shadow-web-dark-blue/20"
+                                classes="w-full md:w-auto"
                             >
                                 <span id="btn-text">{t('pages.contact.form.send')}</span>
                                 <div id="loader" class="hidden w-5 h-5 border-2 border-web-night-blue/30 border-t-web-night-blue rounded-full animate-spin"></div>
-                            </button>
+                            </PrimaryButton>
                         </div>
 
                         <div id="form-message" class="hidden mt-6 p-4 rounded-2xl text-sm font-semibold text-center"></div>

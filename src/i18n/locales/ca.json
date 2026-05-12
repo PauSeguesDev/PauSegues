@@ -18,7 +18,17 @@
                 "description": "Des del 2023 gestiono la pàgina web de la cooperativa Solsona Experience, impulsant la seva presència digital i millorant la comunicació amb els seus visitants.",
                 "image": "/images/projects/solsonaexperience.webp",
                 "slug": "solsona-experience",
-                "externalUrl": "https://solsonaexperience.com"
+                "externalUrl": "https://solsonaexperience.com",
+                "skills": [
+                    {
+                        "name": "Angular",
+                        "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg"
+                    },
+                    {
+                        "name": "Firebase",
+                        "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg"
+                    }
+                ]
             }
         ]
     },
@@ -69,6 +79,9 @@
             "hero": {
                 "title": "Projectes",
                 "pathkeys": [ "home", "projects" ]
+            },
+            "details": {
+                "skills": "Tecnologies utilitzades"
             }
         },
         "contact": {
