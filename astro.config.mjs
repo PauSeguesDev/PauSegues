@@ -1,4 +1,5 @@
 // @ts-check
+import path from 'path';
 import { defineConfig } from 'astro/config';
 import tailwindcss from "@tailwindcss/vite";
 import vercel from '@astrojs/vercel';
@@ -13,7 +14,13 @@ export default defineConfig({
         }
     },
     vite: {
-        plugins: [tailwindcss()]
+        plugins: [tailwindcss()],
+        resolve: {
+            alias: {
+                // 2. Explicitly map the alias
+                '@': path.resolve('./src')
+            }
+        }
     },
     site: 'https://pausegues.vercel.app',
     adapter: vercel(),
