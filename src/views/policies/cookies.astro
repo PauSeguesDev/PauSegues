@@ -1,0 +1,20 @@
+---
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+import InnerTitle from "@/components/sections/InnerTitle.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+import Layout from "@/layouts/Layout.astro";
+---
+
+<Layout
+  title={t("pages.cookies.SEO.title")}
+  description={t("pages.cookies.SEO.description")}
+  lang={lang}
+>
+  <InnerTitle 
+    title={t('pages.cookies.hero.title')} 
+    pageKeys={t('pages.cookies.hero.pathkeys')} 
+  />
+</Layout>

@@ -113,6 +113,36 @@
             "client": "Cliente",
             "date": "Fecha",
             "role": "Rol"
+        },
+        "legal": {
+            "SEO": {
+                "title": "Aviso Legal - Pau Segués Vitutia",
+                "description": "Aviso Legal - Pau Segués Vitutia"
+            },
+            "hero": {
+                "title": "Aviso Legal",
+                "pathkeys": [ "home", "legal" ]
+            }
+        },
+        "privacy": {
+            "SEO": {
+                "title": "Política de Privacidad - Pau Segués Vitutia",
+                "description": "Política de Privacidad - Pau Segués Vitutia"
+            },
+            "hero": {
+                "title": "Política de Privacidad",
+                "pathkeys": [ "home", "privacy" ]
+            }
+        },
+        "cookies": {
+            "SEO": {
+                "title": "Política de Cookies - Pau Segués Vitutia",
+                "description": "Política de Cookies - Pau Segués Vitutia"
+            },
+            "hero": {
+                "title": "Política de Cookies",
+                "pathkeys": [ "home", "cookies" ]
+            }
         }
     }
 }

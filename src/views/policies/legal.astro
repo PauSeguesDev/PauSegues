@@ -1,0 +1,20 @@
+---
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+import Layout from "@/layouts/Layout.astro";
+import InnerTitle from "@/components/sections/InnerTitle.astro";
+---
+
+<Layout
+  title={t("pages.legal.SEO.title")}
+  description={t("pages.legal.SEO.description")}
+  lang={lang}
+>
+  <InnerTitle 
+    title={t('pages.legal.hero.title')} 
+    pageKeys={t('pages.legal.hero.pathkeys')} 
+  />
+</Layout>
