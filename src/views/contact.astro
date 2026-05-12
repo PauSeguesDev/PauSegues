@@ -12,8 +12,8 @@ import { getLangFromUrl, useTranslations } from '@/i18n/utils';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-import InnerTitle from "../components/sections/InnerTitle.astro";
-import Form from "../components/sections/contact/form.astro";
+import InnerTitle from "@/components/sections/InnerTitle.astro";
+import Form from "@/components/sections/contact/form.astro";
 ---
 
 <Layout 
