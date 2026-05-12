@@ -97,4 +97,4 @@ export const routes = {
         es: '/es/404',
         en: '/en/404'
     }
-};
+} as const;
