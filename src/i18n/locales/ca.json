@@ -6,7 +6,6 @@
             "rights": "Tots els drets reservats"
         }
     },
-
     "projects": {
         "titles": {
             "all": "La llista dels meus projectes",
@@ -29,10 +28,30 @@
                         "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg"
                     }
                 ]
+            },
+            {
+                "title": "Port del Comte Skyrace",
+                "description": "Durant la meva estància de pràctiques he tingut la sort de desenvolupar la pàgina web de la cursa Port del Compte Skyerace.",
+                "image": "/images/projects/pdc-skyrace.webp",
+                "slug": "port-del-comte-skyrace",
+                "externalUrl": "https://portdelcomteskyrace.com/",
+                "skills": [
+                    {
+                        "name": "VUE",
+                        "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg"
+                    },
+                    {
+                        "name": "TAILWIND",
+                        "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg"
+                    },
+                    {
+                        "name": "FastAPI",
+                        "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg"
+                    }
+                ]
             }
         ]
     },
-
     "pages": {
         "home": {
             "SEO": {
@@ -78,7 +97,10 @@
             },
             "hero": {
                 "title": "Projectes",
-                "pathkeys": [ "home", "projects" ]
+                "pathkeys": [
+                    "home",
+                    "projects"
+                ]
             },
             "details": {
                 "skills": "Tecnologies utilitzades"
@@ -91,7 +113,10 @@
             },
             "hero": {
                 "title": "Contacte",
-                "pathkeys": [ "home", "contact" ]
+                "pathkeys": [
+                    "home",
+                    "contact"
+                ]
             },
             "form": {
                 "name": "Nom",
@@ -120,6 +145,8 @@
         "projectDetail": {
             "visit": "Visitar el projecte",
             "back": "Tornar enrere",
+            "prev": "Anterior",
+            "next": "Següent",
             "technologies": "Tecnologies",
             "details": "Detalls del Projecte",
             "general": "Informació General",
@@ -130,31 +157,124 @@
         "legal": {
             "SEO": {
                 "title": "Avís Legal - Pau Segués Vitutia",
-                "description": "Avís Legal - Pau Segués Vitutia"
+                "description": "Avís Legal - Pau Segués Vitutia i condicions d'ús del lloc web."
             },
             "hero": {
                 "title": "Avís Legal",
-                "pathkeys": [ "home", "legal" ]
-            }
+                "pathkeys": [
+                    "home",
+                    "legal"
+                ]
+            },
+            "sections": [
+                {
+                    "title": "1. Informació General",
+                    "content": "D'acord amb el deure d'informació establert a l'article 10 de la Llei 34/2002, de l'11 de juliol, de Serveis de la Societat de la Informació i del Comerç Electrònic (LSSI-CE), s'informa que aquest lloc web és titularitat de Pau Segués Vitutia, amb domicili a Solsona i correu electrònic de contacte <a href=\"mailto:pauseguesdev@gmail.com\" class=\"text-web-pearl-blue hover:underline\">pauseguesdev@gmail.com</a>."
+                },
+                {
+                    "title": "2. Propietat Intel·lectual i Industrial",
+                    "content": "Els drets de propietat intel·lectual i industrial de tots els elements que integren aquest lloc web (incloent, sense limitació, marques, logotips, textos, imatges, gràfics, dissenys, codi de programació i estructures de navegació) són titularitat de Pau Segués Vitutia o de tercers que n'han autoritzat l'ús. Queda totalment prohibida la reproducció, distribució o transformació d'aquests continguts sense l'autorització expressa del propietari."
+                },
+                {
+                    "title": "3. Condicions d'Ús i Limitació de Responsabilitat",
+                    "content": "L'usuari es compromet a utilitzar el lloc web de conformitat amb la llei i el present Avís Legal. El propietari no es fa responsable dels danys i perjudicis que es puguin derivar d'interrupcions del servei web, virus informàtics o d'enllaços a llocs de tercers que es trobin en aquesta pàgina."
+                },
+                {
+                    "title": "4. Legislació Aplicable i Jurisdicció",
+                    "content": "El present Avís Legal es regeix per la legislació espanyola i de la Unió Europea. Per a qualsevol controvèrsia que pugui sorgir en relació amb aquest lloc web, les parts se sotmeten als jutjats i tribunals de Manresa."
+                }
+            ]
         },
         "privacy": {
             "SEO": {
                 "title": "Política de Privadesa - Pau Segués Vitutia",
-                "description": "Política de Privadesa - Pau Segués Vitutia"
+                "description": "Política de Privadesa i protecció de dades de Pau Segués Vitutia."
             },
             "hero": {
                 "title": "Política de Privadesa",
-                "pathkeys": [ "home", "privacy" ]
-            }
+                "pathkeys": [
+                    "home",
+                    "privacy"
+                ]
+            },
+            "sections": [
+                {
+                    "title": "1. Responsable del Tractament",
+                    "content": "El responsable del tractament de les dades recollides en aquest lloc web és Pau Segués Vitutia, amb correu electrònic de contacte <a href=\"mailto:pauseguesdev@gmail.com\" class=\"text-web-pearl-blue hover:underline\">pauseguesdev@gmail.com</a>."
+                },
+                {
+                    "title": "2. Dades Recollides i Finalitat",
+                    "content": "A través del nostre formulari de contacte, recollim les dades personals essencials que ens proporciones voluntàriament (nom, cognoms i correu electrònic). L'única finalitat d'aquest recull és respondre a les teves consultes, dubtes o propostes de col·laboració. No utilitzem les dades per a fins publicitaris o de màrqueting sense el teu consentiment explícit."
+                },
+                {
+                    "title": "3. Legitimació del Tractament",
+                    "content": "La base legal per al tractament de les teves dades és el consentiment que ens atorgues en acceptar aquesta Política de Privadesa abans d'enviar el formulari de contacte o en acceptar l'ús de cookies analítiques."
+                },
+                {
+                    "title": "4. Drets de l'Usuari",
+                    "content": "Tens dret a accedir, rectificar, limitar el tractament, oposar-te o sol·licitar la supressió de les teves dades personals en qualsevol moment. Per exercir aquests drets, pots enviar una sol·licitud per correu electrònic a <a href=\"mailto:pauseguesdev@gmail.com\" class=\"text-web-pearl-blue hover:underline\">pauseguesdev@gmail.com</a>, indicant el dret que vols exercir i adjuntant una còpia del teu document d'identitat si cal."
+                },
+                {
+                    "title": "5. Conservació de les Dades",
+                    "content": "Les dades personals es conservaran durant el temps estrictament necessari per respondre a la teva sol·licitud o fins que decideixis revocar el teu consentiment o demanar-ne la supressió."
+                }
+            ]
         },
         "cookies": {
             "SEO": {
                 "title": "Política de Cookies - Pau Segués Vitutia",
-                "description": "Política de Cookies - Pau Segués Vitutia"
+                "description": "Política de Cookies de Pau Segués Vitutia. Configura el teu consentiment."
             },
             "hero": {
                 "title": "Política de Cookies",
-                "pathkeys": [ "home", "cookies" ]
+                "pathkeys": [
+                    "home",
+                    "cookies"
+                ]
+            },
+            "sections": [
+                {
+                    "title": "1. Què és una Cookie?",
+                    "content": "Una galeta o <i>cookie</i> és un petit fitxer de text que s'emmagatzema al teu navegador quan visites gairebé qualsevol pàgina web. La seva utilitat principal és que la web sigui capaç de recordar la teva visita, recordar preferències o recollir dades de navegació anònimes quan tornis a navegar per ella."
+                },
+                {
+                    "title": "2. Tipus de Cookies utilitzades",
+                    "content": "Aquest lloc web utilitza dues categories de cookies: les <b>cookies tècniques/necessàries</b> (essencials perquè puguis navegar correctament per la web) i les <b>cookies analítiques</b> de tercers (que mesuren de manera anònima la forma en què els usuaris interactuen amb els nostres continguts, la qual cosa ens ajuda a millorar)."
+                },
+                {
+                    "title": "3. Gestió de les teves preferències",
+                    "content": "Tens el control total sobre les cookies no necessàries. A continuació, trobaràs el nostre seleccionador interactiu, on podràs donar o retirar el teu consentiment per a les cookies d'anàlisi en qualsevol moment."
+                }
+            ]
+        }
+    },
+    "cookieConsent": {
+        "banner": {
+            "title": "Respectem la teva privadesa",
+            "description": "Aquest lloc web utilitza cookies pròpies i de tercers per millorar la teva experiència, analitzar el trànsit i personalitzar el contingut. Pots acceptar totes les cookies, rebutjar-les o personalitzar la teva selecció.",
+            "acceptAll": "Acceptar totes",
+            "rejectAll": "Rebutjar opcionals",
+            "customize": "Personalitzar"
+        },
+        "selector": {
+            "title": "Configuració de Cookies",
+            "description": "Tria quines categories de cookies vols permetre. Les cookies necessàries s'activen sempre perquè són fonamentals per a la navegació.",
+            "save": "Desar configuració",
+            "categories": {
+                "necessary": {
+                    "title": "Cookies Necessàries",
+                    "description": "Són essencials per al funcionament de la web. Permeten funcions bàsiques com la navegació o l'accés a seccions protegides. Sense elles, la web no pot funcionar correctament.",
+                    "status": "Sempre actives"
+                },
+                "analytics": {
+                    "title": "Cookies d'Anàlisi",
+                    "description": "Ens permeten mesurar de forma anònima el nombre de visitants i veure com es mouen per la web. Això ens ajuda a fer millores de disseny i contingut.",
+                    "status": "Opcional"
+                }
+            },
+            "feedback": {
+                "saved": "Configuració desar correctament!",
+                "pending": "Sense configurar"
             }
         }
     }

@@ -1,0 +1,187 @@
+---
+/**
+ * Cookie Consent Banner Component
+ * Renders a premium floating glassmorphic banner at the bottom of the page.
+ * Prompts users for cookie consent and embeds the CookieSelector inside a collapsible panel.
+ */
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+import CookieSelector from "./CookieSelector.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<div
+  id="cookie-consent-banner"
+  class="fixed bottom-6 left-6 right-6 md:left-auto md:right-6 md:w-[480px] z-50 bg-[#0D1B2AF0]/90 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl p-6 hidden flex-col gap-6 transition-all duration-500 ease-out transform translate-y-8 opacity-0"
+>
+  <!-- Summary View -->
+  <div id="cookie-summary-view" class="space-y-4">
+    <div class="flex items-start gap-3">
+      <div class="p-2 rounded-xl bg-web-pearl-blue/15 text-web-pearl-blue shrink-0">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+        </svg>
+      </div>
+      <div class="space-y-1">
+        <h4 class="text-lg font-bold text-white leading-tight">
+          {t("cookieConsent.banner.title")}
+        </h4>
+        <p class="text-xs text-white/70 leading-relaxed">
+          {t("cookieConsent.banner.description")}
+        </p>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-white/5">
+      <button
+        type="button"
+        id="cookie-btn-accept"
+        class="flex-1 min-w-[120px] px-4 py-2.5 bg-linear-to-r from-web-pearl-blue to-web-dark-blue hover:from-white hover:to-web-grey text-white hover:text-web-night-blue font-semibold text-xs rounded-xl transition-all duration-300 shadow-md hover:scale-[1.02] cursor-pointer"
+      >
+        {t("cookieConsent.banner.acceptAll")}
+      </button>
+      
+      <button
+        type="button"
+        id="cookie-btn-reject"
+        class="flex-1 min-w-[120px] px-4 py-2.5 bg-white/5 border border-white/10 hover:bg-white/10 text-white font-medium text-xs rounded-xl transition-all duration-300 cursor-pointer"
+      >
+        {t("cookieConsent.banner.rejectAll")}
+      </button>
+
+      <button
+        type="button"
+        id="cookie-btn-customize"
+        class="w-full md:w-auto px-4 py-2.5 bg-transparent text-white/75 hover:text-white font-medium text-xs hover:underline transition-all duration-300 cursor-pointer text-center"
+      >
+        {t("cookieConsent.banner.customize")}
+      </button>
+    </div>
+  </div>
+
+  <!-- Detailed Selector View (Drawer) -->
+  <div
+    id="cookie-details-drawer"
+    class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out"
+  >
+    <div class="pt-4 border-t border-white/10">
+      <CookieSelector class="p-0! bg-transparent! border-none! shadow-none! backdrop-blur-none!" />
+    </div>
+  </div>
+</div>
+
+<style>
+  /* CSS transition for smooth entry */
+  #cookie-consent-banner.show-banner {
+    display: flex;
+    animation: slideUpFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes slideUpFadeIn {
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const banner = document.getElementById('cookie-consent-banner');
+    if (!banner) return;
+
+    const btnAccept = document.getElementById('cookie-btn-accept');
+    const btnReject = document.getElementById('cookie-btn-reject');
+    const btnCustomize = document.getElementById('cookie-btn-customize');
+    const drawer = document.getElementById('cookie-details-drawer');
+    const summary = document.getElementById('cookie-summary-view');
+
+    const STORAGE_KEY = 'pau-segues-cookie-consent';
+
+    // Show banner if not configured yet
+    function checkConsent() {
+      try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (!stored) {
+          // Add CSS class to animate in
+          banner?.classList.remove('hidden');
+          // Trigger reflow for transition
+          void banner?.offsetWidth;
+          banner?.classList.add('show-banner');
+        }
+      } catch (e) {
+        console.error('Error checking cookie consent:', e);
+      }
+    }
+
+    // Save choices and hide banner
+    function saveConsent(preferences: { necessary: boolean; analytics: boolean }) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(preferences));
+        
+        // Dispatch custom event
+        const event = new CustomEvent('cookie-consent-changed', {
+          detail: preferences,
+          bubbles: true
+        });
+        window.dispatchEvent(event);
+        
+        // Animate out
+        banner?.classList.remove('show-banner');
+        banner?.classList.add('translate-y-8', 'opacity-0');
+        setTimeout(() => {
+          banner?.classList.add('hidden');
+        }, 500);
+      } catch (e) {
+        console.error('Error saving cookie consent:', e);
+      }
+    }
+
+    // Event Listeners
+    btnAccept?.addEventListener('click', () => {
+      saveConsent({ necessary: true, analytics: true });
+    });
+
+    btnReject?.addEventListener('click', () => {
+      saveConsent({ necessary: true, analytics: false });
+    });
+
+    btnCustomize?.addEventListener('click', () => {
+      if (!drawer) return;
+      
+      const isOpen = drawer.style.maxHeight && drawer.style.maxHeight !== '0px';
+      
+      if (isOpen) {
+        // Close drawer
+        drawer.style.maxHeight = '0px';
+        btnCustomize.textContent = btnCustomize.getAttribute('data-original-text') || 'Customize';
+      } else {
+        // Open drawer
+        // Keep track of original text
+        if (!btnCustomize.getAttribute('data-original-text')) {
+          btnCustomize.setAttribute('data-original-text', btnCustomize.textContent || '');
+        }
+        
+        drawer.style.maxHeight = '600px'; // Set to large enough value for smooth height transition
+        btnCustomize.textContent = '✕'; // Compact close indicator
+      }
+    });
+
+    // Also close the banner if the user saves preferences from the nested selector
+    window.addEventListener('cookie-consent-changed', () => {
+      // Check if banner is currently visible. If so, animate it out.
+      if (banner && !banner.classList.contains('hidden') && banner.classList.contains('show-banner')) {
+        banner.classList.remove('show-banner');
+        banner.classList.add('translate-y-8', 'opacity-0');
+        setTimeout(() => {
+          banner.classList.add('hidden');
+        }, 500);
+      }
+    });
+
+    // Run check
+    checkConsent();
+  });
+</script>
