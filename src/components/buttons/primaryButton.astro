@@ -1,41 +1,58 @@
 ---
-/** *
+/**
  * PrimaryButton component
- * @property {string} Text - The label displayed inside the button.
- * @property {string} Link - The URL the button points to.
- * @property {string} [target] - Optional: Specifies where to open the linked document (e.g., '_blank').
- * @property {string} [rel] - Optional: Specifies the relationship between the current and linked document.
- * @property {"Default" | "Reverse"} [type] - Optional: Defines the visual style variant. Defaults to "Default".
+ * A versatile button component that supports both links and button actions.
+ * Features a premium design with hover animations and slot support for icons.
  */
 interface Props {
-    Text: string;
-    Link: string;
+    /** The label displayed inside the button (optional if using slot) */
+    Text?: string;
+    /** The URL the button points to (only for type="link") */
+    Link?: string;
+    /** Optional: Specifies where to open the linked document (e.g., '_blank') */
     target?: string;
+    /** Optional: Specifies the relationship between the current and linked document */
     rel?: string;
-    type?: "Default" | "Reverse";
+    /** The type of button: 'link' (default), 'submit', or 'button' */
+    type?: "link" | "submit" | "button";
+    /** Optional: Unique identifier for the element */
+    id?: string;
+    /** Optional: Additional CSS classes to append */
+    classes?: string;
 }
 
-// Destructure the props with default value for type
-const { Text, Link, target, rel, type = "Default" } = Astro.props;
+const { Text, Link, target, rel, type = "link", id, classes = "" } = Astro.props;
 
 /**
- * Styling Dictionary
- * Maps button types to Tailwind CSS utility classes for easy maintenance.
+ * Styling
+ * Standardized premium style based on the project detail design.
  */
-const ButtonType = {
-    // Standard style: Blue border with pearl background
-    Default: `inline-block px-6 py-2 rounded-xl border-2 border-web-dark-blue bg-web-pearl-blue font-semibold text-lg shadow-lg 
-        hover:shadow-2xl hover:bg-web-dark-blue hover:scale-110 transition-transform duration-300 cursor-pointer`,
-    // Reverse style: Pearl border with dark night background
-    Reverse: `px-6 py-2 rounded-xl border-2 border-web-pearl-blue bg-web-night-blue font-semibold text-lg shadow-lg 
-        hover:shadow-2xl hover:bg-web-pearl-blue hover:scale-105 transition-transform duration-300 cursor-pointer`,
-};
+const baseClasses = "group/btn relative inline-flex items-center justify-center px-8 py-5 text-base font-bold rounded-2xl text-web-night-blue bg-web-grey overflow-hidden transition-all active:scale-95 disabled:opacity-50 disabled:translate-y-0 shadow-lg shadow-web-dark-blue/10 cursor-pointer hover:scale-105 transition-transform duration-500 ease-out";
+const combinedClasses = `${baseClasses} ${classes}`;
 ---
-<a
-    href={Link}
-    target={target}
-    rel={rel}
-    class={ButtonType[type] || ButtonType.Default}
->
-    {Text}
-</a>
+
+{type === "link" ? (
+    <a
+        href={Link}
+        target={target}
+        rel={rel}
+        id={id}
+        class={combinedClasses}
+    >
+        <span class="relative z-10 flex items-center gap-1">
+            {Text}
+            <slot />
+        </span>
+    </a>
+) : (
+    <button
+        type={type as "submit" | "button"}
+        id={id}
+        class={combinedClasses}
+    >
+        <span class="relative z-10 flex items-center gap-1">
+            {Text}
+            <slot />
+        </span>
+    </button>
+)}

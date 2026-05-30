@@ -15,8 +15,8 @@ const { social } = Astro.props;
     href={social.url} 
     target="_blank" 
     rel="noopener noreferrer" 
-    class="p-4 bg-web-dark-blue/20 border border-web-pearl-blue/10 rounded-2xl text-web-pearl-blue hover:text-white hover:bg-web-dark-blue/40 hover:border-web-pearl-blue/30 transition-all group"
+    class="p-2 bg-web-dark-blue/20 border border-web-pearl-blue/10 rounded-2xl text-web-pearl-blue hover:text-white hover:bg-web-dark-blue/40 hover:border-web-pearl-blue/30 transition-all group"
         aria-label={social.label ?? social.name}
     >
-        <social.image.logo class="w-6 h-6 fill-current group-hover:scale-110 transition-transform" />
+        <social.image.logo class="w-8 h-8 fill-current group-hover:scale-110 transition-transform" />
     </a>

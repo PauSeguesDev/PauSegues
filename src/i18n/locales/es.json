@@ -6,7 +6,6 @@
             "rights": "Todos los derechos reservados"
         }
     },
-
     "projects": {
         "titles": {
             "all": "La lista de mis proyectos",
@@ -18,11 +17,41 @@
                 "description": "Desde 2023, gestiono la página web de la cooperativa Solsona Experience, impulsando su presencia digital y mejorando la comunicación con sus visitantes.",
                 "image": "/images/projects/solsonaexperience.webp",
                 "slug": "solsona-experience",
-                "externalUrl": "https://solsonaexperience.com"
+                "externalUrl": "https://solsonaexperience.com",
+                "skills": [
+                    {
+                        "name": "Angular",
+                        "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg"
+                    },
+                    {
+                        "name": "Firebase",
+                        "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg"
+                    }
+                ]
+            },
+            {
+                "title": "Port del Comte Skyrace",
+                "description": "Durante mi estancia de prácticas he tenido la suerte de desarrollar la página web de la carrera Puerto de la Cuenta Skyerace.",
+                "image": "/images/projects/pdc-skyrace.webp",
+                "slug": "port-del-comte-skyrace",
+                "externalUrl": "https://portdelcomteskyrace.com/",
+                "skills": [
+                    {
+                        "name": "VUE",
+                        "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg"
+                    },
+                    {
+                        "name": "TAILWIND",
+                        "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg"
+                    },
+                    {
+                        "name": "FastAPI",
+                        "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg"
+                    }
+                ]
             }
         ]
     },
-
     "pages": {
         "home": {
             "SEO": {
@@ -37,7 +66,7 @@
                     "En constante evolución"
                 ]
             },
-            "presentation": {   
+            "presentation": {
                 "subtitle": "Hola, soy Pau",
                 "paragrafs": [
                     "Creo soluciones digitales.",
@@ -68,7 +97,13 @@
             },
             "hero": {
                 "title": "Proyectos",
-                "pathkeys": [ "home", "projects" ]
+                "pathkeys": [
+                    "home",
+                    "projects"
+                ]
+            },
+            "details": {
+                "skills": "Tecnologías utilizadas"
             }
         },
         "contact": {
@@ -78,7 +113,10 @@
             },
             "hero": {
                 "title": "Contacto",
-                "pathkeys": [ "home", "contact" ]
+                "pathkeys": [
+                    "home",
+                    "contact"
+                ]
             },
             "form": {
                 "name": "Nombre",
@@ -107,12 +145,137 @@
         "projectDetail": {
             "visit": "Visitar proyecto",
             "back": "Volver atrás",
+            "prev": "Anterior",
+            "next": "Siguiente",
             "technologies": "Tecnologías",
             "details": "Detalles del Proyecto",
             "general": "Información General",
             "client": "Cliente",
             "date": "Fecha",
             "role": "Rol"
+        },
+        "legal": {
+            "SEO": {
+                "title": "Aviso Legal - Pau Segués Vitutia",
+                "description": "Aviso Legal - Pau Segués Vitutia y condiciones de uso del sitio web."
+            },
+            "hero": {
+                "title": "Aviso Legal",
+                "pathkeys": [
+                    "home",
+                    "legal"
+                ]
+            },
+            "sections": [
+                {
+                    "title": "1. Información General",
+                    "content": "De conformidad con el deber de información establecido en el artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y del Comercio Electrónico (LSSI-CE), se informa que este sitio web es propiedad de Pau Segués Vitutia, con domicilio en Solsona y correo electrónico de contacto <a href=\"mailto:pauseguesdev@gmail.com\" class=\"text-web-pearl-blue hover:underline\">pauseguesdev@gmail.com</a>."
+                },
+                {
+                    "title": "2. Propiedad Intelectual e Industrial",
+                    "content": "Los derechos de propiedad intelectual e industrial de todos los elementos que integran este sitio web (incluyendo, sin limitación, marcas, logotipos, textos, imágenes, gráficos, diseños, código de programación y estructuras de navegación) son titularidad de Pau Segués Vitutia o de terceros que han autorizado su uso. Queda totalmente prohibida la reproducción, distribución o transformación de estos contenidos sin la autorización expresa del propietario."
+                },
+                {
+                    "title": "3. Condiciones de Uso y Limitación de Responsabilidad",
+                    "content": "El usuario se compromete a utilizar el sitio web de conformidad con la ley y el presente Aviso Legal. El propietario no se hace responsable de los daños y perjuicios que puedan derivarse de interrupciones del servicio web, virus informáticos o de enlaces a sitios de terceros que se encuentren en esta página."
+                },
+                {
+                    "title": "4. Legislación Aplicable y Jurisdicción",
+                    "content": "El presente Aviso Legal se rige por la legislación española y de la Unión Europea. Para cualquier controversia que pueda surgir en relación con este sitio web, las partes se someten a los juzgados y tribunales de Manresa."
+                }
+            ]
+        },
+        "privacy": {
+            "SEO": {
+                "title": "Política de Privacidad - Pau Segués Vitutia",
+                "description": "Política de Privacidad y protección de datos de Pau Segués Vitutia."
+            },
+            "hero": {
+                "title": "Política de Privacidad",
+                "pathkeys": [
+                    "home",
+                    "privacy"
+                ]
+            },
+            "sections": [
+                {
+                    "title": "1. Responsable del Tratamiento",
+                    "content": "El responsable del tratamiento de los datos recogidos en este sitio web es Pau Segués Vitutia, con correo electrónico de contacto <a href=\"mailto:pauseguesdev@gmail.com\" class=\"text-web-pearl-blue hover:underline\">pauseguesdev@gmail.com</a>."
+                },
+                {
+                    "title": "2. Datos Recogidos y Finalidad",
+                    "content": "A través de nuestro formulario de contacto, recopilamos los datos personales esenciales que nos proporcionas voluntariamente (nombre, apellidos y correo electrónico). La única finalidad de esta recogida es responder a tus consultas, dudas o propuestas de colaboración. No utilizamos los datos para fines publicitarios o de marketing sin tu consentimiento explícito."
+                },
+                {
+                    "title": "3. Legitimación del Tratamiento",
+                    "content": "La base legal para el tratamiento de tus datos es el consentimiento que nos otorgas al aceptar esta Política de Privacidad antes de enviar el formulario de contacto o al aceptar el uso de cookies analíticas."
+                },
+                {
+                    "title": "4. Derechos del Usuario",
+                    "content": "Tienes derecho a acceder, rectificar, limitar el tratamiento, oponerte o solicitar la supresión de tus datos personales en cualquier momento. Para ejercer estos derechos, puedes enviar una solicitud por correo electrónico a <a href=\"mailto:pauseguesdev@gmail.com\" class=\"text-web-pearl-blue hover:underline\">pauseguesdev@gmail.com</a>, indicando el derecho que deseas ejercer y adjuntando una copia de tu documento de identidad si fuera necesario."
+                },
+                {
+                    "title": "5. Conservación de los Datos",
+                    "content": "Los datos personales se conservarán durante el tiempo estrictamente necesario para responder a tu solicitud o hasta que decidas revocar tu consentimiento o solicitar su supresión."
+                }
+            ]
+        },
+        "cookies": {
+            "SEO": {
+                "title": "Política de Cookies - Pau Segués Vitutia",
+                "description": "Política de Cookies de Pau Segués Vitutia. Configura tu consentimiento."
+            },
+            "hero": {
+                "title": "Política de Cookies",
+                "pathkeys": [
+                    "home",
+                    "cookies"
+                ]
+            },
+            "sections": [
+                {
+                    "title": "1. ¿Qué es una Cookie?",
+                    "content": "Una galleta o <i>cookie</i> es un pequeño archivo de texto que se almacena en tu navegador cuando visitas casi cualquier página web. Su utilidad principal es que la web sea capaz de recordar tu visita, recordar preferencias o recopilar datos de navegación anónimos cuando vuelvas a navegar por ella."
+                },
+                {
+                    "title": "2. Tipos de Cookies utilizadas",
+                    "content": "Este sitio web utiliza dos categorías de cookies: las <b>cookies técnicas/necesarias</b> (esenciales para que puedas navegar correctamente por la web) y las <b>cookies analíticas</b> de terceros (que miden de manera anónima la forma en que los usuarios interactúan con nuestros contenidos, lo que nos ayuda a mejorar)."
+                },
+                {
+                    "title": "3. Gestión de tus preferencias",
+                    "content": "Tienes el control total sobre las cookies no necesarias. A continuación, encontrarás nuestro seleccionador interactivo, donde podrás dar o retirar tu consentimiento para las cookies de análisis en cualquier momento."
+                }
+            ]
+        }
+    },
+    "cookieConsent": {
+        "banner": {
+            "title": "Respetamos tu privacidad",
+            "description": "Este sitio web utiliza cookies propias y de terceros para mejorar tu experiencia, analizar el tráfico y personalizar el contenido. Puedes aceptar todas las cookies, rechazarlas o personalizar tu selección.",
+            "acceptAll": "Aceptar todas",
+            "rejectAll": "Rechazar opcionales",
+            "customize": "Personalizar"
+        },
+        "selector": {
+            "title": "Configuración de Cookies",
+            "description": "Elige qué categorías de cookies deseas permitir. Las cookies necesarias se activan siempre porque son fundamentales para la navegación.",
+            "save": "Guardar configuración",
+            "categories": {
+                "necessary": {
+                    "title": "Cookies Necesarias",
+                    "description": "Son esenciales para el funcionamiento de la web. Permiten funciones básicas como la navegación o el acceso a secciones protegidas. Sin ellas, la web no puede funcionar correctamente.",
+                    "status": "Siempre activas"
+                },
+                "analytics": {
+                    "title": "Cookies de Análisis",
+                    "description": "Nos permiten medir de forma anónima el número de visitantes y ver cómo se mueven por la web. Esto nos ayuda a realizar mejoras de diseño y contenido.",
+                    "status": "Opcional"
+                }
+            },
+            "feedback": {
+                "saved": "¡Configuración guardada correctamente!",
+                "pending": "Sin configurar"
+            }
         }
     }
 }

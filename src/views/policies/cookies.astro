@@ -1,0 +1,61 @@
+---
+/**
+ * Cookies Policy View
+ * Renders the localized cookie policy information text
+ * and embeds the interactive CookieSelector widget for direct user configuration.
+ */
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+import InnerTitle from "@/components/sections/InnerTitle.astro";
+import CookieSelector from "@/components/sections/CookieSelector.astro";
+import Layout from "@/layouts/Layout.astro";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// Get the structured sections from the translation file
+const sections = t("pages.cookies.sections") as any[];
+---
+
+<Layout
+  title={t("pages.cookies.SEO.title")}
+  description={t("pages.cookies.SEO.description")}
+  lang={lang}
+>
+  <InnerTitle 
+    title={t('pages.cookies.hero.title')} 
+    pageKeys={t('pages.cookies.hero.pathkeys')} 
+  />
+
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 space-y-16">
+    <!-- Explanatory text cards -->
+    <div class="space-y-12">
+      {
+        sections && Array.isArray(sections) && sections.map((section) => (
+          <article class="p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-all duration-300">
+            <h2 class="text-xl sm:text-2xl font-bold text-white mb-4">
+              {section.title}
+            </h2>
+            <div 
+              class="text-sm sm:text-base text-white/80 leading-relaxed space-y-4"
+              set:html={section.content}
+            />
+          </article>
+        ))
+      }
+    </div>
+
+    <!-- Active Cookie Consent Customizer (the Selector Section) -->
+    <div class="pt-8 border-t border-white/10 space-y-6">
+      <div class="text-center max-w-2xl mx-auto space-y-3">
+        <h2 class="text-3xl font-extrabold text-white tracking-tight">
+          {t("cookieConsent.selector.title")}
+        </h2>
+        <p class="text-white/60 text-sm">
+          {t("cookieConsent.selector.description")}
+        </p>
+      </div>
+      
+      <CookieSelector class="max-w-2xl mx-auto" />
+    </div>
+  </section>
+</Layout>

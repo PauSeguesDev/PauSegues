@@ -1,0 +1,213 @@
+---
+/**
+ * Cookie Selector Component
+ * Renders an interactive card allowing users to configure their cookie preferences.
+ * Connects with localStorage and dispatches a global event on update.
+ * Can be embedded in both the Cookies Policy page and the customization modal.
+ */
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+interface Props {
+  /** Optional class to inject additional styles */
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+---
+
+<div 
+  class={`cookie-selector-card bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-6 sm:p-8 space-y-6 shadow-xl ${className}`}
+  data-lang={lang}
+  id="cookie-selector-root"
+>
+  <div class="space-y-2">
+    <h3 class="text-2xl font-bold text-white flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-web-pearl-blue" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+      </svg>
+      {t("cookieConsent.selector.title")}
+    </h3>
+    <p class="text-sm text-white/70">
+      {t("cookieConsent.selector.description")}
+    </p>
+  </div>
+
+  <div class="border-t border-white/10 pt-6 space-y-6">
+    <!-- Category: Necessary -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-xl bg-white/5 border border-white/5">
+      <div class="space-y-1 max-w-xl">
+        <div class="flex items-center gap-2">
+          <span class="font-semibold text-white">{t("cookieConsent.selector.categories.necessary.title")}</span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-white/10 text-white/60 font-medium">
+            {t("cookieConsent.selector.categories.necessary.status")}
+          </span>
+        </div>
+        <p class="text-xs text-white/60 leading-relaxed">
+          {t("cookieConsent.selector.categories.necessary.description")}
+        </p>
+      </div>
+      <div class="flex items-center self-end sm:self-center">
+        <!-- Disabled Toggle (Always active) -->
+        <button 
+          type="button" 
+          disabled 
+          class="relative inline-flex h-6 w-11 shrink-0 cursor-not-allowed rounded-full border-2 border-transparent bg-web-pearl-blue transition-colors duration-200 ease-in-out focus:outline-none"
+          aria-label={t("cookieConsent.selector.categories.necessary.title")}
+        >
+          <span class="translate-x-5 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Category: Analytics -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-xl bg-white/5 border border-white/5 hover:border-white/10 transition-colors">
+      <div class="space-y-1 max-w-xl">
+        <div class="flex items-center gap-2">
+          <span class="font-semibold text-white">{t("cookieConsent.selector.categories.analytics.title")}</span>
+          <span class="text-[10px] px-2 py-0.5 rounded-full bg-web-pearl-blue/20 text-web-pearl-blue font-medium">
+            {t("cookieConsent.selector.categories.analytics.status")}
+          </span>
+        </div>
+        <p class="text-xs text-white/60 leading-relaxed">
+          {t("cookieConsent.selector.categories.analytics.description")}
+        </p>
+      </div>
+      <div class="flex items-center self-end sm:self-center">
+        <!-- Switch Toggle -->
+        <button 
+          type="button" 
+          id="cookie-toggle-analytics"
+          class="cookie-toggle-btn relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent bg-white/10 hover:bg-white/20 transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-web-pearl-blue focus:ring-offset-2 focus:ring-offset-web-night-blue"
+          aria-checked="false"
+          role="switch"
+        >
+          <span class="translate-x-0 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Actions -->
+  <div class="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div id="cookie-selector-feedback" class="text-sm font-medium text-emerald-400 opacity-0 transition-opacity duration-300">
+      {t("cookieConsent.selector.feedback.saved")}
+    </div>
+    
+    <button
+      type="button"
+      id="cookie-save-btn"
+      class="w-full sm:w-auto px-6 py-3 bg-linear-to-r from-web-pearl-blue to-web-dark-blue hover:from-white hover:to-web-grey text-white hover:text-web-night-blue transition-all duration-300 font-semibold rounded-xl shadow-lg hover:scale-[1.02] active:scale-[0.98] focus:outline-none cursor-pointer"
+    >
+      {t("cookieConsent.selector.save")}
+    </button>
+  </div>
+</div>
+
+<script>
+  // Script executes entirely on the client side
+  document.addEventListener('DOMContentLoaded', () => {
+    const root = document.getElementById('cookie-selector-root');
+    if (!root) return;
+
+    const toggleAnalytics = document.getElementById('cookie-toggle-analytics') as HTMLButtonElement | null;
+    const saveBtn = document.getElementById('cookie-save-btn');
+    const feedback = document.getElementById('cookie-selector-feedback');
+
+    const STORAGE_KEY = 'pau-segues-cookie-consent';
+
+    // State
+    let preferences = {
+      necessary: true,
+      analytics: false
+    };
+
+    // Load preferences from localStorage
+    function loadPreferences() {
+      try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored) {
+          preferences = JSON.parse(stored);
+        }
+      } catch (e) {
+        console.error('Error loading cookie preferences:', e);
+      }
+      updateUI();
+    }
+
+    // Toggle button visual state
+    function updateToggleState(btn: HTMLButtonElement | null, active: boolean) {
+      if (!btn) return;
+      const dot = btn.firstElementChild;
+      
+      btn.setAttribute('aria-checked', active ? 'true' : 'false');
+      
+      if (active) {
+        btn.classList.remove('bg-white/10', 'hover:bg-white/20');
+        btn.classList.add('bg-web-pearl-blue');
+        dot?.classList.remove('translate-x-0');
+        dot?.classList.add('translate-x-5');
+      } else {
+        btn.classList.remove('bg-web-pearl-blue');
+        btn.classList.add('bg-white/10', 'hover:bg-white/20');
+        dot?.classList.remove('translate-x-5');
+        dot?.classList.add('translate-x-0');
+      }
+    }
+
+    // Update UI based on current preferences state
+    function updateUI() {
+      updateToggleState(toggleAnalytics, preferences.analytics);
+    }
+
+    // Toggle handler helper
+    function setupToggle(btn: HTMLButtonElement | null, key: 'analytics') {
+      if (!btn) return;
+      btn.addEventListener('click', () => {
+        preferences[key] = !preferences[key];
+        updateToggleState(btn, preferences[key]);
+      });
+    }
+
+    setupToggle(toggleAnalytics, 'analytics');
+
+    // Save handler
+    if (saveBtn) {
+      saveBtn.addEventListener('click', () => {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(preferences));
+          
+          // Dispatch custom event to notify analytics scripts
+          const event = new CustomEvent('cookie-consent-changed', {
+            detail: preferences,
+            bubbles: true
+          });
+          window.dispatchEvent(event);
+          
+          // Visual feedback
+          if (feedback) {
+            feedback.classList.remove('opacity-0');
+            feedback.classList.add('opacity-100');
+            setTimeout(() => {
+              feedback.classList.remove('opacity-100');
+              feedback.classList.add('opacity-0');
+            }, 3000);
+          }
+        } catch (e) {
+          console.error('Error saving cookie preferences:', e);
+        }
+      });
+    }
+
+    // Initial load
+    loadPreferences();
+
+    // Listen for external changes (like from the banner or another page)
+    window.addEventListener('cookie-consent-changed', () => {
+      loadPreferences();
+    });
+  });
+</script>

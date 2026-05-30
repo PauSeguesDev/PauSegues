@@ -6,7 +6,6 @@
             "rights": "All rights reserved"
         }
     },
-
     "projects": {
         "titles": {
             "all": "The list of my projects",
@@ -18,11 +17,41 @@
                 "description": "Since 2023, I have been managing the website for the Solsona Experience cooperative, boosting its digital presence and improving communication with its visitors.",
                 "image": "/images/projects/solsonaexperience.webp",
                 "slug": "solsona-experience",
-                "externalUrl": "https://solsonaexperience.com"
+                "externalUrl": "https://solsonaexperience.com",
+                "skills": [
+                    {
+                        "name": "Angular",
+                        "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg"
+                    },
+                    {
+                        "name": "Firebase",
+                        "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg"
+                    }
+                ]
+            },
+            {
+                "title": "Port del Comte Skyrace",
+                "description": "During my internship I was lucky enough to develop the website of the Port del Compte Skyerace race.Compte Skyerace",
+                "image": "/images/projects/pdc-skyrace.webp",
+                "slug": "port-del-comte-skyrace",
+                "externalUrl": "https://portdelcomteskyrace.com/",
+                "skills": [
+                    {
+                        "name": "VUE",
+                        "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg"
+                    },
+                    {
+                        "name": "TAILWIND",
+                        "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg"
+                    },
+                    {
+                        "name": "FastAPI",
+                        "icon_url": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/fastapi/fastapi-original.svg"
+                    }
+                ]
             }
         ]
     },
-
     "pages": {
         "home": {
             "SEO": {
@@ -68,7 +97,13 @@
             },
             "hero": {
                 "title": "Projects",
-                "pathkeys": [ "home", "projects" ]
+                "pathkeys": [
+                    "home",
+                    "projects"
+                ]
+            },
+            "details": {
+                "skills": "Technologies used"
             }
         },
         "contact": {
@@ -78,7 +113,10 @@
             },
             "hero": {
                 "title": "Contact",
-                "pathkeys": [ "home", "contact" ]
+                "pathkeys": [
+                    "home",
+                    "contact"
+                ]
             },
             "form": {
                 "name": "First Name",
@@ -107,12 +145,137 @@
         "projectDetail": {
             "visit": "Visit project",
             "back": "Go back",
+            "prev": "Previous",
+            "next": "Next",
             "technologies": "Technologies",
             "details": "Project Details",
             "general": "General Information",
             "client": "Client",
             "date": "Date",
             "role": "Role"
+        },
+        "legal": {
+            "SEO": {
+                "title": "Legal Notice - Pau Segués Vitutia",
+                "description": "Legal Notice - Pau Segués Vitutia and website terms of use."
+            },
+            "hero": {
+                "title": "Legal Notice",
+                "pathkeys": [
+                    "home",
+                    "legal"
+                ]
+            },
+            "sections": [
+                {
+                    "title": "1. General Information",
+                    "content": "In accordance with the information duty established in Article 10 of Law 34/2002 of July 11, on Services of the Information Society and Electronic Commerce (LSSI-CE), we inform you that this website is owned by Pau Segués Vitutia, residing in Solsona, with the contact email <a href=\"mailto:pauseguesdev@gmail.com\" class=\"text-web-pearl-blue hover:underline\">pauseguesdev@gmail.com</a>."
+                },
+                {
+                    "title": "2. Intellectual and Industrial Property",
+                    "content": "The intellectual and industrial property rights of all elements that make up this website (including, without limitation, trademarks, logos, texts, images, graphics, designs, programming code, and navigation structures) are owned by Pau Segués Vitutia or third parties who have authorized their use. Any reproduction, distribution, or transformation of these contents is strictly prohibited without the express written authorization of the owner."
+                },
+                {
+                    "title": "3. Terms of Use and Limitation of Liability",
+                    "content": "The user agrees to use the website in accordance with the law and this Legal Notice. The owner is not liable for any damages that may arise from web service interruptions, computer viruses, or links to third-party sites found on this page."
+                },
+                {
+                    "title": "4. Applicable Law and Jurisdiction",
+                    "content": "This Legal Notice is governed by Spanish and European Union legislation. For any controversy that may arise in relation to this website, the parties submit to the courts and tribunals of Manresa."
+                }
+            ]
+        },
+        "privacy": {
+            "SEO": {
+                "title": "Privacy Policy - Pau Segués Vitutia",
+                "description": "Privacy Policy and data protection of Pau Segués Vitutia."
+            },
+            "hero": {
+                "title": "Privacy Policy",
+                "pathkeys": [
+                    "home",
+                    "privacy"
+                ]
+            },
+            "sections": [
+                {
+                    "title": "1. Data Controller",
+                    "content": "The data controller for the personal data collected on this website is Pau Segués Vitutia, with the contact email <a href=\"mailto:pauseguesdev@gmail.com\" class=\"text-web-pearl-blue hover:underline\">pauseguesdev@gmail.com</a>."
+                },
+                {
+                    "title": "2. Data Collected and Purpose",
+                    "content": "Through our contact form, we collect essential personal data that you voluntarily provide (first name, last name, and email address). The sole purpose of this collection is to respond to your inquiries, doubts, or collaboration proposals. We do not use your data for advertising or marketing purposes without your explicit consent."
+                },
+                {
+                    "title": "3. Legitimacy of Treatment",
+                    "content": "The legal basis for processing your data is the consent you grant us by accepting this Privacy Policy before sending the contact form or by accepting the use of analytical cookies."
+                },
+                {
+                    "title": "4. User Rights",
+                    "content": "You have the right to access, rectify, limit the processing of, object to, or request the erasure of your personal data at any time. To exercise these rights, you can send an email request to <a href=\"mailto:pauseguesdev@gmail.com\" class=\"text-web-pearl-blue hover:underline\">pauseguesdev@gmail.com</a>, indicating the right you wish to exercise and attaching a copy of your ID document if necessary."
+                },
+                {
+                    "title": "5. Data Retention",
+                    "content": "Personal data will be kept for the strictly necessary time to respond to your request or until you decide to withdraw your consent or request its erasure."
+                }
+            ]
+        },
+        "cookies": {
+            "SEO": {
+                "title": "Cookies Policy - Pau Segués Vitutia",
+                "description": "Cookies Policy of Pau Segués Vitutia. Configure your cookie preferences."
+            },
+            "hero": {
+                "title": "Cookies Policy",
+                "pathkeys": [
+                    "home",
+                    "cookies"
+                ]
+            },
+            "sections": [
+                {
+                    "title": "1. What is a Cookie?",
+                    "content": "A <i>cookie</i> is a small text file stored in your browser when you visit almost any website. Its main utility is to enable the website to remember your visit, remember preferences, or collect anonymous navigation data when you browse it again."
+                },
+                {
+                    "title": "2. Types of Cookies used",
+                    "content": "This website uses two categories of cookies: <b>technical/necessary cookies</b> (essential for you to browse the web correctly) and third-party <b>analytical cookies</b> (which anonymously measure how users interact with our content, helping us improve)."
+                },
+                {
+                    "title": "3. Managing Your Preferences",
+                    "content": "You have total control over non-necessary cookies. Below, you will find our interactive selector, where you can grant or withdraw your consent for analysis cookies at any time."
+                }
+            ]
+        }
+    },
+    "cookieConsent": {
+        "banner": {
+            "title": "We respect your privacy",
+            "description": "This website uses cookies (both first-party and third-party) to improve your experience, analyze traffic, and personalize content. You can accept all cookies, reject non-essential ones, or customize your selection.",
+            "acceptAll": "Accept all",
+            "rejectAll": "Reject optional",
+            "customize": "Customize"
+        },
+        "selector": {
+            "title": "Cookie Settings",
+            "description": "Choose which categories of cookies you want to allow. Necessary cookies are always enabled because they are fundamental for website navigation.",
+            "save": "Save configuration",
+            "categories": {
+                "necessary": {
+                    "title": "Necessary Cookies",
+                    "description": "Essential for the website's operation. They enable basic functions like navigation or access to secure sections. Without them, the website cannot work properly.",
+                    "status": "Always active"
+                },
+                "analytics": {
+                    "title": "Analytical Cookies",
+                    "description": "They allow us to anonymously measure the number of visitors and see how they move around the web. This helps us make design and content improvements.",
+                    "status": "Optional"
+                }
+            },
+            "feedback": {
+                "saved": "Configuration saved successfully!",
+                "pending": "Not configured"
+            }
         }
     }
 }

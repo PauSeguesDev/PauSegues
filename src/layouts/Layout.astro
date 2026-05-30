@@ -8,6 +8,7 @@ import "../styles/global.css";
 
 import Header from '@/components/sections/layout/header.astro'
 import Footer from '@/components/sections/layout/footer.astro'
+import CookieBanner from '@/components/sections/CookieBanner.astro'
 
 interface Props {
     /** The page title displayed in the browser tab */
@@ -46,5 +47,36 @@ const { title, description, lang } = Astro.props
         </main>
 
         <Footer />
+        <CookieBanner />
+
+        <!-- Vercel Analytics integration linked with cookie consent -->
+        <script>
+            import { inject } from '@vercel/analytics';
+
+            function initAnalytics() {
+                try {
+                    const STORAGE_KEY = 'pau-segues-cookie-consent';
+                    const stored = localStorage.getItem(STORAGE_KEY);
+                    if (stored) {
+                        const preferences = JSON.parse(stored);
+                        if (preferences.analytics) {
+                            inject();
+                        }
+                    }
+                } catch (e) {
+                    console.error('[Analytics] Error initializing Vercel Analytics:', e);
+                }
+            }
+
+            // Attempt to initialize on load
+            initAnalytics();
+
+            // Listen for user updates to cookie consent
+            window.addEventListener('cookie-consent-changed', (e: any) => {
+                if (e.detail && e.detail.analytics) {
+                    inject();
+                }
+            });
+        </script>
     </body>
 </html>

@@ -1,0 +1,191 @@
+---
+import { useTranslations } from "@/i18n/utils";
+import SkillCard from "@/components/skillsCard.astro";
+import PrimaryButton from "@/components/buttons/primaryButton.astro";
+
+interface Project {
+    title: string;
+    description: string;
+    image: string;
+    slug: string;
+    externalUrl?: string;
+    skills: { name: string; icon_url: string }[];
+}
+
+interface Props {
+    project: Project;
+    prevProject: Project | null;
+    nextProject: Project | null;
+    lang: "ca" | "es" | "en";
+}
+
+const { project, prevProject, nextProject, lang } = Astro.props;
+import { routes } from "@/i18n/routes";
+const t = useTranslations(lang);
+
+const projectBaseUrl = routes.projects[lang];
+---
+
+<section class="bg-gradient pt-32 pb-32 relative overflow-hidden min-h-[80dvh] flex items-center">
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            
+            <!-- Left Column: Visuals -->
+            <div class="lg:col-span-7 space-y-10 animate-fade-in-left">
+                <!-- Back Action (Desktop only) -->
+                <div class="hidden lg:block">
+                    <a
+                        href={projectBaseUrl}
+                        onclick="if(window.history.length > 1) { history.back(); return false; }"
+                        class="inline-flex items-center text-web-grey/60 hover:text-white transition-colors group cursor-pointer"
+                    >
+                        <div class="w-10 h-10 rounded-full flex items-center justify-center mr-4 transition-all">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <span class="font-medium tracking-wide">{t('pages.projectDetail.back')}</span>
+                    </a>
+                </div>
+
+                <div class="space-y-8">
+                    <!-- Main Project Image with premium frame -->
+                    <div class="relative group/img">
+                        <div class="absolute -inset-1 bg-linear-to-r from-web-pearl-blue to-web-dark-blue rounded-3xl blur opacity-20 group-hover/img:opacity-40 transition duration-1000"></div>
+                        <div class="relative overflow-hidden rounded-2xl border border-white/10 shadow-2xl aspect-video bg-web-night-blue">
+                            <img 
+                                src={project.image} 
+                                alt={project.title}
+                                class="w-full h-full object-cover transform scale-100 group-hover/img:scale-105 transition-transform duration-1000 ease-out"
+                            />
+                            <div class="absolute inset-0 bg-linear-to-t from-web-night-blue/60 via-transparent to-transparent opacity-60"></div>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="flex items-center justify-between gap-6 pt-8 border-t border-white/5">
+                        <div class="flex-1">
+                            {prevProject && (
+                                <a 
+                                    href={`${projectBaseUrl}/${prevProject.slug}`}
+                                    class="group flex items-center gap-4 transition-all"
+                                >
+                                    <div class="relative shrink-0 w-16 h-10 md:w-24 md:h-14 overflow-hidden rounded-lg border border-white/10 group-hover:border-web-pearl-blue/50 transition-colors">
+                                        <img 
+                                            src={prevProject.image} 
+                                            alt={prevProject.title}
+                                            class="w-full h-full object-cover transform scale-100 group-hover:scale-110 transition-transform duration-500"
+                                        />
+                                        <div class="absolute inset-0 bg-web-night-blue/20 group-hover:bg-transparent transition-colors"></div>
+                                    </div>
+                                    <div class="flex flex-col gap-1">
+                                        <span class="flex items-center text-[10px] font-bold uppercase tracking-[0.2em] text-web-grey/40 group-hover:text-web-pearl-blue transition-colors">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1.5 transform" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                            </svg>
+                                            {t('pages.projectDetail.prev')}
+                                        </span>
+                                        <span class="text-xs md:text-sm font-semibold text-white/70 group-hover:text-white line-clamp-1 transition-colors">
+                                            {prevProject.title}
+                                        </span>
+                                    </div>
+                                </a>
+                            )}
+                        </div>
+
+                        <div class="flex-1 flex justify-end">
+                            {nextProject && (
+                                <a 
+                                    href={`${projectBaseUrl}/${nextProject.slug}`}
+                                    class="group flex items-center flex-row-reverse gap-4 text-right transition-all"
+                                >
+                                    <div class="relative shrink-0 w-16 h-10 md:w-24 md:h-14 overflow-hidden rounded-lg border border-white/10 group-hover:border-web-pearl-blue/50 transition-colors">
+                                        <img 
+                                            src={nextProject.image} 
+                                            alt={nextProject.title}
+                                            class="w-full h-full object-cover transform scale-100 group-hover:scale-110 transition-transform duration-500"
+                                        />
+                                        <div class="absolute inset-0 bg-web-night-blue/20 group-hover:bg-transparent transition-colors"></div>
+                                    </div>
+                                    <div class="flex flex-col items-end gap-1">
+                                        <span class="flex items-center text-[10px] font-bold uppercase tracking-[0.2em] text-web-grey/40 group-hover:text-web-pearl-blue transition-colors">
+                                            {t('pages.projectDetail.next')}
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 ml-1.5 transform" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                                            </svg>
+                                        </span>
+                                        <span class="text-xs md:text-sm font-semibold text-white/70 group-hover:text-white line-clamp-1 transition-colors">
+                                            {nextProject.title}
+                                        </span>
+                                    </div>
+                                </a>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Details & Content -->
+            <div class="lg:col-span-5 space-y-10 animate-fade-in-right">
+                <div class="space-y-4">
+                    <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
+                        {project.title}
+                    </h1>
+                    <p class="text-lg md:text-xl text-web-grey/80 font-light leading-relaxed">
+                        {project.description}
+                    </p>
+                    <SkillCard skills={project.skills} title={t('pages.projects.details.skills')} />
+                </div>
+
+                <!-- CTAs -->
+                <div class="flex flex-col sm:flex-row gap-6 pt-4">
+                    {project.externalUrl && (
+                        <PrimaryButton
+                            Text={t('pages.projectDetail.visit')}
+                            Link={project.externalUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            classes="flex-1"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform transition-transform" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                                <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                            </svg>
+                        </PrimaryButton>
+                    )}
+                    
+                    <!-- Mobile only Back button -->
+                    <a
+                        href={projectBaseUrl}
+                        onclick="if(window.history.length > 1) { history.back(); return false; }"
+                        class="lg:hidden flex items-center justify-center px-8 py-5 text-base font-semibold rounded-2xl text-web-grey border-2 border-white/10 hover:bg-white/5 transition-all cursor-pointer"
+                    >
+                        {t('pages.projectDetail.back')}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .animate-fade-in-left {
+        opacity: 0;
+        animation: fade-in-left 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .animate-fade-in-right {
+        opacity: 0;
+        animation: fade-in-right 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        animation-delay: 0.2s;
+    }
+
+    @keyframes fade-in-left {
+        from { opacity: 0; transform: translateX(-30px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes fade-in-right {
+        from { opacity: 0; transform: translateX(30px); }
+        to { opacity: 1; transform: translateX(0); }
+    }
+</style>

@@ -1,0 +1,61 @@
+---
+/**
+ * Page Header Component
+ * Renders a hero section for sub-pages featuring a dynamic Title
+ * and an automated Breadcrumb navigation based on i18n routes.
+ */
+import { routes, navLabels } from "@/i18n/routes";
+import { getLangFromUrl } from "@/i18n/utils";
+
+interface Props {
+    /** The main heading to display in the hero section */
+    title: string;
+    /** An array of keys from the routes object to build the breadcrumb path */
+    pageKeys: (keyof typeof routes)[];
+}
+
+const { title, pageKeys } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+---
+
+<section class="w-full h-[35dvh] bg-gradient">
+    <div class="flex flex-col items-center justify-center h-full pt-12">
+        <h1 class="text-5xl md:text-6xl font-bold text-white mb-6">
+            {title}
+        </h1>
+        <nav aria-label="Breadcrumb">
+            <ul class="flex items-center space-x-3 text-lg">
+                {
+                    pageKeys.map((key, index) => {
+                        const label = navLabels[key][lang];
+                        const href = routes[key][lang];
+                        const isLast = index === pageKeys.length - 1;
+
+                        return (
+                            <>
+                                <li>
+                                    {isLast ? (
+                                        /* Current Page: Highlighted and non-clickable for UX */
+                                        <span class="text-web-pearl-blue font-medium">
+                                            {label}
+                                        </span>
+                                    ) : (
+                                        /* Parent Pages: Dimmed and clickable for easy backtracking */
+                                        <a
+                                            href={href}
+                                            class="text-white/50 hover:text-white transition-colors"
+                                        >
+                                            {label}
+                                        </a>
+                                    )}
+                                </li>
+                                {/* Visual Separator: Displayed only between items */}
+                                {!isLast && <li class="text-white/20">/</li>}
+                            </>
+                        );
+                    })
+                }
+            </ul>
+        </nav>
+    </div>
+</section>

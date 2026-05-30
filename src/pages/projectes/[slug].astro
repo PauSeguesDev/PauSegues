@@ -4,14 +4,16 @@ import ca from '@/i18n/locales/ca.json';
 
 export function getStaticPaths() {
     const projects = ca.projects.list;
-    return projects.map((project) => {
+    return projects.map((project, index) => {
+        const prevProject = index < projects.length - 1 ? projects[index + 1] : null;
+        const nextProject = index > 0 ? projects[index - 1] : null;
         return {
             params: { slug: project.slug },
-            props: { project }
+            props: { project, prevProject, nextProject }
         };
     });
 }
 
-const { project } = Astro.props;
+const { project, prevProject, nextProject } = Astro.props;
 ---
-<ProjectView project={project} lang="ca" />
+<ProjectView project={project} prevProject={prevProject} nextProject={nextProject} lang="ca" />
