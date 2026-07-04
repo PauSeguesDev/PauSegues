@@ -76,7 +76,7 @@
                     "Looking for someone with energy and passion for code? <a href=\"/en/contact\" class=\"underline\">Let's talk!</a>"
                 ],
                 "image": {
-                    "src": "/images/jo.png",
+                    "src": "/images/jo.webp",
                     "alt": "Pau Segués Vitutia"
                 }
             },
@@ -246,6 +246,17 @@
                     "content": "You have total control over non-necessary cookies. Below, you will find our interactive selector, where you can grant or withdraw your consent for analysis cookies at any time."
                 }
             ]
+        },
+        "notFound": {
+            "SEO": {
+                "title": "Page not found - Pau Segués Vitutia",
+                "description": "Sorry, the page you are looking for does not exist."
+            },
+            "title": "404",
+            "subtitle": "Oops! Page not found",
+            "description": "The page you are looking for does not exist, has been moved, or temporarily deleted.",
+            "button": "Go back home",
+            "contactButton": "Contact me"
         }
     },
     "cookieConsent": {

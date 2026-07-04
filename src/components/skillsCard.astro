@@ -23,7 +23,7 @@ const { title, skills } = Astro.props;
         <h2 class="font-bold text-lg mr-4 text-web-dark-blue">{title}</h2>
     </div>
 
-    <div class="p-8 grid grid-cols-4 gap-y-8 gap-x-4">
+    <div class="p-6 sm:p-8 grid grid-cols-3 sm:grid-cols-4 gap-y-8 gap-x-2 sm:gap-x-4">
         {skills.map((skill: { name: string; icon_url: string }) => (
             <div class="flex flex-col items-center hover:scale-110 transition-all duration-300 space-y-2">
                 <img 
