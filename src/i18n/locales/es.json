@@ -76,7 +76,7 @@
                     "¿Buscas a alguien con energía y pasión por el código? <a href=\"/es/contacto\" class=\"underline\">¡Hablemos!</a>"
                 ],
                 "image": {
-                    "src": "/images/jo.png",
+                    "src": "/images/jo.webp",
                     "alt": "Pau Segués Vitutia"
                 }
             },
@@ -246,6 +246,17 @@
                     "content": "Tienes el control total sobre las cookies no necesarias. A continuación, encontrarás nuestro seleccionador interactivo, donde podrás dar o retirar tu consentimiento para las cookies de análisis en cualquier momento."
                 }
             ]
+        },
+        "notFound": {
+            "SEO": {
+                "title": "Página no encontrada - Pau Segués Vitutia",
+                "description": "Lo sentimos, la página que estás buscando no existe."
+            },
+            "title": "404",
+            "subtitle": "¡Ups! Página no encontrada",
+            "description": "La página que buscas no existe, se ha movido o se ha eliminado temporalmente.",
+            "button": "Volver al inicio",
+            "contactButton": "Contactar"
         }
     },
     "cookieConsent": {

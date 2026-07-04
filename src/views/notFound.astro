@@ -1,0 +1,165 @@
+---
+/**
+ * 404 Not Found View Component
+ * Renders a premium, visually engaging 404 error page.
+ * Uses client-side language detection to serve the correct translation
+ * dynamically without server overhead, preventing layout flashes.
+ */
+import Layout from "@/layouts/Layout.astro";
+import { getLangFromUrl, useTranslations } from "@/i18n/utils";
+import { routes } from "@/i18n/routes";
+
+// Detect initial server lang (default fallback)
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Layout
+  title="Pàgina no trobada - Pau Segués Vitutia"
+  description="Ho sentim, la pàgina que estàs buscant no existeix."
+  lang={lang}
+>
+  <!-- Client-side title routing -->
+  <script is:inline>
+    (function() {
+      const titles = {
+        ca: "Pàgina no trobada - Pau Segués Vitutia",
+        es: "Página no encontrada - Pau Segués Vitutia",
+        en: "Page not found - Pau Segués Vitutia"
+      };
+      const path = window.location.pathname;
+      let detectedLang = 'ca';
+      if (path.startsWith('/es/') || path.endsWith('/es')) {
+        detectedLang = 'es';
+      } else if (path.startsWith('/en/') || path.endsWith('/en')) {
+        detectedLang = 'en';
+      }
+      document.title = titles[detectedLang];
+    })();
+  </script>
+
+  <section class="min-h-[70dvh] flex items-center justify-center relative overflow-hidden bg-gradient py-12 px-4 sm:px-6 lg:px-8">
+    <!-- Glowing background elements -->
+    <div class="absolute top-1/4 left-1/4 w-72 h-72 bg-web-pearl-blue/10 rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-web-dark-blue/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+
+    <div class="max-w-xl w-full text-center relative z-10">
+      <!-- Glassmorphic Card -->
+      <div class="bg-white/5 border border-white/10 rounded-3xl p-8 sm:p-12 backdrop-blur-md shadow-2xl relative overflow-hidden">
+        
+        <!-- Glowing Ring behind 404 -->
+        <div class="absolute -top-12 left-1/2 -translate-x-1/2 w-48 h-48 bg-blue-500/10 rounded-full blur-xl"></div>
+        
+        <!-- Big Animated 404 Number -->
+        <div class="relative">
+          <h1 class="text-8xl sm:text-9xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-blue-100 to-web-pearl-blue animate-pulse drop-shadow-[0_0_35px_rgba(119,141,169,0.3)]">
+            404
+          </h1>
+          <div class="absolute inset-0 flex items-center justify-center opacity-10">
+            <span class="text-8xl sm:text-9xl font-black tracking-widest select-none blur-sm">404</span>
+          </div>
+        </div>
+
+        <!-- Catalan Locale Block -->
+        <div data-lang-block="ca" class="mt-6 space-y-6">
+          <h2 class="text-2xl sm:text-3xl font-bold text-white">Ups! Pàgina no trobada</h2>
+          <p class="text-white/70 text-sm sm:text-base leading-relaxed">
+            La pàgina que busques no existeix, s'ha mogut o s'ha eliminat temporalment.
+          </p>
+        </div>
+
+        <!-- Spanish Locale Block -->
+        <div data-lang-block="es" class="mt-6 space-y-6 hidden">
+          <h2 class="text-2xl sm:text-3xl font-bold text-white">¡Ups! Página no encontrada</h2>
+          <p class="text-white/70 text-sm sm:text-base leading-relaxed">
+            La página que buscas no existe, se ha movido o se ha eliminado temporalmente.
+          </p>
+        </div>
+
+        <!-- English Locale Block -->
+        <div data-lang-block="en" class="mt-6 space-y-6 hidden">
+          <h2 class="text-2xl sm:text-3xl font-bold text-white">Oops! Page not found</h2>
+          <p class="text-white/70 text-sm sm:text-base leading-relaxed">
+            The page you are looking for does not exist, has been moved, or temporarily deleted.
+          </p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a
+            id="home-btn"
+            href={routes.home.ca}
+            class="w-full sm:w-auto px-8 py-3 rounded-xl bg-web-pearl-blue text-white font-semibold shadow-lg shadow-web-pearl-blue/20 hover:bg-web-dark-blue hover:shadow-web-dark-blue/30 active:scale-[0.98] transition-all duration-200"
+          >
+            <span data-lang-text="ca">Tornar a l'inici</span>
+            <span data-lang-text="es" class="hidden">Volver al inicio</span>
+            <span data-lang-text="en" class="hidden">Go back home</span>
+          </a>
+          
+          <a
+            id="contact-btn"
+            href={routes.contact.ca}
+            class="w-full sm:w-auto px-8 py-3 rounded-xl border border-white/20 text-white font-semibold bg-white/5 hover:bg-white/10 hover:border-white/40 active:scale-[0.98] transition-all duration-200"
+          >
+            <span data-lang-text="ca">Contactar</span>
+            <span data-lang-text="es" class="hidden">Contactar</span>
+            <span data-lang-text="en" class="hidden">Contact me</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  import { routes } from "@/i18n/routes";
+
+  function handleLanguageRouting() {
+    const path = window.location.pathname;
+    let lang: 'ca' | 'es' | 'en' = 'ca';
+
+    if (path.startsWith('/es/') || path.endsWith('/es')) {
+      lang = 'es';
+    } else if (path.startsWith('/en/') || path.endsWith('/en')) {
+      lang = 'en';
+    }
+
+    // Toggle visibility of language blocks
+    document.querySelectorAll('[data-lang-block]').forEach((block) => {
+      const targetLang = block.getAttribute('data-lang-block');
+      if (targetLang === lang) {
+        block.classList.remove('hidden');
+      } else {
+        block.classList.add('hidden');
+      }
+    });
+
+    // Toggle button texts
+    document.querySelectorAll('[data-lang-text]').forEach((textSpan) => {
+      const targetLang = textSpan.getAttribute('data-lang-text');
+      if (targetLang === lang) {
+        textSpan.classList.remove('hidden');
+      } else {
+        textSpan.classList.add('hidden');
+      }
+    });
+
+    // Set correct route hrefs
+    const homeBtn = document.getElementById('home-btn') as HTMLAnchorElement | null;
+    const contactBtn = document.getElementById('contact-btn') as HTMLAnchorElement | null;
+
+    if (homeBtn) {
+      homeBtn.href = routes.home[lang];
+    }
+    if (contactBtn) {
+      contactBtn.href = routes.contact[lang];
+    }
+  }
+
+  // Run on initial load
+  handleLanguageRouting();
+
+  // Support client-side navigation frameworks / view transitions if any
+  document.addEventListener('astro:page-load', handleLanguageRouting);
+</script>

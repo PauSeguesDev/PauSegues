@@ -1,7 +1,7 @@
 {
   "name": "pausegues",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -9,14 +9,17 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/vercel": "^9.0.5",
+    "@astrojs/vercel": "^11.0.2",
     "@tailwindcss/vite": "^4.2.1",
     "@vercel/analytics": "^2.0.1",
-    "astro": "^5.17.1",
-    "nodemailer": "^8.0.3",
+    "astro": "^7.0.6",
+    "nodemailer": "^9.0.3",
     "tailwindcss": "^4.2.1"
   },
   "devDependencies": {
     "@types/nodemailer": "^7.0.11"
+  },
+  "overrides": {
+    "path-to-regexp": "^6.3.0"
   }
 }
