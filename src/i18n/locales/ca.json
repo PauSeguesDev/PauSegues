@@ -88,6 +88,16 @@
                     "tools": "Eines",
                     "database": "Bases de dades"
                 }
+            },
+            "experience": {
+                "title": "Experiència laboral",
+                "jobs": [
+                    {
+                        "role": "Desenvolupador full-stack",
+                        "company": "NordKat",
+                        "period": "2026 - Actualitat"
+                    }
+                ]
             }
         },
         "projects": {
