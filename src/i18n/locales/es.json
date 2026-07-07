@@ -88,6 +88,16 @@
                     "tools": "Herramientas",
                     "database": "Bases de datos"
                 }
+            },
+            "experience": {
+                "title": "Experiencia laboral",
+                "jobs": [
+                    {
+                        "role": "Desarrollador full-stack",
+                        "company": "NordKat",
+                        "period": "2026 - Actualidad"
+                    }
+                ]
             }
         },
         "projects": {

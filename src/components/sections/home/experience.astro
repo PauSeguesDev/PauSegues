@@ -1,0 +1,90 @@
+---
+/**
+ * Experience Section Component
+ * Displays an alternating timeline of professional/academic work experience.
+ * Mobile: Left-aligned timeline.
+ * Desktop: Centered timeline with cards alternating left and right.
+ */
+import { getLangFromUrl, useTranslations } from '@/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+interface Job {
+  role: string;
+  company: string;
+  period: string;
+  description?: string;
+}
+
+const jobs = t('pages.home.experience.jobs') as unknown as Job[];
+---
+
+<section class="w-full py-20 px-4 sm:px-12 md:px-24">
+  <div class="max-w-5xl mx-auto">
+    <div class="flex justify-center items-center mb-16">
+      <h2 class="text-3xl font-bold text-web-grey tracking-tight">{t('pages.home.experience.title')}</h2>
+    </div>
+    
+    <div class="relative w-full">
+      {/* Central timeline line - Desktop only */}
+      <div class="hidden md:block absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] bg-web-pearl-blue/15" />
+      
+      {/* Left timeline line - Mobile only */}
+      <div class="md:hidden absolute left-4 top-0 bottom-0 w-[2px] bg-web-pearl-blue/15" />
+      
+      <div class="flex flex-col gap-12 md:gap-10 relative">
+        {
+          jobs && Array.isArray(jobs) && jobs.map((job, index) => {
+            const isEven = index % 2 === 0; // index 0 (1st) = Right, index 1 (2nd) = Left
+            const isCurrent = job.period.toLowerCase().includes('actual') || job.period.toLowerCase().includes('pres');
+            
+            return (
+              <div class="relative w-full group">
+                {/* Timeline Dot */}
+                <div class="absolute left-4 md:left-1/2 -translate-x-1/2 top-8 w-4 h-4 rounded-full bg-web-night-blue border-2 border-web-pearl-blue group-hover:border-web-grey group-hover:scale-125 transition-all duration-300 shadow-[0_0_8px_rgba(119,141,169,0.4)] z-10" />
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 w-full gap-8 md:gap-16">
+                  {/* Card Container */}
+                  <div class={`pl-12 md:pl-0 ${isEven ? 'md:order-2' : 'md:order-1 md:text-right'}`}>
+                    <div class={`flex flex-col gap-3 p-6 sm:p-8 rounded-2xl bg-linear-to-br from-web-dark-blue/10 to-web-night-blue/60 border border-web-dark-blue/20 hover:border-web-pearl-blue/40 hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-[0_10px_30px_-10px_rgba(119,141,169,0.15)] ${!isEven ? 'md:items-end' : 'md:items-start'}`}>
+                      
+                      {/* Period Badge */}
+                      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-web-pearl-blue/10 text-web-pearl-blue border border-web-pearl-blue/15">
+                        {isCurrent && (
+                          <span class="relative flex h-2 w-2">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                          </span>
+                        )}
+                        <span class="tracking-wider uppercase">{job.period}</span>
+                      </div>
+                      
+                      {/* Role & Company */}
+                      <div class="flex flex-col gap-1 mt-1">
+                        <h3 class="text-xl sm:text-2xl font-bold text-white tracking-tight leading-snug group-hover:text-web-grey transition-colors duration-300">
+                          {job.role}
+                        </h3>
+                        <h4 class="text-md font-semibold text-web-pearl-blue tracking-wide">
+                          {job.company}
+                        </h4>
+                      </div>
+                      
+                      {/* Optional Description */}
+                      {job.description && (
+                        <p class="text-sm text-web-grey/85 mt-2 leading-relaxed" set:html={job.description} />
+                      )}
+                    </div>
+                  </div>
+                  
+                  {/* Spacer Column (Desktop only) */}
+                  <div class={`hidden md:block ${isEven ? 'md:order-1' : 'md:order-2'}`} />
+                </div>
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+  </div>
+</section>
