@@ -1,7 +1,7 @@
 {
     "layout": {
         "footer": {
-            "description": "Hola, sóc el Pau. Estudiant de Desenvolupament d’Aplicacions Web a Lacetània (Manresa). M’apassiona la tecnologia i la programació. M'agrada buscar i crear solucions digitals funcionals i creatives.",
+            "description": "Hola, sóc el Pau. Desenvolupador full-stack a NordKat. M’apassiona la tecnologia i la programació. M'agrada buscar i crear solucions digitals funcionals i creatives.",
             "socialTitle": "Segueix-me a les xarxes socials",
             "rights": "Tots els drets reservats"
         }
@@ -70,7 +70,7 @@
                 "subtitle": "Hola, sóc el Pau",
                 "paragrafs": [
                     "Creo solucions digitals.",
-                    "Soc de Solsona i actualment estic estudiant de Desenvolupament d'Aplicacions Web (DAW) a Manresa i soc un apassionat de l'ecosistema tecnològic.",
+                    "Soc de Solsona i actualment estic treballant com a desenvolupador full-stack a NordKat, i soc un apassionat de l'ecosistema tecnològic.",
                     "La meva filosofia és clara: detectar reptes i construir solucions. No em conformo amb fer que el codi \"simplement funcioni\"; m'esforço perquè el resultat sigui robust, creatiu i estigui ben fet. Per això, gaudeixo transformant idees abstractes en solucions reals que aportin valor.",
                     "En un sector que no s'atura mai, soc curiós per naturalesa: m'agrada estar al dia, provant noves eines i explorant les últimes tendències del desenvolupament.",
                     "Busques algú amb energia i passió pel codi? <a href=\"/contacte\" class=\"underline\">Parlem!</a>"
