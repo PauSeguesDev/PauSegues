@@ -1,7 +1,7 @@
 {
     "layout": {
         "footer": {
-            "description": "Hi, I'm Pau. Full-stack developer at NordKat. I'm passionate about technology and programming. I enjoy finding and creating functional and creative digital solutions.",
+            "description": "Hi, I'm Pau. Full-stack developer at nordkat. I'm passionate about technology and programming. I enjoy finding and creating functional and creative digital solutions.",
             "socialTitle": "Follow me on social media",
             "rights": "All rights reserved"
         }
@@ -70,7 +70,7 @@
                 "subtitle": "Hi, I'm Pau",
                 "paragrafs": [
                     "I create digital solutions.",
-                    "I'm from Solsona and currently working as a full-stack developer at NordKat, and I'm passionate about the technology ecosystem.",
+                    "I'm from Solsona and currently working as a full-stack developer at nordkat, and I'm passionate about the technology ecosystem.",
                     "My philosophy is clear: detect challenges and build solutions. I don't settle for making the code 'simply work'; I strive for the result to be robust, creative, and well-made. That's why I enjoy transforming abstract ideas into real solutions that add value.",
                     "In a sector that never stops, I'm naturally curious: I like to stay updated, trying new tools and exploring the latest development trends.",
                     "Looking for someone with energy and passion for code? <a href=\"/en/contact\" class=\"underline\">Let's talk!</a>"
@@ -94,7 +94,7 @@
                 "jobs": [
                     {
                         "role": "Full-stack developer",
-                        "company": "NordKat",
+                        "company": "nordkat",
                         "period": "2026 - Present"
                     }
                 ]
